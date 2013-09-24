@@ -1,0 +1,24 @@
+{
+  "name": "watai-web-reporter",
+  "version": "0.1.0",
+  "authors": [
+    "Gilles Fabio <gilles@gillesfabio.com>"
+  ],
+  "description": "Web reporter for Watai web view",
+  "main": "index.html",
+  "keywords": [
+    "watai",
+    "test"
+  ],
+  "license": "AGPL",
+  "homepage": "http://github.com/gillesfabio/watai-web-reporter",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "vendor"
+  ]
+}
