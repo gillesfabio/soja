@@ -6,8 +6,8 @@ define([
 
 	'use strict';
 
-	var MessageModel = Backbone.Model.extend({});
+	var FeatureModel = Backbone.Model.extend({});
 
-	return MessageModel;
+	return FeatureModel;
 
 });

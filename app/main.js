@@ -27,7 +27,7 @@ requirejs.config({
 
 require([
 
-	'app/routers/Router'
+	'app/router'
 
 ], function(Router) {
 

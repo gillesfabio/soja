@@ -2,7 +2,7 @@ define([
 
 	'backbone',
 	'socket.io-client',
-	'app/views/RunnerView'
+	'app/views/runner'
 
 ], function(Backbone, io, RunnerView) {
 
@@ -15,9 +15,8 @@ define([
 		},
 
 		runner: function runner() {
-			console.log('unn');
 			var socket = io.connect('http://localhost:9999');
-			var view = new RunnerView({socket: socket});
+			var view   = new RunnerView({socket: socket});
 			$('#content').html(view.render().el);
 		}
 
