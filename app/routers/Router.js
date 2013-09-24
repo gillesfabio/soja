@@ -1,12 +1,28 @@
 define([
 
-	'backbone'
+	'backbone',
+	'socket.io-client',
+	'app/views/RunnerView'
 
-], function(Backbone) {
+], function(Backbone, io, RunnerView) {
 
 	'use strict';
 
-	var Router = Backbone.Router.extend({});
+	var Router = Backbone.Router.extend({
+
+		routes: {
+			'': 'runner'
+		},
+
+		runner: function runner() {
+			console.log('unn');
+			var socket = io.connect('http://localhost:9999');
+			var view = new RunnerView({socket: socket});
+			$('#content').html(view.render().el);
+		}
+
+	});
+
 	return Router;
 
 });

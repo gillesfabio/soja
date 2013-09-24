@@ -27,14 +27,12 @@ requirejs.config({
 
 require([
 
-	'app/views/AppView',
 	'app/routers/Router'
 
-], function(AppView, Router) {
+], function(Router) {
 
 	'use strict';
 
-	var app = new AppView();
 	var router = new Router();
 	Backbone.history.start();
 
