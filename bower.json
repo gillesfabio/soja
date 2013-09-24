@@ -20,5 +20,12 @@
     "test",
     "tests",
     "vendor"
-  ]
+  ],
+  "dependencies": {
+    "requirejs": "2.1.x",
+    "jquery": "2.x",
+    "bootstrap": "3.x",
+    "underscore": "1.5.x",
+    "backbone": "1.0.x"
+  }
 }
