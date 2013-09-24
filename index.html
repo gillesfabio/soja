@@ -28,5 +28,26 @@
 		</div>
 		<div id="content" class="container">
 		</div>
+		<script type="text/template" id="runner-template">
+		  	<div class="alert <%= connected ? 'alert-success' : 'alert-danger' %>">
+		  		<strong>Server status</strong>: <%= connected ? 'connected' : 'not connected' %>
+		  	</div>
+			<% if (features.length) { %>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title"><%= runnerName %></h3>
+					</div>
+					<div class="panel-body feature">
+						<ul class="list-unstyled">
+							<% _.each(features, function(feature) { %>
+								<% if (feature.type !== 'runner') { %>
+								<li><span class="glyphicon glyphicon-<%= feature.state === 'success' ? 'ok-circle' : 'remove-circle' %>"></span> <%= feature.message %>
+								<% } %>
+							<% }); %>
+						</ul>
+					</div>
+				</div>
+			<% } %>
+		</script>
 	</body>
 </html>
