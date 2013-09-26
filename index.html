@@ -4,21 +4,11 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Watai</title>
-		<link href='http://fonts.googleapis.com/css?family=Lato:300,700,300italic,700italic' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
 		<link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="app/styles/main.css">
 		<script data-main="app/main" src="vendor/requirejs/require.js"></script>
-		<style>
-			html {
-    			-webkit-font-smoothing: antialiased;
-			}
-			body {
-				font-family: 'Lato', sans-serif;
-			}
-			.navbar-brand {
-				font-weight: bold;
-			}
-		</style>
 	</head>
 	<body>
 		<div class="navbar navbar-default navbar-static-top">
@@ -41,24 +31,28 @@
 		<div id="content" class="container">
 		</div>
 		<script type="text/template" id="runner-template">
-		  	<div class="alert <%= connected ? 'alert-success' : 'alert-danger' %>">
-		  		<strong>Server status</strong>: <%= connected ? 'connected' : 'not connected' %>
-		  	</div>
+			<div id="runner-info">
+				<div class="alert <%= connected ? 'alert-success' : 'alert-danger' %>">
+					<strong>Server status</strong>: <%= connected ? 'connected' : 'not connected' %>
+				</div>
+			</div>
 			<% if (features.length) { %>
+			<div id="runner-tests">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title"><%= runnerName %></h3>
 					</div>
 					<div class="panel-body feature">
-						<ul class="list-unstyled">
+						<ul class="list-unstyled" id="runner-features">
 							<% _.each(features, function(feature) { %>
-								<% if (feature.type !== 'runner') { %>
-								<li><span class="glyphicon glyphicon-<%= feature.state === 'success' ? 'ok-circle' : 'remove-circle' %>"></span> <%= feature.message %>
-								<% } %>
+							<li class="<%= feature.state === 'success' ? 'feature-success' : 'feature-failure' %>">
+								<span class="glyphicon glyphicon-<%= feature.state === 'success' ? 'ok' : 'remove' %>"></span>  <%= feature.message %>
+							</li>
 							<% }); %>
 						</ul>
 					</div>
 				</div>
+			</div>
 			<% } %>
 		</script>
 	</body>

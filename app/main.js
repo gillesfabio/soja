@@ -1,12 +1,15 @@
 requirejs.config({
+
 	baseUrl: '.',
+
 	paths: {
-		'jquery': 'vendor/jquery/jquery',
-		'underscore': 'vendor/underscore/underscore',
-		'backbone': 'vendor/backbone/backbone',
-		'bootstrap': 'vendor/bootstrap/dist/js/bootstrap',
-		'socket.io-client': 'vendor/socket.io-client/dist/socket.io'
+		'jquery'			: 'vendor/jquery/jquery',
+		'underscore'		: 'vendor/underscore/underscore',
+		'backbone'			: 'vendor/backbone/backbone',
+		'bootstrap'			: 'vendor/bootstrap/dist/js/bootstrap',
+		'socket.io-client'	: 'vendor/socket.io-client/dist/socket.io'
 	},
+
 	shim: {
 		'underscore': {
 			exports: '_'

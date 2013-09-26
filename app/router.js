@@ -2,7 +2,7 @@ define([
 
 	'backbone',
 	'socket.io-client',
-	'app/views/runner'
+	'app/views/RunnerView'
 
 ], function(Backbone, io, RunnerView) {
 

@@ -1,0 +1,32 @@
+html {
+	-webkit-font-smoothing: antialiased;
+}
+body {
+	font-family: 'Lato', sans-serif;
+}
+.navbar-brand {
+	font-weight: bold;
+}
+
+.feature-success {
+	background: #dff0d8;
+	color: #468847;
+}
+
+.feature-failure {
+	background: #f2dede;
+	color: #b94a48;
+}
+
+#runner-features {
+	line-height: 28px;
+}
+
+#runner-features li {
+	margin: 5px 0 5px 0;
+	padding: 5px 10px 5px 10px;
+}
+
+#runner-features .glyphicon {
+	margin-right: 10px;
+}
