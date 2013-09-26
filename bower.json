@@ -2,7 +2,7 @@
   "name": "watai-webview-frontend",
   "version": "0.1.0",
   "author": "Gilles Fabio <gilles@gillesfabio.com>",
-  "description": "Frontend for Watai web view.",
+  "description": "Watai web view frontend.",
   "keywords": [
     "watai",
     "test",
