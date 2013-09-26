@@ -20,6 +20,7 @@ define([
 			var features = new FeatureCollection();
 			var runners  = new RunnerCollection();
 			var socket   = io.connect('http://localhost:9999');
+			socket.emit('start runner', {});
 			var view     = new RunnerView({
 				socket   : socket,
 				runners  : runners,

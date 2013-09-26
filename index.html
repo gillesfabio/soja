@@ -26,6 +26,10 @@
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="#">Runner</a></li>
 					</ul>
+					<div class="pull-right">
+  						<button type="button" class="btn btn-primary btn-default navbar-btn" id="watai-start"><i class="icon-play"></i></button>
+  						<button type="button" class="btn btn-warning btn-default navbar-btn" id="watai-stop"><i class="icon-stop"></i></button>
+  					</div>
 				</div>
 			</div>
 		</div>
@@ -53,34 +57,40 @@
 		</script>
 
 		<script type="text/template" id="runner-template">
-			<div id="runner-info"></div>
-			<% if (features.length) { %>
-			<div id="runner-tests">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title"><%= runner.description %></h3>
-					</div>
-					<div class="panel-body feature">
-						<ul class="list-unstyled" id="runner-features">
-							<% _.each(features, function(feature) { %>
-							<% var feature = feature.toJSON() %>
-							<li class="<%= feature.state === 'success' ? 'feature-success' : 'feature-failure' %>">
-								<i class="icon-<%= feature.state === 'success' ? 'ok' : 'remove' %>"></i>  <%= feature.message %>
-								<% if (feature.state === 'failure' && feature.reasons) { %>
-									<% _.each(feature.reasons, function(reason, index) { %>
-										<h5>Reason #<%= index + 1 %></h5>
-										<pre class="runner-failure-reason">
-										<%= reason %>
-										</pre>
+			<div class="row">
+				<div id="runner-info" class="col-md-12"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<% if (features.length) { %>
+					<div id="runner-tests">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title"><%= runner.description %></h3>
+							</div>
+							<div class="panel-body feature">
+								<ul class="list-unstyled" id="runner-features">
+									<% _.each(features, function(feature) { %>
+									<% var feature = feature.toJSON() %>
+									<li class="<%= feature.state === 'success' ? 'feature-success' : 'feature-failure' %>">
+										<i class="icon-<%= feature.state === 'success' ? 'ok' : 'remove' %>"></i>  <%= feature.message %>
+										<% if (feature.state === 'failure' && feature.reasons) { %>
+											<% _.each(feature.reasons, function(reason, index) { %>
+												<h5>Reason #<%= index + 1 %></h5>
+												<pre class="runner-failure-reason">
+												<%= reason %>
+												</pre>
+											<% }); %>
+										<% } %>
+									</li>
 									<% }); %>
-								<% } %>
-							</li>
-							<% }); %>
-						</ul>
+								</ul>
+							</div>
+						</div>
 					</div>
+					<% } %>
 				</div>
 			</div>
-			<% } %>
 		</script>
 	</body>
 </html>

@@ -1,45 +1,75 @@
-define([
-
-	'underscore',
-	'backbone',
-	'app/models/RunnerModel',
-	'app/models/FeatureModel',
-	'app/views/RunnerInfoView'
-
-], function(_, Backbone, RunnerModel, FeatureModel, RunnerInfoView) {
+define(function(require) {
 
 	'use strict';
 
+	var _                 = require('underscore');
+	var Backbone          = require('backbone');
+	var RunnerModel       = require('app/models/RunnerModel');
+	var FeatureModel      = require('app/models/FeatureModel');
+	var RunnerInfoView    = require('app/views/RunnerInfoView');
+
+
 	var RunnerView = Backbone.View.extend({
 
-		options     :  {},
-		socket      :   null,
-		template    : _.template($('#runner-template').html()),
+		// View properties
+		options  : {},
+		socket   : null,
+		template : _.template($('#runner-template').html()),
 
-		features    : null,
-		runners     : null,
+		// Collections
+		features : null,
+		runners  : null,
 
+		// Subviews
+		runnerInfoView    : null,
+		runnerControlView : null,
+
+		// Collectors
 		models      : [RunnerModel, FeatureModel],
 		collections : [],
+		subviews    : [],
 
-		infoData : {
-			connected: false,
-			lastSessionDate: null
+		// Subviews data
+		runnerInfoViewData : {
+			connected       : false,
+			lastSessionDate : null
 		},
 
 		initialize: function initialize(options) {
+			this.initView(options);
+			this.initCollections();
+			this.initSubviews();
+			this.initEvents();
+			this.fetch();
+		},
 
-			_.bindAll(this, 'start', 'connect', 'disconnect', 'message', 'render');
+		initView: function initView(options) {
+			this.options = options;
+			this.socket = this.options.socket;
+		},
 
-			this.options  = options;
-			this.socket   = options.socket;
-			this.runners  = options.runners;
-			this.features = options.features;
-
+		initCollections: function initCollections() {
+			this.runners = this.options.runners;
+			this.features = this.options.features;
 			this.collections.push(this.runners);
 			this.collections.push(this.features);
+		},
 
-			this.runnerInfoView = new RunnerInfoView({data: this.infoData});
+		initSubviews: function initSubviews() {
+			this.runnerInfoView = new RunnerInfoView({data: this.runnerInfoViewData});
+			this.subviews.push(this.runnerInfoView);
+		},
+
+		initEvents: function initEvents() {
+
+			_.bindAll(this,
+				'startRunner',
+				'stopRunner',
+				'start',
+				'connect',
+				'disconnect',
+				'message',
+				'render');
 
 			this.listenTo(this.socket, 'connect', this.connect);
 			this.listenTo(this.socket, 'disconnect', this.disconnect);
@@ -48,6 +78,12 @@ define([
 			this.listenTo(this.features, 'change', this.render);
 			this.listenTo(this.runners, 'change', this.render);
 
+			// Outside of el (in navbar)
+			$('#watai-start').on('click', this.startRunner);
+			$('#watai-stop').on('click', this.stopRunner);
+		},
+
+		fetch: function fetch() {
 			this.features.fetch();
 			this.runners.fetch();
 		},
@@ -67,14 +103,24 @@ define([
 			return this;
 		},
 
+		startRunner: function startRunner() {
+			this.socket.emit('start runner', {});
+			console.log('start runner');
+		},
+
+		stopRunner: function stopRunner() {
+			this.socket.emit('stop runner', {});
+			console.log('stop runner');
+		},
+
 		connect: function onSocketConnect() {
-			this.infoData.connected = true;
+			this.runnerInfoViewData.connected = true;
 			this.render();
 			return this;
 		},
 
 		disconnect: function onSocketDisconnect() {
-			this.infoData.connected = false;
+			this.runnerInfoViewData.connected = false;
 			this.render();
 			return this;
 		},
@@ -87,11 +133,8 @@ define([
 
 		render: function render() {
 			var runner = this.runners.first().toJSON();
-			this.infoData.lastSessionDate = runner.startedAt;
-			$(this.el).html(this.template({
-				runner   : runner,
-				features : this.features.models
-			}));
+			this.runnerInfoViewData.lastSessionDate = runner.startedAt;
+			$(this.el).html(this.template({runner: runner, features: this.features.models}));
 			$(this.el).find('#runner-info').html(this.runnerInfoView.render().el);
 			return this;
 		}
