@@ -47,6 +47,14 @@
 							<% _.each(features, function(feature) { %>
 							<li class="<%= feature.state === 'success' ? 'feature-success' : 'feature-failure' %>">
 								<span class="glyphicon glyphicon-<%= feature.state === 'success' ? 'ok' : 'remove' %>"></span>  <%= feature.message %>
+								<% if (feature.state === 'failure' && feature.reasons) { %>
+									<% _.each(feature.reasons, function(reason, index) { %>
+										<h5>Reason #<%= index + 1 %></h5>
+										<pre class="runner-failure-reason">
+										<%= reason %>
+										</pre>
+									<% }); %>
+								<% } %>
 							</li>
 							<% }); %>
 						</ul>

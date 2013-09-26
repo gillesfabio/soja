@@ -30,3 +30,12 @@ body {
 #runner-features .glyphicon {
 	margin-right: 10px;
 }
+
+#runner-features pre {
+	font-size: 11px;
+	tab-size: 2;
+	-moz-tab-size: 2;
+	-o-tab-size: 2;
+	overflow: auto;
+	margin-bottom: 10px;
+}
