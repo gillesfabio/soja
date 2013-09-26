@@ -2,9 +2,11 @@ define([
 
 	'backbone',
 	'socket.io-client',
-	'app/views/RunnerView'
+	'app/views/RunnerView',
+	'app/collections/RunnerCollection',
+	'app/collections/FeatureCollection'
 
-], function(Backbone, io, RunnerView) {
+], function(Backbone, io, RunnerView, RunnerCollection, FeatureCollection) {
 
 	'use strict';
 
@@ -15,8 +17,14 @@ define([
 		},
 
 		runner: function runner() {
-			var socket = io.connect('http://localhost:9999');
-			var view   = new RunnerView({socket: socket});
+			var features = new FeatureCollection();
+			var runners  = new RunnerCollection();
+			var socket   = io.connect('http://localhost:9999');
+			var view     = new RunnerView({
+				socket   : socket,
+				runners  : runners,
+				features : features
+			});
 			$('#content').html(view.render().el);
 		}
 

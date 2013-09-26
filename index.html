@@ -40,11 +40,12 @@
 			<div id="runner-tests">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title"><%= runnerName %></h3>
+						<h3 class="panel-title"><%= runner.toJSON().description %></h3>
 					</div>
 					<div class="panel-body feature">
 						<ul class="list-unstyled" id="runner-features">
 							<% _.each(features, function(feature) { %>
+							<% var feature = feature.toJSON() %>
 							<li class="<%= feature.state === 'success' ? 'feature-success' : 'feature-failure' %>">
 								<span class="glyphicon glyphicon-<%= feature.state === 'success' ? 'ok' : 'remove' %>"></span>  <%= feature.message %>
 								<% if (feature.state === 'failure' && feature.reasons) { %>
