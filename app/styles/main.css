@@ -8,6 +8,16 @@ body {
 	font-weight: bold;
 }
 
+.list-item-success {
+	background: #dff0d8;
+	color: #468847;
+}
+
+.list-item-failure {
+	background: #f2dede;
+	color: #b94a48;
+}
+
 .feature-success {
 	background: #dff0d8;
 	color: #468847;

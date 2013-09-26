@@ -17,7 +17,10 @@ define('app/collections/RunnerCollection', [
 		createUnique: function createIfDoesNotExist(data) {
 			if (_.has(data, 'type') && data.type === 'runner' && data.state === 'start') {
 				if (!this.findWhere({description: data.message})) {
-					this.create({description: data.message});
+					this.create({
+						description: data.message,
+						startedAt: data.startedAt
+					});
 				}
 			}
 		}

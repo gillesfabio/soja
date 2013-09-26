@@ -31,16 +31,22 @@
 		<div id="content" class="container">
 		</div>
 		<script type="text/template" id="runner-template">
-			<div id="runner-info">
-				<div class="alert <%= connected ? 'alert-success' : 'alert-danger' %>">
-					<strong>Server status</strong>: <%= connected ? 'connected' : 'not connected' %>
+			<div id="runner-info" class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Information</h3>
+				</div>
+				<div class="panel-body">
+					<ul class="list-unstyled">
+						<li><strong>Last session:</strong> <%= lastSessionDate ? lastSessionDate : 'never' %></li>
+						<li><strong>Server connection status:</strong> <%= connected ? 'connected' : 'not connected' %></li>
+					</ul>
 				</div>
 			</div>
 			<% if (features.length) { %>
 			<div id="runner-tests">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title"><%= runner.toJSON().description %></h3>
+						<h3 class="panel-title"><%= runner.description %></h3>
 					</div>
 					<div class="panel-body feature">
 						<ul class="list-unstyled" id="runner-features">

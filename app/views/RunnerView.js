@@ -2,10 +2,11 @@ define([
 
 	'underscore',
 	'backbone',
+	'moment',
 	'app/models/RunnerModel',
 	'app/models/FeatureModel'
 
-], function(_, Backbone, RunnerModel, FeatureModel) {
+], function(_, Backbone, moment, RunnerModel, FeatureModel) {
 
 	'use strict';
 
@@ -18,6 +19,7 @@ define([
 		features    : null,
 		runners     : null,
 		connected   : false,
+		startDate   : null,
 
 		models      : [RunnerModel, FeatureModel],
 		collections : [],
@@ -57,6 +59,7 @@ define([
 
 		start: function start() {
 			this.clear();
+			return this;
 		},
 
 		connect: function onSocketConnect() {
@@ -78,9 +81,12 @@ define([
 		},
 
 		render: function render() {
+			var runner = this.runners.first().toJSON();
 			$(this.el).html(this.template({
 				connected : this.connected,
-				runner    : this.runners.first(),
+				startDate : this.startDate,
+				runner    : runner,
+				lastSessionDate: moment(runner.startedAt).fromNow(),
 				features  : this.features.models
 			}));
 			return this;

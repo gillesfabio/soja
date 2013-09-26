@@ -28,6 +28,7 @@
     "underscore": "1.5.x",
     "backbone": "1.0.x",
     "socket.io-client": "0.9.x",
-    "backbone.localStorage": "~1.1.6"
+    "backbone.localStorage": "~1.1.6",
+    "momentjs": "~2.2.1"
   }
 }
