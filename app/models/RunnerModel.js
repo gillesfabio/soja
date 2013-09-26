@@ -1,10 +1,15 @@
-define(function(require) {
+define('app/models/RunnerModel', [
+
+	'backbone',
+	'backbone.localStorage'
+
+], function(Backbone) {
 
 	'use strict';
 
-	var Backbone = require('backbone');
-
-	var RunnerModel = Backbone.Model.extend({});
+	var RunnerModel = Backbone.Model.extend({
+		localStorage: new Backbone.LocalStorage('watai-web-runners')
+	});
 
 	return RunnerModel;
 
