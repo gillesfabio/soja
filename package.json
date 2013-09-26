@@ -1,0 +1,12 @@
+{
+  "name": "watai-webview-frontend",
+  "version": "0.1.0",
+  "description": "Watai web view frontend.",
+  "author": "Gilles Fabio <gilles@gillesfabio.com>",
+  "license": "AGPL",
+  "private": true,
+  "dependencies": {
+    "express": "3.4.x",
+    "socket.io": "0.9.x"
+  }
+}
