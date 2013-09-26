@@ -8,13 +8,11 @@ body {
 	font-weight: bold;
 }
 
-.list-item-success {
-	background: #dff0d8;
+.list-item-ok {
 	color: #468847;
 }
 
 .list-item-failure {
-	background: #f2dede;
 	color: #b94a48;
 }
 
@@ -37,7 +35,7 @@ body {
 	padding: 5px 10px 5px 10px;
 }
 
-#runner-features .glyphicon {
+#runner-features i {
 	margin-right: 10px;
 }
 

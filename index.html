@@ -7,6 +7,7 @@
 		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
 		<link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="app/styles/main.css">
 		<script data-main="app/main" src="vendor/requirejs/require.js"></script>
 	</head>
@@ -37,8 +38,14 @@
 				</div>
 				<div class="panel-body">
 					<ul class="list-unstyled">
-						<li><strong>Last session:</strong> <%= lastSessionDate ? lastSessionDate : 'never' %></li>
-						<li><strong>Server connection status:</strong> <%= connected ? 'connected' : 'not connected' %></li>
+						<li>
+							<i class="icon-time"></i> <strong>Last session:</strong>
+							<%= lastSessionDate ? lastSessionDate : 'never' %>
+						</li>
+						<li class="<%= connected ? 'list-item-ok' : 'list-item-failure' %>">
+							<i class="<%= connected ? 'icon-thumbs-up-alt' : 'icon-thumbs-down-alt' %>"></i>
+							<strong>Server:</strong> <%= connected ? 'connected' : 'not connected' %>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -53,7 +60,7 @@
 							<% _.each(features, function(feature) { %>
 							<% var feature = feature.toJSON() %>
 							<li class="<%= feature.state === 'success' ? 'feature-success' : 'feature-failure' %>">
-								<span class="glyphicon glyphicon-<%= feature.state === 'success' ? 'ok' : 'remove' %>"></span>  <%= feature.message %>
+								<i class="icon-<%= feature.state === 'success' ? 'ok' : 'remove' %>"></i>  <%= feature.message %>
 								<% if (feature.state === 'failure' && feature.reasons) { %>
 									<% _.each(feature.reasons, function(reason, index) { %>
 										<h5>Reason #<%= index + 1 %></h5>
