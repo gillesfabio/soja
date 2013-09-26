@@ -31,8 +31,9 @@
 		</div>
 		<div id="content" class="container">
 		</div>
-		<script type="text/template" id="runner-template">
-			<div id="runner-info" class="panel panel-default">
+
+		<script type="text/template" id="runner-info-template">
+			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">Information</h3>
 				</div>
@@ -49,6 +50,10 @@
 					</ul>
 				</div>
 			</div>
+		</script>
+
+		<script type="text/template" id="runner-template">
+			<div id="runner-info"></div>
 			<% if (features.length) { %>
 			<div id="runner-tests">
 				<div class="panel panel-default">

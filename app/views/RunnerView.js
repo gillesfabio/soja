@@ -2,11 +2,11 @@ define([
 
 	'underscore',
 	'backbone',
-	'moment',
 	'app/models/RunnerModel',
-	'app/models/FeatureModel'
+	'app/models/FeatureModel',
+	'app/views/RunnerInfoView'
 
-], function(_, Backbone, moment, RunnerModel, FeatureModel) {
+], function(_, Backbone, RunnerModel, FeatureModel, RunnerInfoView) {
 
 	'use strict';
 
@@ -18,11 +18,14 @@ define([
 
 		features    : null,
 		runners     : null,
-		connected   : false,
-		startDate   : null,
 
 		models      : [RunnerModel, FeatureModel],
 		collections : [],
+
+		infoData : {
+			connected: false,
+			lastSessionDate: null
+		},
 
 		initialize: function initialize(options) {
 
@@ -35,6 +38,8 @@ define([
 
 			this.collections.push(this.runners);
 			this.collections.push(this.features);
+
+			this.runnerInfoView = new RunnerInfoView({data: this.infoData});
 
 			this.listenTo(this.socket, 'connect', this.connect);
 			this.listenTo(this.socket, 'disconnect', this.disconnect);
@@ -63,13 +68,13 @@ define([
 		},
 
 		connect: function onSocketConnect() {
-			this.connected = true;
+			this.infoData.connected = true;
 			this.render();
 			return this;
 		},
 
 		disconnect: function onSocketDisconnect() {
-			this.connected = false;
+			this.infoData.connected = false;
 			this.render();
 			return this;
 		},
@@ -82,13 +87,12 @@ define([
 
 		render: function render() {
 			var runner = this.runners.first().toJSON();
+			this.infoData.lastSessionDate = runner.startedAt;
 			$(this.el).html(this.template({
-				connected : this.connected,
-				startDate : this.startDate,
-				runner    : runner,
-				lastSessionDate: moment(runner.startedAt).fromNow(),
-				features  : this.features.models
+				runner   : runner,
+				features : this.features.models
 			}));
+			$(this.el).find('#runner-info').html(this.runnerInfoView.render().el);
 			return this;
 		}
 
