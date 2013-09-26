@@ -1,17 +1,11 @@
 {
-  "name": "watai-web-reporter",
+  "name": "watai-webview-frontend",
   "version": "0.1.0",
-  "authors": [
-    "Gilles Fabio <gilles@gillesfabio.com>"
-  ],
-  "description": "Web reporter for Watai web view",
-  "main": "index.html",
-  "keywords": [
-    "watai",
-    "test"
-  ],
+  "author": "Gilles Fabio <gilles@gillesfabio.com>",
+  "description": "Frontend for Watai web view.",
+  "keywords": ["watai", "test", "testing"],
   "license": "AGPL",
-  "homepage": "http://github.com/gillesfabio/watai-web-reporter",
+  "homepage": "http://github.com/gillesfabio/watai-webview-frontend",
   "private": true,
   "ignore": [
     "**/.*",
@@ -19,7 +13,7 @@
     "bower_components",
     "test",
     "tests",
-    "vendor"
+    "src/vendor"
   ],
   "dependencies": {
     "requirejs": "2.1.x",
