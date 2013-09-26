@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "author": "Gilles Fabio <gilles@gillesfabio.com>",
   "description": "Frontend for Watai web view.",
-  "keywords": ["watai", "test", "testing"],
+  "keywords": [
+    "watai",
+    "test",
+    "testing"
+  ],
   "license": "AGPL",
   "homepage": "http://github.com/gillesfabio/watai-webview-frontend",
   "private": true,
@@ -25,5 +29,8 @@
     "backbone.localStorage": "1.1.x",
     "momentjs": "2.2.x",
     "font-awesome": "3.2.x"
+  },
+  "devDependencies": {
+    "mocha": "~1.13.0"
   }
 }
