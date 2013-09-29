@@ -1,8 +1,8 @@
 {
-	"name": "watai-webview-frontend",
+	"name": "wwui",
 	"version": "0.1.0",
 	"author": "Gilles Fabio <gilles@gillesfabio.com>",
-	"description": "Watai web view frontend.",
+	"description": "Watai Web User Interface.",
 	"keywords": [
 		"watai",
 		"test",
@@ -10,7 +10,7 @@
 		"websocket"
 	],
 	"license": "AGPL",
-	"homepage": "http://github.com/gillesfabio/watai-webview-frontend",
+	"homepage": "http://github.com/gillesfabio/wwui",
 	"private": true,
 	"ignore": [
 		"**/.*",
