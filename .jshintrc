@@ -1,0 +1,30 @@
+{
+	"strict"		: true,
+	"browser"		: true,
+	"node"			: true,
+	"curly"			: false,
+	"trailing"		: true,
+	"undef"			: true,
+	"sub"			: true,
+	"jquery"		: true,
+    "mootools"		: true,
+    "smarttabs"		: false,
+    "devel"			: true,
+	"eqeqeq"		: true,
+	"eqnull"		: false,
+	"forin"			: false,
+	"immed"			: true,
+	"latedef"       : false,
+	"newcap"		: true,
+	"onevar"		: false,
+	"predef"		: [
+		"define",
+		"requirejs",
+		"describe",
+		"it",
+		"before",
+		"beforeEach",
+		"after",
+		"afterEach"
+	]
+}

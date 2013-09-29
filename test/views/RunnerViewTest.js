@@ -5,6 +5,7 @@ define(function(require) {
 	'use strict';
 
 	var expect            = require('chai').expect;
+	var Backbone          = require('backbone');
 	var RunnerView        = require('app/views/RunnerView');
 	var RunnerInfoView    = require('app/views/RunnerInfoView');
 	var RunnerCollection  = require('app/collections/RunnerCollection');
@@ -13,7 +14,7 @@ define(function(require) {
 
 	var view, runners, features, socket, output;
 
-	RunnerCollection.prototype.localStorage = new Backbone.LocalStorage('watai:web:test:runners');
+	RunnerCollection.prototype.localStorage  = new Backbone.LocalStorage('watai:web:test:runners');
 	FeatureCollection.prototype.localStorage = new Backbone.LocalStorage('watai:web:test:features');
 
 	socket = io.connect('http://localhost:9999');

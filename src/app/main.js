@@ -36,9 +36,10 @@ requirejs.config({
 
 require([
 
+	'backbone',
 	'app/router'
 
-], function(Router) {
+], function(Backbone, Router) {
 
 	'use strict';
 

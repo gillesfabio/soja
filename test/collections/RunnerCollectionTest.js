@@ -5,6 +5,7 @@ define(function(require) {
 	'use strict';
 
 	var expect           = require('chai').expect;
+	var Backbone         = require('backbone');
 	var RunnerCollection = require('app/collections/RunnerCollection');
 
 	var collection, runDate, model, data1, data2;

@@ -5,6 +5,7 @@ define(function(require) {
 	'use strict';
 
 	var expect            = require('chai').expect;
+	var Backbone          = require('backbone');
 	var FeatureCollection = require('app/collections/FeatureCollection');
 
 	FeatureCollection.prototype.localStorage = new Backbone.LocalStorage('watai:web:test:features');

@@ -6,6 +6,17 @@ module.exports = function(grunt) {
 	'use strict';
 
 	grunt.initConfig({
+		jshint: {
+			all: [
+				'Gruntfile.js',
+				'src/**/*.js',
+				'test/**/*.js'
+			],
+			options: {
+				ignores: ['vendor/**/*.js'],
+				jshintrc: '.jshintrc'
+			}
+		},
 		express: {
 			app: {
 				options: {
@@ -27,13 +38,16 @@ module.exports = function(grunt) {
 		}
 	});
 
+	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-express');
 
 	grunt.registerTask('default', [
+		'jshint',
 		'express:app'
 	]);
 
 	grunt.registerTask('test', [
+		'jshint',
 		'express:test'
 	]);
 };

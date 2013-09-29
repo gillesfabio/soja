@@ -1,17 +1,18 @@
 {
-	"name": "wwui",
-	"version": "0.1.0",
-	"description": "Watai Web User Interface.",
-	"author": "Gilles Fabio <gilles@gillesfabio.com>",
-	"license": "AGPL",
-	"private": true,
-	"dependencies": {
-		"express": "3.x",
-		"grunt": "0.4.x",
-		"grunt-contrib-watch": "0.5.x",
-		"grunt-express": "1.2.x"
-	},
-	"devDependencies": {
-		"socket.io": "0.9.x"
-	}
+  "name": "wwui",
+  "version": "0.1.0",
+  "description": "Watai Web User Interface.",
+  "author": "Gilles Fabio <gilles@gillesfabio.com>",
+  "license": "AGPL",
+  "private": true,
+  "dependencies": {
+    "express": "3.x",
+    "grunt": "0.4.x",
+    "grunt-contrib-watch": "0.5.x",
+    "grunt-express": "1.2.x"
+  },
+  "devDependencies": {
+    "socket.io": "0.9.x",
+    "grunt-contrib-jshint": "0.6.x"
+  }
 }
