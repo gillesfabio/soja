@@ -12,6 +12,7 @@ Prerequisites:
 * [NPM](http://npm.org)
 * [Grunt](http://gruntjs.com)
 * [Bower](http://bower.io)
+* [Compass](http://compass-style.org/)
 
 Installation:
 
@@ -31,6 +32,7 @@ The steps are:
 * Install [Node](http://nodejs.org) (NPM is already provided by Node)
 * Install [Grunt](http://gruntjs.com)
 * Install [Bower](http://bower.io)
+* Install [Compass](http://compass-style.org/)
 * Install [Soja](http://github.com/gillesfabio/soja)
 
 Once the OS X Command Line Tools or Xcode are installed, open a terminal
@@ -50,7 +52,7 @@ Now, you can clone the Soja repository and install the stack:
 
 	git clone https://github.com/gillesfabio/soja.git
 	cd soja
-	make install
+	make install # npm install; bower install; gem install compass
 
 Done.
 

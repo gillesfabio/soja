@@ -17,6 +17,28 @@ module.exports = function(grunt) {
 				jshintrc: '.jshintrc'
 			}
 		},
+		compass: {
+			dist: {
+				options: {
+					sassDir: 'src/app/styles/sass',
+					cssDir: 'src/app/styles/css',
+					outputStyle: 'expanded',
+					noLineComments: true,
+					force: true
+				},
+				files: {
+					'src/app/styles/dist/app.css': 'src/app/styles/app/scss'
+				}
+			}
+		},
+		watch: {
+			compass: {
+				files: [
+					'src/app/styles/sass/*.scss'
+				],
+				tasks: ['compass']
+			}
+		},
 		express: {
 			app: {
 				options: {
@@ -39,10 +61,14 @@ module.exports = function(grunt) {
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-compass');
+	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-express');
 
 	grunt.registerTask('default', [
 		'jshint',
+		'watch:compass',
+		'compass',
 		'express:app'
 	]);
 
