@@ -8,8 +8,29 @@ var express = require('express'),
 
 
 app.use(express.static(__dirname));
-app.use(express.static(path.join(__dirname, '..', 'src', 'vendor')));
+app.use(express.static(path.join(__dirname, '..', 'src')));
 
-io.set('log level', 1);
+io.set('log level', 5);
 io.set('transports', ['websocket']);
 server.listen(9999);
+
+io.sockets.on('connection', function(socket) {
+
+	var runDate = new Date();
+
+	socket.emit('watai:web:runner', {
+		runDate : runDate,
+		name    : 'Runner',
+		action  : 'start'
+	});
+
+	for (var i = 0; i < 4; i++) {
+		socket.emit('watai:web:feature', {
+			runDate     : runDate,
+			sendDate    : new Date(),
+			status      : 'success',
+			description : 'This is feature ' + '#' + (i + 1),
+			reasons     : []
+		});
+	}
+});

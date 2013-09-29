@@ -7,9 +7,7 @@ define('app/models/FeatureModel', [
 
 	'use strict';
 
-	var FeatureModel = Backbone.Model.extend({
-		localStorage: new Backbone.LocalStorage('watai-web-features')
-	});
+	var FeatureModel = Backbone.Model.extend({});
 
 	return FeatureModel;
 

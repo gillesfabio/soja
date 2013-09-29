@@ -1,0 +1,16 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Information</h3>
+	</div>
+	<div class="panel-body">
+		<ul class="list-unstyled">
+			<li>
+				<i class="icon-time"></i> <strong>Last run:</strong> <%= lastRunDate ? lastRunDate : 'never' %>
+			</li>
+			<li class="<%= connected ? 'list-item-ok' : 'list-item-failure' %>">
+				<i class="<%= connected ? 'icon-thumbs-up-alt' : 'icon-thumbs-down-alt' %>"></i>
+				<strong>Server:</strong> <%= connected ? 'connected' : 'not connected' %>
+			</li>
+		</ul>
+	</div>
+</div>

@@ -12,14 +12,26 @@ define('app/collections/FeatureCollection', [
 	var FeatureCollection = Backbone.Collection.extend({
 
 		model: FeatureModel,
-		localStorage: new Backbone.LocalStorage('watai-web-features'),
+		localStorage: new Backbone.LocalStorage('watai:web:features'),
 
 		createUnique: function createUnique(data) {
-			if (_.has(data, 'type') && data.type === 'feature') {
-				if (!this.findWhere({state: data.state, message: data.message})) {
-					this.create(data);
-				}
+			var exists, feature;
+			data = _.extend({
+				runDate     : null,
+				status      : null,
+				description : null
+			}, data);
+			if (!data.runDate && !data.status && !data.description) return;
+			exists = this.findWhere({
+				runDate     : data.runDate,
+				status      : data.status,
+				description : data.description
+			});
+			if (!exists) {
+				feature = this.create(data);
+				return feature;
 			}
+			return;
 		}
 	});
 

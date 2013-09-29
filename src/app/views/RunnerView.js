@@ -7,85 +7,66 @@ define(function(require) {
 	var RunnerModel       = require('app/models/RunnerModel');
 	var FeatureModel      = require('app/models/FeatureModel');
 	var RunnerInfoView    = require('app/views/RunnerInfoView');
-
+	var template          = require('text!app/templates/runner.html');
 
 	var RunnerView = Backbone.View.extend({
 
-		// View properties
-		options  : {},
-		socket   : null,
-		template : _.template($('#runner-template').html()),
-
-		// Collections
-		features : null,
-		runners  : null,
-
-		// Subviews
-		runnerInfoView    : null,
-		runnerControlView : null,
-
-		// Collectors
-		models      : [RunnerModel, FeatureModel],
-		collections : [],
-		subviews    : [],
-
-		// Subviews data
-		runnerInfoViewData : {
-			connected       : false,
-			lastSessionDate : null
-		},
+		template: _.template(template),
 
 		initialize: function initialize(options) {
-			this.initView(options);
+			this.options = options || {};
+			this.initView();
+			this.initModels();
 			this.initCollections();
 			this.initSubviews();
 			this.initEvents();
-			this.fetch();
 		},
 
-		initView: function initView(options) {
-			this.options = options;
-			this.socket = this.options.socket;
+		initView: function initView() {
+			this.socket = (_.has(this.options, 'socket') && this.options.socket) ? this.options.socket : null;
+			this.runner = null;
+		},
+
+		initModels: function initModels() {
+			this.models = [RunnerModel, FeatureModel];
 		},
 
 		initCollections: function initCollections() {
-			this.runners = this.options.runners;
-			this.features = this.options.features;
-			this.collections.push(this.runners);
-			this.collections.push(this.features);
+			this.collections = [];
+			this.runners  = (_.has(this.options, 'runners') && this.options.runners) ? this.options.runners : null;
+			this.features = (_.has(this.options, 'features') && this.options.features) ? this.options.features : null;
+			if (this.runners)  this.collections.push(this.runners);
+			if (this.features) this.collections.push(this.features);
 		},
 
 		initSubviews: function initSubviews() {
-			this.runnerInfoView = new RunnerInfoView({data: this.runnerInfoViewData});
+			this.subviews = [];
+			this.runnerInfoView = new RunnerInfoView();
 			this.subviews.push(this.runnerInfoView);
 		},
 
 		initEvents: function initEvents() {
 
 			_.bindAll(this,
-				'startRunner',
-				'stopRunner',
-				'start',
-				'connect',
-				'disconnect',
-				'message',
+				'onSocketConnect',
+				'onSocketDisconnect',
+				'onSocketRunner',
+				'onSocketFeature',
 				'render');
 
-			this.listenTo(this.socket, 'connect', this.connect);
-			this.listenTo(this.socket, 'disconnect', this.disconnect);
-			this.listenTo(this.socket, 'message', this.message);
-			this.listenTo(this.socket, 'start', this.start);
+			this.listenTo(this.socket, 'connect', this.onSocketConnect);
+			this.listenTo(this.socket, 'disconnect', this.onSocketDisconnect);
+			this.listenTo(this.socket, 'watai:web:runner', this.onSocketRunner);
+			this.listenTo(this.socket, 'watai:web:feature', this.onSocketFeature);
+
 			this.listenTo(this.features, 'change', this.render);
 			this.listenTo(this.runners, 'change', this.render);
-
-			// Outside of el (in navbar)
-			$('#watai-start').on('click', this.startRunner);
-			$('#watai-stop').on('click', this.stopRunner);
 		},
 
 		fetch: function fetch() {
 			this.features.fetch();
 			this.runners.fetch();
+			return this;
 		},
 
 		clear: function clear() {
@@ -96,45 +77,37 @@ define(function(require) {
 			this.collections.forEach(function(collection) {
 				collection.reset();
 			});
-		},
-
-		start: function start() {
-			this.clear();
 			return this;
 		},
 
-		startRunner: function startRunner() {
-			this.socket.emit('start runner', {});
-			console.log('start runner');
-		},
-
-		stopRunner: function stopRunner() {
-			this.socket.emit('stop runner', {});
-			console.log('stop runner');
-		},
-
-		connect: function onSocketConnect() {
-			this.runnerInfoViewData.connected = true;
+		onSocketConnect: function onSocketConnect() {
+			this.runnerInfoView.data.connected = true;
 			this.render();
 			return this;
 		},
 
-		disconnect: function onSocketDisconnect() {
-			this.runnerInfoViewData.connected = false;
+		onSocketDisconnect: function onSocketDisconnect() {
+			this.runnerInfoView.data.connected = false;
 			this.render();
 			return this;
 		},
 
-		message: function message(data) {
-			this.runners.createUnique(data);
+		onSocketRunner: function onSocketRunner(data) {
+			this.runner = this.runners.createUnique(data);
+			if (this.runner) this.runnerInfoView.data.lastRunDate = this.runner.toJSON().runDate;
+			return this;
+		},
+
+		onSocketFeature: function onSocketFeature(data) {
 			this.features.createUnique(data);
 			return this;
 		},
 
 		render: function render() {
-			var runner = this.runners.first().toJSON();
-			this.runnerInfoViewData.lastSessionDate = runner.startedAt;
-			$(this.el).html(this.template({runner: runner, features: this.features.models}));
+			$(this.el).html(this.template({
+				runner   : this.runner ? this.runner.toJSON() : null,
+				features : this.features ? this.features.toJSON() : []
+			}));
 			$(this.el).find('#runner-info').html(this.runnerInfoView.render().el);
 			return this;
 		}

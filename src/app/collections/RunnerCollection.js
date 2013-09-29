@@ -12,15 +12,25 @@ define('app/collections/RunnerCollection', [
 	var RunnerCollection = Backbone.Collection.extend({
 
 		model: RunnerModel,
-		localStorage: new Backbone.LocalStorage('watai-web-runners'),
+		localStorage: new Backbone.LocalStorage('watai:web:runners'),
 
-		createUnique: function createIfDoesNotExist(data) {
-			if (_.has(data, 'type') && data.type === 'runner' && data.state === 'start') {
-				if (!this.findWhere({description: data.message})) {
-					this.create({
-						description: data.message,
-						startedAt: data.startedAt
-					});
+		createUnique: function createUnique(data) {
+			var exists, runner;
+			data = _.extend({
+				action  : null,
+				runDate : null,
+				name    : null
+			}, data);
+			if (!data.action && !data.runDate && !data.name) return;
+			if (data.action === 'start') {
+				exists = this.findWhere({
+					runDate : data.runDate,
+					name    : data.name
+				});
+				if (!exists) {
+					delete data['action'];
+					runner = this.create(data);
+					return runner;
 				}
 			}
 		}

@@ -9,7 +9,8 @@ requirejs.config({
 		'backbone.localStorage'	: 'vendor/backbone.localStorage/backbone.localStorage',
 		'bootstrap'				: 'vendor/bootstrap/dist/js/bootstrap',
 		'socket.io-client'		: 'vendor/socket.io-client/dist/socket.io',
-		'moment'				: 'vendor/momentjs/moment'
+		'moment'				: 'vendor/momentjs/moment',
+		'text'					: 'vendor/requirejs-text/text'
 	},
 
 	shim: {

@@ -7,9 +7,7 @@ define('app/models/RunnerModel', [
 
 	'use strict';
 
-	var RunnerModel = Backbone.Model.extend({
-		localStorage: new Backbone.LocalStorage('watai-web-runners')
-	});
+	var RunnerModel = Backbone.Model.extend({});
 
 	return RunnerModel;
 

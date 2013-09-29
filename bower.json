@@ -21,6 +21,7 @@
   ],
   "dependencies": {
     "requirejs": "2.1.x",
+    "requirejs-text": "2.x",
     "jquery": "2.x",
     "bootstrap": "3.x",
     "underscore": "1.5.x",
@@ -31,6 +32,7 @@
     "font-awesome": "3.2.x"
   },
   "devDependencies": {
-    "mocha": "~1.13.0"
+    "mocha": "1.x",
+    "chai": "1.x"
   }
 }

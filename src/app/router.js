@@ -17,15 +17,12 @@ define([
 		},
 
 		runner: function runner() {
-			var features = new FeatureCollection();
-			var runners  = new RunnerCollection();
-			var socket   = io.connect('http://localhost:9999');
-			socket.emit('start runner', {});
-			var view     = new RunnerView({
-				socket   : socket,
-				runners  : runners,
-				features : features
+			var view = new RunnerView({
+				socket   : io.connect('http://localhost:9999'),
+				runners  : new RunnerCollection(),
+				features : new FeatureCollection()
 			});
+			view.fetch();
 			$('#content').html(view.render().el);
 		}
 

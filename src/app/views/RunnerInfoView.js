@@ -1,3 +1,5 @@
+/* jshint expr: true */
+
 define(function(require) {
 
 	'use strict';
@@ -5,30 +7,28 @@ define(function(require) {
 	var _        = require('underscore');
 	var Backbone = require('backbone');
 	var moment   = require('moment');
+	var template = require('text!app/templates/runner-info.html');
 
 	var RunnerInfoView = Backbone.View.extend({
 
-		template: _.template($('#runner-info-template').html()),
+		template: _.template(template),
 
-		initialize: function initialize(options) {
-			this.options = options;
-			this.data = this.options.data;
+		initialize: function initialize() {
+			this.data = {
+				connected: false,
+				lastRunDate: null
+			};
 		},
 
-		getLastSessionDate: function lastSessionDate() {
-			return (_.has(this.data, 'lastSessionDate') && this.data.lastSessionDate) ?
-				moment(this.data.lastSessionDate).fromNow() : null;
-		},
-
-		getConnected: function connected() {
-			if (_.has(this.data, 'connected')) return this.data.connected;
-			return null;
+		lastRunDateFormatted: function lastRunDateFormatted() {
+			if (this.data.lastRunDate) return moment(this.data.lastRunDate).fromNow();
+			return this.data.lastRunDate;
 		},
 
 		render: function render() {
 			$(this.el).html(this.template({
-				lastSessionDate: this.getLastSessionDate(),
-				connected: this.getConnected(),
+				lastRunDate : this.lastRunDateFormatted(),
+				connected   : this.data.connected
 			}));
 			return this;
 		}
