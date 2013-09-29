@@ -7,6 +7,10 @@
   "private": true,
   "dependencies": {
     "express": "3.x",
+    "grunt-cli": "0.1.x",
+    "grunt": "0.4.x",
+    "grunt-contrib-watch": "0.5.x",
+    "grunt-express": "1.2.x"
   },
   "devDependencies": {
     "nodemon": "0.7.x",
