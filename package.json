@@ -1,7 +1,7 @@
 {
-  "name": "wwui",
+  "name": "soja",
   "version": "0.1.0",
-  "description": "Watai Web User Interface.",
+  "description": "Web User Interface for Watai framework.",
   "author": "Gilles Fabio <gilles@gillesfabio.com>",
   "license": "AGPL",
   "private": true,

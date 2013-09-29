@@ -1,8 +1,8 @@
 {
-	"name": "wwui",
+	"name": "soja",
 	"version": "0.1.0",
 	"author": "Gilles Fabio <gilles@gillesfabio.com>",
-	"description": "Watai Web User Interface.",
+	"description": "Web User Interface for Watai framework.",
 	"keywords": [
 		"watai",
 		"test",
@@ -10,7 +10,7 @@
 		"websocket"
 	],
 	"license": "AGPL",
-	"homepage": "http://github.com/gillesfabio/wwui",
+	"homepage": "http://github.com/gillesfabio/soja",
 	"private": true,
 	"ignore": [
 		"**/.*",

@@ -1,6 +1,6 @@
-# Wwui (Watai Web User Interface)
+# Soja
 
-**Wwui** is a realtime web user interface for [Watai](http://github.com/MattiSG/Watai)
+**Soja** is a realtime web user interface for [Watai](http://github.com/MattiSG/Watai)
 web testing framework.
 
 ## Installation
@@ -15,8 +15,8 @@ Prerequisites:
 
 Installation:
 
-	git clone https://github.com/gillesfabio/wwui
-	cd wwui
+	git clone https://github.com/gillesfabio/soja.git
+	cd soja
 	make install
 
 Lost? Follow your OS specific instructions thereafter.
@@ -31,7 +31,7 @@ The steps are:
 * Install [Node](http://nodejs.org) (NPM is already provided by Node)
 * Install [Grunt](http://gruntjs.com)
 * Install [Bower](http://bower.io)
-* Install [Wuui](http://github.com/gillesfabio/wwui)
+* Install [Soja](http://github.com/gillesfabio/soja)
 
 Once the OS X Command Line Tools or Xcode are installed, open a terminal
 (`Applications/Utilities/Terminal.app`) and execute the following commands
@@ -46,10 +46,10 @@ Once the OS X Command Line Tools or Xcode are installed, open a terminal
 	# Install Grunt and Bower
 	sudo npm install -g grunt bower
 
-Now, you can clone the Wwui repository and install the stack:
+Now, you can clone the Soja repository and install the stack:
 
-	git clone https://github.com/gillesfabio/wwui.git
-	cd wwui
+	git clone https://github.com/gillesfabio/soja.git
+	cd soja
 	make install
 
 Done.
@@ -69,7 +69,7 @@ Now, execute your Watai test suite and see the results in the browser.
 ## Contribute
 
 Feel free to contribute by creating issues and submitting pull requests.
-Please [create an issue](http://github.com/gillesfabio/wwui/issues) first
+Please [create an issue](http://github.com/gillesfabio/soja/issues) first
 on GitHub before submitting any pull request.
 
 Your code must follow the [Watai's code conventions](https://github.com/MattiSG/Watai/wiki/Code-conventions).
