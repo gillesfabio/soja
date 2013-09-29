@@ -8,6 +8,7 @@ var express = require('express'),
 
 
 app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, '..')));
 app.use(express.static(path.join(__dirname, '..', 'src')));
 
 io.set('log level', 1);

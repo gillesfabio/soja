@@ -10,7 +10,7 @@ module.exports = function(grunt) {
 			app: {
 				options: {
 					port         : 8888,
-					bases        : ['src'],
+					bases        : ['src', __dirname],
 					serverreload : true,
 					showStack    : true
 				}
