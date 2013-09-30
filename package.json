@@ -7,11 +7,11 @@
   "private": true,
   "dependencies": {
     "express": "3.x",
-    "socket.io": "0.9.x",
     "grunt": "0.4.x",
     "grunt-contrib-watch": "0.5.x",
     "grunt-express": "1.2.x",
     "grunt-contrib-jshint": "0.6.x",
-    "grunt-contrib-compass": "0.5.x"
+    "grunt-contrib-compass": "0.5.x",
+    "ws": "0.4.x"
   }
 }

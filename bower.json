@@ -1,37 +1,36 @@
 {
-	"name": "soja",
-	"version": "0.1.0",
-	"author": "Gilles Fabio <gilles@gillesfabio.com>",
-	"description": "Web User Interface for Watai framework.",
-	"keywords": [
-		"watai",
-		"test",
-		"testing",
-		"websocket"
-	],
-	"license": "AGPL",
-	"homepage": "http://github.com/gillesfabio/soja",
-	"private": true,
-	"ignore": [
-		"**/.*",
-		"node_modules",
-		"test",
-		"vendor"
-	],
-	"dependencies": {
-		"requirejs": "2.1.x",
-		"requirejs-text": "2.x",
-		"jquery": "2.x",
-		"bootstrap": "3.x",
-		"underscore": "1.5.x",
-		"backbone": "1.0.x",
-		"socket.io-client": "0.9.x",
-		"backbone.localStorage": "1.1.x",
-		"momentjs": "2.2.x",
-		"font-awesome": "3.2.x"
-	},
-	"devDependencies": {
-		"mocha": "1.x",
-		"chai": "1.x"
-	}
+  "name": "soja",
+  "version": "0.1.0",
+  "author": "Gilles Fabio <gilles@gillesfabio.com>",
+  "description": "Web User Interface for Watai framework.",
+  "keywords": [
+    "watai",
+    "test",
+    "testing",
+    "websocket"
+  ],
+  "license": "AGPL",
+  "homepage": "http://github.com/gillesfabio/soja",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "test",
+    "vendor"
+  ],
+  "dependencies": {
+    "requirejs": "2.1.x",
+    "requirejs-text": "2.x",
+    "jquery": "2.x",
+    "bootstrap": "3.x",
+    "underscore": "1.5.x",
+    "backbone": "1.0.x",
+    "backbone.localStorage": "1.1.x",
+    "momentjs": "2.2.x",
+    "font-awesome": "3.2.x"
+  },
+  "devDependencies": {
+    "mocha": "1.x",
+    "chai": "1.x"
+  }
 }
