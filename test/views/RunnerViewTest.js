@@ -15,8 +15,8 @@ define(function(require) {
 
 	var ws, view, runners, features, output;
 
-	RunnerCollection.prototype.localStorage  = new Backbone.LocalStorage('watai:web:test:runners');
-	FeatureCollection.prototype.localStorage = new Backbone.LocalStorage('watai:web:test:features');
+	RunnerCollection.prototype.localStorage  = new Backbone.LocalStorage('watai:soja:test:runners');
+	FeatureCollection.prototype.localStorage = new Backbone.LocalStorage('watai:soja:test:features');
 
 	describe('Views', function() {
 		describe('RunnerView', function() {

@@ -92,10 +92,10 @@ define(function(require) {
 			data = _.extend({type: null}, data);
 			if (!data.type) return this;
 			switch (data.type) {
-				case 'watai:ws:runner':
+				case 'watai:soja:runner':
 					this.createRunner(data);
 					break;
-				case 'watai:ws:feature':
+				case 'watai:soja:feature':
 					this.createFeature(data);
 					break;
 			}

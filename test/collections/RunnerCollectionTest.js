@@ -10,7 +10,7 @@ define(function(require) {
 
 	var collection, runDate, model, data1, data2;
 
-	RunnerCollection.prototype.localStorage = new Backbone.LocalStorage('watai:web:test:runners');
+	RunnerCollection.prototype.localStorage = new Backbone.LocalStorage('watai:soja:test:runners');
 
 	describe('Collections', function() {
 		describe('RunnerCollection', function() {

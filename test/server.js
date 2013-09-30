@@ -18,7 +18,7 @@ wss.on('connection', function(ws) {
 	var runDate = new Date();
 
 	ws.send(JSON.stringify({
-		type	: 'watai:ws:runner',
+		type	: 'watai:soja:runner',
 		runDate : runDate,
 		name    : 'Runner',
 		action  : 'start'
@@ -26,7 +26,7 @@ wss.on('connection', function(ws) {
 
 	for (var i = 0; i < 4; i++) {
 		ws.send(JSON.stringify({
-			type        : 'watai:ws:feature',
+			type        : 'watai:soja:feature',
 			runDate     : runDate,
 			status      : 'success',
 			description : 'This is feature ' + '#' + (i + 1),

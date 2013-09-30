@@ -12,7 +12,7 @@ define('app/collections/FeatureCollection', [
 	var FeatureCollection = Backbone.Collection.extend({
 
 		model: FeatureModel,
-		localStorage: new Backbone.LocalStorage('watai:web:features'),
+		localStorage: new Backbone.LocalStorage('watai:soja:features'),
 
 		createUnique: function createUnique(data) {
 			var exists, feature;

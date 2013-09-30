@@ -10,7 +10,7 @@ define(function(require) {
 
 	var collection, model, runDate, data1, data2;
 
-	FeatureCollection.prototype.localStorage = new Backbone.LocalStorage('watai:web:test:features');
+	FeatureCollection.prototype.localStorage = new Backbone.LocalStorage('watai:soja:test:features');
 
 	describe('Collections', function() {
 		describe('FeatureCollection', function() {

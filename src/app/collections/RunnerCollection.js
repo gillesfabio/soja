@@ -12,7 +12,7 @@ define('app/collections/RunnerCollection', [
 	var RunnerCollection = Backbone.Collection.extend({
 
 		model: RunnerModel,
-		localStorage: new Backbone.LocalStorage('watai:web:runners'),
+		localStorage: new Backbone.LocalStorage('watai:soja:runners'),
 
 		createUnique: function createUnique(data) {
 			var exists, runner;
