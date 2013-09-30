@@ -7,14 +7,16 @@
 		<div id="runner-tests">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title"><%= runner.description %></h3>
+					<% if (runner) { %>
+					<h3 class="panel-title"><%= runner.name %></h3>
+					<% } %>
 				</div>
 				<div class="panel-body feature">
 					<ul class="list-unstyled" id="runner-features">
 						<% _.each(features, function(feature) { %>
-						<li class="<%= feature.state === 'success' ? 'feature-success' : 'feature-failure' %>">
-							<i class="icon-<%= feature.state === 'success' ? 'ok' : 'remove' %>"></i>  <%= feature.description %>
-							<% if (feature.state === 'failure' && feature.reasons) { %>
+						<li class="<%= feature.status === 'success' ? 'feature-success' : 'feature-failure' %>">
+							<i class="icon-<%= feature.status === 'success' ? 'ok' : 'remove' %>"></i>  <%= feature.description %>
+							<% if (feature.status === 'failure' && feature.reasons) { %>
 								<% _.each(feature.reasons, function(reason, index) { %>
 									<h5>Reason #<%= index + 1 %></h5>
 									<pre class="runner-failure-reason">

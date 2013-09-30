@@ -19,13 +19,15 @@ define('app/collections/FeatureCollection', [
 			data = _.extend({
 				runDate     : null,
 				status      : null,
-				description : null
+				description : null,
+				reasons     : []
 			}, data);
 			if (!data.runDate && !data.status && !data.description) return;
 			exists = this.findWhere({
 				runDate     : data.runDate,
 				status      : data.status,
-				description : data.description
+				description : data.description,
+				reasons     : data.reasons
 			});
 			if (!exists) {
 				delete data.type;

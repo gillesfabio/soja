@@ -64,17 +64,15 @@ define(function(require) {
 		},
 
 		clear: function clear() {
-			this.models.forEach(function(Model) {
-				var model = new Model();
-				model.localStorage._clear();
-			});
 			this.collections.forEach(function(collection) {
 				collection.reset();
+				collection.localStorage._clear();
 			});
 			return this;
 		},
 
 		onSocketOpen: function onSocketOpen(event) {
+			this.clear();
 			this.runnerInfoView.data.connected = true;
 			this.render();
 			return this;
@@ -92,10 +90,10 @@ define(function(require) {
 			data = _.extend({type: null}, data);
 			if (!data.type) return this;
 			switch (data.type) {
-				case 'watai:soja:runner':
+				case 'watai:websocket:runner':
 					this.createRunner(data);
 					break;
-				case 'watai:soja:feature':
+				case 'watai:websocket:feature':
 					this.createFeature(data);
 					break;
 			}
