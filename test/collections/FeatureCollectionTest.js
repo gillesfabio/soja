@@ -8,14 +8,9 @@ define(function(require) {
 	var Backbone          = require('backbone');
 	var FeatureCollection = require('app/collections/FeatureCollection');
 
+	var collection, model, runDate, data1, data2;
+
 	FeatureCollection.prototype.localStorage = new Backbone.LocalStorage('watai:web:test:features');
-
-	var collection,
-		model,
-		runDate,
-		data1,
-		data2;
-
 
 	describe('Collections', function() {
 		describe('FeatureCollection', function() {
@@ -32,7 +27,6 @@ define(function(require) {
 
 				data1 = {
 					runDate     : runDate,
-					sendDate    : new Date(),
 					status      : 'success',
 					description : 'This is a message',
 					reasons     : []
@@ -40,7 +34,6 @@ define(function(require) {
 
 				data2 = {
 					runDate      : runDate,
-					sendDate     : new Date(),
 					status       : 'success',
 					description  : 'This is another message',
 					reasons      : []

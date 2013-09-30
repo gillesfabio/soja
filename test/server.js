@@ -1,38 +1,37 @@
 'use strict';
 
-var express = require('express'),
-	path	= require('path'),
-	app     = express(),
-	server  = require('http').createServer(app),
-	io      = require('socket.io').listen(server);
-
+var express         = require('express'),
+	path            = require('path'),
+	app             = express(),
+	server          = require('http').createServer(app),
+	WebSocketServer = require('ws').Server,
+	wss             = new WebSocketServer({server: server});
 
 app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, '..')));
 app.use(express.static(path.join(__dirname, '..', 'src')));
 
-io.set('log level', 1);
-io.set('transports', ['websocket']);
 server.listen(9999);
 
-io.sockets.on('connection', function(socket) {
+wss.on('connection', function(ws) {
 
 	var runDate = new Date();
 
-	socket.emit('watai:web:runner', {
+	ws.send(JSON.stringify({
+		type	: 'watai:ws:runner',
 		runDate : runDate,
 		name    : 'Runner',
 		action  : 'start'
-	});
+	}));
 
 	for (var i = 0; i < 4; i++) {
-		socket.emit('watai:web:feature', {
+		ws.send(JSON.stringify({
+			type        : 'watai:ws:feature',
 			runDate     : runDate,
-			sendDate    : new Date(),
 			status      : 'success',
 			description : 'This is feature ' + '#' + (i + 1),
 			reasons     : []
-		});
+		}));
 	}
 });
 

@@ -10,15 +10,13 @@ define(function(require) {
 	var RunnerInfoView    = require('app/views/RunnerInfoView');
 	var RunnerCollection  = require('app/collections/RunnerCollection');
 	var FeatureCollection = require('app/collections/FeatureCollection');
-	var io                = require('socket.io-client');
 
-	var view, runners, features, socket, output;
+	var server = 'ws://localhost:9999';
+
+	var ws, view, runners, features, output;
 
 	RunnerCollection.prototype.localStorage  = new Backbone.LocalStorage('watai:web:test:runners');
 	FeatureCollection.prototype.localStorage = new Backbone.LocalStorage('watai:web:test:features');
-
-	socket = io.connect('http://localhost:9999');
-
 
 	describe('Views', function() {
 		describe('RunnerView', function() {
@@ -33,8 +31,10 @@ define(function(require) {
 				features.localStorage._clear();
 				runners.localStorage._clear();
 
+				ws = new WebSocket(server);
+
 				view = new RunnerView({
-					socket   : socket,
+					ws       : ws,
 					runners  : runners,
 					features : features
 				});
@@ -43,13 +43,10 @@ define(function(require) {
 			});
 
 			afterEach(function() {
-				socket.socket.connect();
 				$('#fixtures').empty();
-
 			});
 
 			it('should properly initialize view', function() {
-				expect(view.socket).to.equal(socket);
 				expect(view.runners).to.be.an.instanceof(RunnerCollection);
 				expect(view.features).to.be.an.instanceof(FeatureCollection);
 			});

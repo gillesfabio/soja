@@ -67,7 +67,6 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('default', [
 		'jshint',
-		'watch:compass',
 		'compass',
 		'express:app'
 	]);

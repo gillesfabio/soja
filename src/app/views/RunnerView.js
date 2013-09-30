@@ -23,7 +23,10 @@ define(function(require) {
 		},
 
 		initView: function initView() {
-			this.socket = (_.has(this.options, 'socket') && this.options.socket) ? this.options.socket : null;
+			if (!_.has(this.options, 'ws') && !this.options.ws && !this.options.ws instanceof WebSocket) {
+				throw new Error('RunnerView: "ws" argument is required and must be a WebSocket instance');
+			}
+			this.ws = this.options.ws;
 			this.runner = null;
 		},
 
@@ -46,21 +49,12 @@ define(function(require) {
 		},
 
 		initEvents: function initEvents() {
-
-			_.bindAll(this,
-				'onSocketConnect',
-				'onSocketDisconnect',
-				'onSocketRunner',
-				'onSocketFeature',
-				'render');
-
-			this.listenTo(this.socket, 'connect', this.onSocketConnect);
-			this.listenTo(this.socket, 'disconnect', this.onSocketDisconnect);
-			this.listenTo(this.socket, 'watai:web:runner', this.onSocketRunner);
-			this.listenTo(this.socket, 'watai:web:feature', this.onSocketFeature);
-
+			_.bindAll(this, 'onSocketOpen', 'onSocketClose', 'onSocketMessage', 'render');
 			this.listenTo(this.features, 'change', this.render);
 			this.listenTo(this.runners, 'change', this.render);
+			this.ws.onopen    = this.onSocketOpen;
+			this.ws.onclose   = this.onSocketClose;
+			this.ws.onmessage = this.onSocketMessage;
 		},
 
 		fetch: function fetch() {
@@ -80,25 +74,43 @@ define(function(require) {
 			return this;
 		},
 
-		onSocketConnect: function onSocketConnect() {
+		onSocketOpen: function onSocketOpen(event) {
 			this.runnerInfoView.data.connected = true;
 			this.render();
 			return this;
 		},
 
-		onSocketDisconnect: function onSocketDisconnect() {
+		onSocketClose: function onSocketClose(event) {
 			this.runnerInfoView.data.connected = false;
 			this.render();
 			return this;
 		},
 
-		onSocketRunner: function onSocketRunner(data) {
-			this.runner = this.runners.createUnique(data);
-			if (this.runner) this.runnerInfoView.data.lastRunDate = this.runner.toJSON().runDate;
+		onSocketMessage: function onSocketMessage(event) {
+			if (!_.has(event, data) && !event.data) return this;
+			var data = JSON.parse(event.data);
+			data = _.extend({type: null}, data);
+			if (!data.type) return this;
+			switch (data.type) {
+				case 'watai:ws:runner':
+					this.createRunner(data);
+					break;
+				case 'watai:ws:feature':
+					this.createFeature(data);
+					break;
+			}
 			return this;
 		},
 
-		onSocketFeature: function onSocketFeature(data) {
+		createRunner: function createRunner(data) {
+			this.runner = this.runners.createUnique(data);
+			if (this.runner) {
+				this.runnerInfoView.data.lastRunDate = this.runner.toJSON().runDate;
+			}
+			return this;
+		},
+
+		createFeature: function createFeature(data) {
 			this.features.createUnique(data);
 			return this;
 		},
@@ -111,7 +123,6 @@ define(function(require) {
 			$(this.el).find('#runner-info').html(this.runnerInfoView.render().el);
 			return this;
 		}
-
 	});
 
 	return RunnerView;

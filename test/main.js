@@ -11,7 +11,6 @@ requirejs.config({
 		'mocha'					: 'vendor/mocha/mocha',
 		'chai'					: 'vendor/chai/chai',
 		'text'					: 'vendor/requirejs-text/text',
-		'socket.io-client'		: 'vendor/socket.io-client/dist/socket.io'
 	},
 
 	shim: {
@@ -27,10 +26,6 @@ requirejs.config({
 		},
 		'mocha': {
 			exports: 'mocha'
-		},
-		'socket.io-client': {
-			deps: ['jquery'],
-			exports: 'io'
 		}
 	}
 });

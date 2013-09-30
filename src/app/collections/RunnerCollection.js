@@ -28,7 +28,8 @@ define('app/collections/RunnerCollection', [
 					name    : data.name
 				});
 				if (!exists) {
-					delete data['action'];
+					delete data.type;
+					delete data.action;
 					runner = this.create(data);
 					return runner;
 				}

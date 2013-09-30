@@ -12,7 +12,6 @@ define(function(require) {
 
 	RunnerCollection.prototype.localStorage = new Backbone.LocalStorage('watai:web:test:runners');
 
-
 	describe('Collections', function() {
 		describe('RunnerCollection', function() {
 

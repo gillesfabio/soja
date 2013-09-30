@@ -8,7 +8,6 @@ define(function(require) {
 	var Backbone        = require('backbone');
 	var RunnerInfoView	= require('app/views/RunnerInfoView');
 
-
 	describe('Views', function() {
 		describe('RunnerInfoView', function() {
 

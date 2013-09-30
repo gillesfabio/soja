@@ -28,6 +28,7 @@ define('app/collections/FeatureCollection', [
 				description : data.description
 			});
 			if (!exists) {
+				delete data.type;
 				feature = this.create(data);
 				return feature;
 			}
