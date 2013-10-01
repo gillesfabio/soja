@@ -16,13 +16,16 @@
 						<% _.each(features, function(feature) { %>
 						<li class="<%= feature.status === 'success' ? 'feature-success' : 'feature-failure' %>">
 							<i class="icon-<%= feature.status === 'success' ? 'ok' : 'remove' %>"></i>  <%= feature.description %>
-							<% if (feature.status === 'failure' && feature.reasons) { %>
-								<% _.each(feature.reasons, function(reason, index) { %>
-									<h5>Reason #<%= index + 1 %></h5>
-									<pre class="runner-failure-reason">
-									<%= reason %>
-									</pre>
-								<% }); %>
+							<% if (feature.status === 'failure' && feature.reason) { %>
+							<ul class="feature-reason-detail">
+								<% if (feature.reason.title) { %><li><%= feature.reason.title %></li><% } %>
+								<% if (feature.reason.help) { %><li><%= feature.reason.help.replace('<', '').replace('>', '') %></li><% } %>
+							</ul>
+							<% if (feature.reason.source) { %>
+							<pre class="runner-failure-reason">
+<%= feature.reason.source %>
+							</pre>
+							<% } %>
 							<% } %>
 						</li>
 						<% }); %>

@@ -102,9 +102,7 @@ define(function(require) {
 
 		createRunner: function createRunner(data) {
 			this.runner = this.runners.createUnique(data);
-			if (this.runner) {
-				this.runnerInfoView.data.lastRunDate = this.runner.toJSON().runDate;
-			}
+			if (this.runner) this.runnerInfoView.data.lastRunDate = this.runner.toJSON().runDate;
 			return this;
 		},
 
