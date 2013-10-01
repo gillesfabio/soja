@@ -3,9 +3,10 @@ define('app/collections/RunnerCollection', [
 	'app/models/RunnerModel',
 	'underscore',
 	'backbone',
+	'loglevel',
 	'backbone.localStorage'
 
-], function(RunnerModel, _, Backbone) {
+], function(RunnerModel, _, Backbone, logger) {
 
 	'use strict';
 
@@ -21,7 +22,10 @@ define('app/collections/RunnerCollection', [
 				runDate : null,
 				name    : null
 			}, data);
-			if (!data.action && !data.runDate && !data.name) return;
+			if (!data.action && !data.runDate && !data.name) {
+				logger.warn('Something is wrong with: ' + JSON.stringify(data));
+				return;
+			}
 			if (data.action === 'start') {
 				exists = this.findWhere({
 					runDate : data.runDate,
@@ -31,8 +35,10 @@ define('app/collections/RunnerCollection', [
 					delete data.type;
 					delete data.action;
 					runner = this.create(data);
+					logger.info('Created runner: ' + runner.attributes.name);
 					return runner;
 				}
+				logger.info('Runner: ' + runner.attributes.name + ' (run date: ' + data.runDate + ') — already exists');
 			}
 		}
 	});

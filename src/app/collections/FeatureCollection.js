@@ -3,9 +3,10 @@ define('app/collections/FeatureCollection', [
 	'app/models/FeatureModel',
 	'underscore',
 	'backbone',
+	'loglevel',
 	'backbone.localStorage'
 
-], function(FeatureModel, _, Backbone) {
+], function(FeatureModel, _, Backbone, logger) {
 
 	'use strict';
 
@@ -21,7 +22,10 @@ define('app/collections/FeatureCollection', [
 				status      : null,
 				description : null
 			}, data);
-			if (!data.runDate && !data.status && !data.description) return;
+			if (!data.runDate && !data.status && !data.description) {
+				logger.warn("Something is wrong with: " + JSON.stringify(data));
+				return;
+			}
 			exists = this.findWhere({
 				runDate     : data.runDate,
 				status      : data.status,
@@ -30,9 +34,10 @@ define('app/collections/FeatureCollection', [
 			if (!exists) {
 				delete data.type;
 				feature = this.create(data);
+				logger.info('Created feature: ' + feature.attributes.description);
 				return feature;
 			}
-			return;
+			logger.info('Feature: ' + feature.attributes.description + ' — already exists');
 		}
 	});
 

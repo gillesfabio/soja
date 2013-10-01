@@ -3,9 +3,10 @@ define([
 	'backbone',
 	'app/views/RunnerView',
 	'app/collections/RunnerCollection',
-	'app/collections/FeatureCollection'
+	'app/collections/FeatureCollection',
+	'loglevel'
 
-], function(Backbone, RunnerView, RunnerCollection, FeatureCollection) {
+], function(Backbone, RunnerView, RunnerCollection, FeatureCollection, logger) {
 
 	'use strict';
 
@@ -16,6 +17,7 @@ define([
 		},
 
 		runner: function runner() {
+			logger.info('Router: runner');
 			var ws   = new WebSocket('ws://localhost:9999');
 			var view = new RunnerView({
 				ws       : ws,

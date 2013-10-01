@@ -11,6 +11,7 @@ requirejs.config({
 		'mocha'					: 'vendor/mocha/mocha',
 		'chai'					: 'vendor/chai/chai',
 		'text'					: 'vendor/requirejs-text/text',
+		'loglevel'				: 'vendor/loglevel/dist/loglevel'
 	},
 
 	shim: {

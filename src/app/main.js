@@ -9,7 +9,8 @@ requirejs.config({
 		'backbone.localStorage'	: 'vendor/backbone.localStorage/backbone.localStorage',
 		'bootstrap'				: 'vendor/bootstrap/dist/js/bootstrap',
 		'moment'				: 'vendor/momentjs/moment',
-		'text'					: 'vendor/requirejs-text/text'
+		'text'					: 'vendor/requirejs-text/text',
+		'loglevel'				: 'vendor/loglevel/dist/loglevel'
 	},
 
 	shim: {
@@ -32,11 +33,14 @@ requirejs.config({
 require([
 
 	'backbone',
-	'app/router'
+	'app/router',
+	'loglevel'
 
-], function(Backbone, Router) {
+], function(Backbone, Router, logger) {
 
 	'use strict';
+
+	logger.disableAll();
 
 	var router = new Router();
 	Backbone.history.start();
