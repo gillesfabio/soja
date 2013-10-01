@@ -38,7 +38,7 @@ define('app/collections/RunnerCollection', [
 					logger.info('Created runner: ' + runner.attributes.name);
 					return runner;
 				}
-				logger.info('Runner: ' + runner.attributes.name + ' (run date: ' + data.runDate + ') — already exists');
+				logger.info('Runner: ' + exists.attributes.name + ' (run date: ' + data.runDate + ') — already exists');
 			}
 		}
 	});

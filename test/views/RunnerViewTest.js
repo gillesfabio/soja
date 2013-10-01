@@ -55,10 +55,6 @@ define(function(require) {
 				expect(view.collections.length).to.equal(2);
 			});
 
-			it('should have a proper "models" array property', function() {
-				expect(view.models.length).to.equal(2);
-			});
-
 			it('should have a proper "subviews" array property', function() {
 				expect(view.subviews.length).to.equal(1);
 				expect(view.subviews[0]).to.be.an.instanceof(RunnerInfoView);
