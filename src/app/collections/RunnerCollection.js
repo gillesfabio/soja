@@ -18,28 +18,25 @@ define('app/collections/RunnerCollection', [
 		createUnique: function createUnique(data) {
 			var exists, runner;
 			data = _.extend({
-				action  : null,
 				runDate : null,
 				name    : null
 			}, data);
-			if (!data.action && !data.runDate && !data.name) {
+			if (!data.runDate && !data.name) {
 				logger.warn('Something is wrong with: ' + JSON.stringify(data));
 				return;
 			}
-			if (data.action === 'start') {
-				exists = this.findWhere({
-					runDate : data.runDate,
-					name    : data.name
-				});
-				if (!exists) {
-					delete data.type;
-					delete data.action;
-					runner = this.create(data);
-					logger.info('Created runner: ' + runner.attributes.name);
-					return runner;
-				}
-				logger.info('Runner: ' + exists.attributes.name + ' (run date: ' + data.runDate + ') — already exists');
+			exists = this.findWhere({
+				runDate : data.runDate,
+				name    : data.name
+			});
+			if (!exists) {
+				delete data.type;
+				runner = this.create(data);
+				logger.info('Created runner: ' + runner.attributes.name);
+				return runner;
 			}
+			logger.info('Runner: ' + exists.attributes.name + ' (run date: ' + exists.attributes.runDate + ') — already exists');
+			return exists;
 		}
 	});
 

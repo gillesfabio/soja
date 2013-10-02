@@ -40,7 +40,7 @@ require([
 
 	'use strict';
 
-	logger.disableAll();
+	logger.enableAll();
 
 	var router = new Router();
 	Backbone.history.start();

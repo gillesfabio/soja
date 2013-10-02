@@ -33,12 +33,14 @@ requirejs.config({
 
 require([
 
-	'mocha'
+	'mocha',
+	'loglevel'
 
-], function(mocha) {
+], function(mocha, logger) {
 
 	'use strict';
 
+	logger.enableAll();
 	mocha.setup('bdd');
 
 	require([

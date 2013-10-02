@@ -38,6 +38,7 @@ define('app/collections/FeatureCollection', [
 				return feature;
 			}
 			logger.info('Feature: ' + exists.attributes.description + ' — already exists');
+			return exists;
 		}
 	});
 

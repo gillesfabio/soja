@@ -108,11 +108,14 @@ define(function(require) {
 				return this;
 			}
 			switch (data.type) {
-				case 'watai:websocket:runner':
+				case 'watai:websocket:runner:start':
 					this.createRunner(data);
 					break;
 				case 'watai:websocket:feature':
 					this.createFeature(data);
+					break;
+				case 'watai:websocket:runner:stop':
+					this.closeConnection();
 					break;
 			}
 			return this;
@@ -130,6 +133,11 @@ define(function(require) {
 		createFeature: function createFeature(data) {
 			this.features.createUnique(data);
 			return this;
+		},
+
+		closeConnection: function closeConnection() {
+			logger.debug('RunnerView: close WebSocket connection');
+			this.ws.close();
 		},
 
 		render: function render() {

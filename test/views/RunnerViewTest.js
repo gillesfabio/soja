@@ -28,7 +28,10 @@ define(function(require) {
 				runners  = new RunnerCollection();
 				features = new FeatureCollection();
 
+				features.reset();
 				features.localStorage._clear();
+
+				runners.reset();
 				runners.localStorage._clear();
 
 				ws = new WebSocket(server);

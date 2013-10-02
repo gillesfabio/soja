@@ -44,7 +44,7 @@ define(function(require) {
 				expect(collection.models.length).to.equal(1);
 
 				model = collection.createUnique(data1);
-				expect(model).to.be.undefined;
+				expect(model).to.be.ok;
 				expect(collection.models.length).to.equal(1);
 
 				model = collection.createUnique(data2);
@@ -52,7 +52,7 @@ define(function(require) {
 				expect(collection.models.length).to.equal(2);
 
 				model = collection.createUnique(data2);
-				expect(model).to.be.undefined;
+				expect(model).to.be.ok;
 				expect(collection.models.length).to.equal(2);
 			});
 		});

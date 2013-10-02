@@ -18,10 +18,9 @@ wss.on('connection', function(ws) {
 	var runDate = new Date();
 
 	ws.send(JSON.stringify({
-		type	: 'watai:websocket:runner',
+		type	: 'watai:websocket:runner:start',
 		runDate : runDate,
 		name    : 'Runner',
-		action  : 'start'
 	}));
 
 	for (var i = 0; i < 4; i++) {
