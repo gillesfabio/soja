@@ -60,7 +60,8 @@ require([
 		'collections/RunnerCollectionTest',
 		'collections/FeatureCollectionTest',
 		'views/RunnerViewTest',
-		'views/RunnerInfoViewTest'
+		'views/RunnerInfoViewTest',
+		'views/SettingsViewTest'
 
 	], function() {
 
