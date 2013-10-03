@@ -10,7 +10,8 @@ requirejs.config({
 		'bootstrap'				: 'vendor/bootstrap/dist/js/bootstrap',
 		'moment'				: 'vendor/momentjs/moment',
 		'text'					: 'vendor/requirejs-text/text',
-		'loglevel'				: 'vendor/loglevel/dist/loglevel'
+		'loglevel'				: 'vendor/loglevel/dist/loglevel',
+		'handlebars'			: 'vendor/handlebars/handlebars'
 	},
 
 	shim: {
@@ -26,6 +27,9 @@ requirejs.config({
 		},
 		'bootstrap': {
 			deps: ['jquery']
+		},
+		'handlebars': {
+			exports: 'Handlebars'
 		}
 	}
 });
