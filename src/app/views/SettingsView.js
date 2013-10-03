@@ -8,6 +8,7 @@ define(function(require) {
 	var Handlebars = require('handlebars');
 	var logger     = require('loglevel');
 	var template   = require('text!app/templates/settings.hbs');
+	var bootstrap  = require('bootstrap');
 
 	// App
 	var RunnerCollection  = require('app/collections/RunnerCollection');
@@ -16,10 +17,12 @@ define(function(require) {
 
 	var SettingsView = Backbone.View.extend({
 
+		id: 'settings',
 		template: Handlebars.compile(template),
 
 		events: {
-			'click .flush-database': 'flushDatabase'
+			'click .flush-database': 'flushDatabase',
+			'click button[data-dismiss="alert"]': 'closeFeedback'
 		},
 
 		initialize: function initialize(options) {

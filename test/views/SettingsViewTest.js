@@ -19,7 +19,7 @@ define(function(require) {
 	var runners  = new RunnerCollection();
 	var features = new FeatureCollection();
 
-	var view;
+	var view, output;
 
 
 	describe('Views', function() {
@@ -47,6 +47,13 @@ define(function(require) {
 				view.flushDatabase();
 				expect(runners.models.length).to.equal(0);
 				expect(features.models.length).to.equal(0);
+			});
+
+			it('should properly show the feedback message', function() {
+				view.feedback = {type: 'success', message: 'I am the feedback message'};
+				output = $('#fixtures').html(view.render().el).html();
+				expect(output).to.have.string('alert-success');
+				expect(output).to.have.string('I am the feedback message');
 			});
 		});
 	});

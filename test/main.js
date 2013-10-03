@@ -7,6 +7,7 @@ requirejs.config({
 		'underscore'			: 'vendor/underscore/underscore',
 		'backbone'				: 'vendor/backbone/backbone',
 		'backbone.localStorage'	: 'vendor/backbone.localStorage/backbone.localStorage',
+		'bootstrap'				: 'vendor/bootstrap/dist/js/bootstrap',
 		'moment'				: 'vendor/momentjs/moment',
 		'mocha'					: 'vendor/mocha/mocha',
 		'chai'					: 'vendor/chai/chai',
@@ -26,6 +27,9 @@ requirejs.config({
 		},
 		'backbone.localStorage': {
 			deps: ['underscore', 'jquery', 'backbone']
+		},
+		'bootstrap': {
+			deps: ['jquery']
 		},
 		'mocha': {
 			exports: 'mocha'
@@ -56,6 +60,7 @@ require([
 
 		'backbone.localStorage',
 		'handlebars-helpers',
+		'bootstrap',
 
 		'collections/RunnerCollectionTest',
 		'collections/FeatureCollectionTest',
