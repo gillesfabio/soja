@@ -28,7 +28,8 @@
     "backbone.localStorage": "1.1.x",
     "momentjs": "2.2.x",
     "font-awesome": "3.2.x",
-    "loglevel": "0.4.x"
+    "loglevel": "0.4.x",
+    "handlebars": "1.x"
   },
   "devDependencies": {
     "mocha": "1.x",
