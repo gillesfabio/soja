@@ -53,6 +53,10 @@ define(function(require) {
 
 		flushDatabase: function flushDatabase() {
 			logger.debug('SettingsView: flush database');
+			this.collections.forEach(function(collection) {
+				collection.reset();
+				collection.localStorage._clear();
+			});
 			return this;
 		},
 
