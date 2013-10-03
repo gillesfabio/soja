@@ -11,7 +11,8 @@ requirejs.config({
 		'moment'				: 'vendor/momentjs/moment',
 		'text'					: 'vendor/requirejs-text/text',
 		'loglevel'				: 'vendor/loglevel/dist/loglevel',
-		'handlebars'			: 'vendor/handlebars/handlebars'
+		'handlebars'			: 'vendor/handlebars/handlebars',
+		'handlebars-helpers'	: 'vendor/handlebars-helpers/helpers'
 	},
 
 	shim: {
@@ -38,7 +39,9 @@ require([
 
 	'backbone',
 	'app/router',
-	'loglevel'
+	'loglevel',
+	'handlebars',
+	'handlebars-helpers'
 
 ], function(Backbone, Router, logger) {
 

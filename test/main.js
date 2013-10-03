@@ -12,7 +12,8 @@ requirejs.config({
 		'chai'					: 'vendor/chai/chai',
 		'text'					: 'vendor/requirejs-text/text',
 		'loglevel'				: 'vendor/loglevel/dist/loglevel',
-		'handlebars'			: 'vendor/handlebars/handlebars'
+		'handlebars'			: 'vendor/handlebars/handlebars',
+		'handlebars-helpers'	: 'vendor/handlebars-helpers/helpers'
 	},
 
 	shim: {

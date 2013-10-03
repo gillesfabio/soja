@@ -29,7 +29,8 @@
     "momentjs": "2.2.x",
     "font-awesome": "3.2.x",
     "loglevel": "0.4.x",
-    "handlebars": "1.x"
+    "handlebars": "1.x",
+    "handlebars-helpers": "~1.0.0"
   },
   "devDependencies": {
     "mocha": "1.x",
