@@ -5,11 +5,12 @@
 	<div class="panel-body">
 		<ul class="list-unstyled">
 			<li>
-				<i class="icon-time"></i> <strong>Last run:</strong> <%= lastRunDate ? lastRunDate : 'never' %>
+				<i class="icon-time"></i>
+				<strong>Last run:</strong> {{#if lastRunDat}}lastRunDate{{else}}never{{/if}}
 			</li>
-			<li class="<%= connected ? 'list-item-ok' : 'list-item-failure' %>">
-				<i class="<%= connected ? 'icon-thumbs-up-alt' : 'icon-thumbs-down-alt' %>"></i>
-				<strong>Server:</strong> <%= connected ? 'connected' : 'not connected' %>
+			<li class="{{#if connected}}list-item-ok{{else}}list-item-failure{{/if}}">
+				<i class="{{#if connected}}icon-thumbs-up-alt{{else}}icon-thumbs-down-alt{{/if}}"></i>
+				<strong>Server:</strong> {{#if connected}}connected{{else}}not connected{{/if}}
 			</li>
 		</ul>
 	</div>
