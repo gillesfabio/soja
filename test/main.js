@@ -51,6 +51,8 @@ require([
 	require([
 
 		'backbone.localStorage',
+		'handlebars',
+		'handlebars-helpers',
 
 		'collections/RunnerCollectionTest',
 		'collections/FeatureCollectionTest',
