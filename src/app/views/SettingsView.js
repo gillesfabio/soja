@@ -21,8 +21,7 @@ define(function(require) {
 		template: Handlebars.compile(template),
 
 		events: {
-			'click .flush-database': 'flushDatabase',
-			'click button[data-dismiss="alert"]': 'closeFeedback'
+			'click .flush-database': 'flushDatabase'
 		},
 
 		initialize: function initialize(options) {
