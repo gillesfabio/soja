@@ -7,8 +7,9 @@ define(function(require) {
 	var RunnerModel       = require('app/models/RunnerModel');
 	var FeatureModel      = require('app/models/FeatureModel');
 	var RunnerInfoView    = require('app/views/RunnerInfoView');
-	var template          = require('text!app/templates/runner.html');
+	var template          = require('text!app/templates/runner.hbs');
 	var logger            = require('loglevel');
+	var Handlebars        = require('handlebars');
 
 	var RunnerView = Backbone.View.extend({
 

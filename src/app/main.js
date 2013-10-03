@@ -31,6 +31,10 @@ requirejs.config({
 		},
 		'handlebars': {
 			exports: 'Handlebars'
+		},
+		'handlebars-helpers': {
+			deps: ['handlebars'],
+			exports: 'Handlebars'
 		}
 	}
 });
@@ -40,7 +44,6 @@ require([
 	'backbone',
 	'app/router',
 	'loglevel',
-	'handlebars',
 	'handlebars-helpers'
 
 ], function(Backbone, Router, logger) {

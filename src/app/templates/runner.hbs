@@ -13,7 +13,7 @@
 					<ul class="list-unstyled" id="runner-features">
 						{{#each features}}
 						<li class="{{#if_eq status compare="success"}}feature-success{{else}}feature-failure{{/if_eq}}">
-							<i class="icon-{{#if_eq status compare="success"}}ok{{else}}remove{{/if_eq}}></i> {{description}}
+							<i class="icon-{{#if_eq status compare="success"}}ok{{else}}remove{{/if_eq}}"></i> {{description}}
 							{{#if_eq status compare='failure'}}
 								{{#if reason}}
 									<ul class="feature-reason-detail">
@@ -24,7 +24,7 @@
 										<pre class="runner-failure-reason">{{reason.source}}</pre>
 									{{/if}}
 								{{/if}}
-							{{/if}}
+							{{/if_eq}}
 						</li>
 						{{/each}}
 					</ul>

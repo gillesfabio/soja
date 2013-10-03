@@ -31,6 +31,10 @@ requirejs.config({
 			exports: 'mocha'
 		},
 		'handlebars': {
+			exports: 'Handlebars',
+		},
+		'handlebars-helpers': {
+			deps: ['handlebars'],
 			exports: 'Handlebars'
 		}
 	}
@@ -51,7 +55,6 @@ require([
 	require([
 
 		'backbone.localStorage',
-		'handlebars',
 		'handlebars-helpers',
 
 		'collections/RunnerCollectionTest',

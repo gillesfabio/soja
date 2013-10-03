@@ -4,11 +4,12 @@ define(function(require) {
 
 	'use strict';
 
-	var _        = require('underscore');
-	var Backbone = require('backbone');
-	var moment   = require('moment');
-	var template = require('text!app/templates/runner-info.hbs');
-	var logger   = require('loglevel');
+	var _          = require('underscore');
+	var Backbone   = require('backbone');
+	var moment     = require('moment');
+	var template   = require('text!app/templates/runner-info.hbs');
+	var logger     = require('loglevel');
+	var Handlebars = require('handlebars');
 
 	var RunnerInfoView = Backbone.View.extend({
 
