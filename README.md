@@ -72,11 +72,12 @@ Now, execute your Watai test suite and see the results in the browser.
 
 Feel free to contribute by creating issues and submitting pull requests.
 Please [create an issue](http://github.com/gillesfabio/soja/issues) first
-on GitHub before submitting any pull request.
+on GitHub before submitting any pull request. Your code must follow
+the [Watai's code conventions](https://github.com/MattiSG/Watai/wiki/Code-conventions).
 
-Your code must follow the [Watai's code conventions](https://github.com/MattiSG/Watai/wiki/Code-conventions).
+### Tests
 
-Tests are written on top of [Chai's BDD](http://chaijs.com/api/bdd/) and
+Tests are written on top of [Chai](http://chaijs.com/api/bdd/) (BDD) and
 [Mocha](http://visionmedia.github.io/mocha/).
 
 To execute the test suite, run the following command:
@@ -86,6 +87,22 @@ To execute the test suite, run the following command:
 In your favorite browser, go to `http://localhost:9999`:
 
 	open http://localhost:9999
+
+### Developer Documentation
+
+The documentation is powered by [JSDoc3](http://usejsdoc.org/).
+
+If your OS is OS X, you can use [Homebrew](http://brew.sh/) to install
+the latest version of JSDoc in a single one command:
+
+	brew install jsdoc3
+
+Then you can easily generate and browse it:
+
+	make doc
+	open doc/index.html
+
+### Any question?
 
 If you have any question, create an issue or contact the author.
 

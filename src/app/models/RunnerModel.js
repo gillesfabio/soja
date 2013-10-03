@@ -3,11 +3,20 @@ define('app/models/RunnerModel', [
 	'backbone',
 	'backbone.localStorage'
 
-], function(Backbone) {
+],
+/**
+* RunnerModel
+* @exports models/RunnerModel
+*/
+function(Backbone) {
 
 	'use strict';
 
-	var RunnerModel = Backbone.Model.extend({});
+	/**
+	* @class
+	* @extends Backbone.Model
+	*/
+	var RunnerModel = Backbone.Model.extend(/** @lends module:models/RunnerModel~RunnerModel.prototype */{});
 
 	return RunnerModel;
 

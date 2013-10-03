@@ -13,5 +13,8 @@
     "grunt-contrib-jshint": "0.6.x",
     "grunt-contrib-compass": "0.5.x",
     "ws": "0.4.x"
+  },
+  "devDependencies": {
+    "jsdoc": "git://github.com/jsdoc3/jsdoc.git"
   }
 }

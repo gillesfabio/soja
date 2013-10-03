@@ -1,4 +1,9 @@
-define(function(require) {
+define(
+	/**
+	* Runner View.
+	* @exports views/RunnerView
+	*/
+	function(require) {
 
 	'use strict';
 
@@ -7,14 +12,36 @@ define(function(require) {
 	var RunnerModel       = require('app/models/RunnerModel');
 	var FeatureModel      = require('app/models/FeatureModel');
 	var RunnerInfoView    = require('app/views/RunnerInfoView');
-	var template          = require('text!app/templates/runner.hbs');
+	var tpl               = require('text!app/templates/runner.hbs');
 	var logger            = require('loglevel');
 	var Handlebars        = require('handlebars');
 
-	var RunnerView = Backbone.View.extend({
+	/**
+	* @class
+	* @requires Underscore
+	* @requires Backbone
+	* @requires Handlebars
+	* @extends Backbone.View
+	* @property {WebSocket} ws - The WebSocket client instance.
+	* @property {RunnerModel} runner - The current runner model instance.
+	* @property {RunnerCollection} runners - The view's RunnerCollection instance.
+	* @property {FeatureCollection} features - The view's FeatureCollection instance.
+	* @property {Array} collections - Contains all collections.
+	* @property {Array} subviews - Contains all subviews.
+	* @property {RunnerInfoView} runnerInfoView - The RunnerInfoView subview instance.
+	*/
+	var RunnerView = Backbone.View.extend(/** @lends module:views/RunnerView~RunnerView.prototype */{
 
-		template: Handlebars.compile(template),
+		/**
+		* The view template.
+		* @type {string}
+		*/
+		template: Handlebars.compile(tpl),
 
+		/**
+		* Initializes view.
+		* @param {object} options - View Options
+		*/
 		initialize: function initialize(options) {
 			this.options = options || {};
 			this.initView();
@@ -23,6 +50,10 @@ define(function(require) {
 			this.initEvents();
 		},
 
+		/**
+		* Initializes view properties.
+		* @private
+		*/
 		initView: function initView() {
 			logger.debug('RunnerView: initialize view');
 			if (!_.has(this.options, 'ws') && !this.options.ws && !this.options.ws instanceof WebSocket) {
@@ -32,6 +63,10 @@ define(function(require) {
 			this.runner = null;
 		},
 
+		/**
+		* Initializes view collections.
+		* @private
+		*/
 		initCollections: function initCollections() {
 			logger.debug('RunnerView: initialize collections');
 			this.collections = [];
@@ -47,6 +82,10 @@ define(function(require) {
 			}
 		},
 
+		/**
+		* Initializes view's subviews.
+		* @private
+		*/
 		initSubviews: function initSubviews() {
 			logger.debug('RunnerView: initialize subviews');
 			this.subviews = [];
@@ -55,6 +94,10 @@ define(function(require) {
 			logger.debug('RunnerView: added runnerInfoView (RunnerInfoView) to subviews');
 		},
 
+		/**
+		* Initializes view events.
+		* @private
+		*/
 		initEvents: function initEvents() {
 			logger.debug('RunnerView: initialize events');
 			_.bindAll(this, 'onSocketOpen', 'onSocketClose', 'onSocketMessage', 'render');
@@ -65,6 +108,9 @@ define(function(require) {
 			this.ws.onmessage = this.onSocketMessage;
 		},
 
+		/**
+		* Fetches view collections data.
+		*/
 		fetch: function fetch() {
 			logger.debug('RunnerView: fetch collections data');
 			this.features.fetch();
@@ -72,30 +118,46 @@ define(function(require) {
 			return this;
 		},
 
-		clear: function clear() {
-			logger.debug('RunnerView: clear (reset) collections');
+		/**
+		* Resets collections
+		* @private
+		*/
+		reset: function clear() {
+			logger.debug('RunnerView: reset collections');
 			this.collections.forEach(function(collection) {
 				collection.reset();
-				collection.localStorage._clear();
 			});
 			return this;
 		},
 
-		onSocketOpen: function onSocketOpen(event) {
+		/**
+		* WebSocket "onopen" event callback.
+		* @private
+		*/
+		onSocketOpen: function onSocketOpen() {
 			logger.debug('RunnerView: onSocketOpen');
-			this.clear();
+			this.reset();
 			this.runnerInfoView.data.connected = true;
 			this.render();
 			return this;
 		},
 
-		onSocketClose: function onSocketClose(event) {
+		/**
+		* WebSocket "onclose" event callback.
+		* @private
+		*/
+		onSocketClose: function onSocketClose() {
 			logger.debug('RunnerView: onSocketClose');
 			this.runnerInfoView.data.connected = false;
 			this.render();
 			return this;
 		},
 
+		/**
+		* WebSocket "onmessage" event callback.
+		* @param {object} event - The event
+		* @private
+		*/
 		onSocketMessage: function onSocketMessage(event) {
 			logger.debug('RunnerView: onSocketMessage');
 			if (!_.has(event, data) && !event.data) {
@@ -122,6 +184,13 @@ define(function(require) {
 			return this;
 		},
 
+		/**
+		* Takes data sent by WebSocket and creates the runner if it does not
+		* already exists in the database.
+		*
+		* @param {object} data - WebSocket "onmessage" event data.
+		* @private
+		*/
 		createRunner: function createRunner(data) {
 			this.runner = this.runners.createUnique(data);
 			if (this.runner) {
@@ -131,16 +200,30 @@ define(function(require) {
 			return this;
 		},
 
+		/**
+		* Takes data sent by WebSocket and creates the feature if it does not
+		* already exists in the database.
+		*
+		* @param {object} data - WebSocket "onmessage" event data.
+		* @private
+		*/
 		createFeature: function createFeature(data) {
 			this.features.createUnique(data);
 			return this;
 		},
 
+		/**
+		* Closes the WebSocket server connection.
+		* @private
+		*/
 		closeConnection: function closeConnection() {
 			logger.debug('RunnerView: close WebSocket connection');
 			this.ws.close();
 		},
 
+		/**
+		* Renders the view.
+		*/
 		render: function render() {
 			logger.debug('RunnerView: render');
 			$(this.el).html(this.template({

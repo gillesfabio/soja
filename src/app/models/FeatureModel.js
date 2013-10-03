@@ -3,11 +3,20 @@ define('app/models/FeatureModel', [
 	'backbone',
 	'backbone.localStorage'
 
-], function(Backbone) {
+],
+/**
+* FeatureModel
+* @exports models/FeatureModel
+*/
+function(Backbone) {
 
 	'use strict';
 
-	var FeatureModel = Backbone.Model.extend({});
+	/**
+	* @class
+	* @extends Backbone.Model
+	*/
+	var FeatureModel = Backbone.Model.extend(/** @lends module:models/FeatureModel~FeatureModel.prototype */{});
 
 	return FeatureModel;
 

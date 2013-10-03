@@ -1,0 +1,19 @@
+{
+	"opts": {
+		"destination": "./doc",
+		"recurse": true,
+		"private": true,
+		"verbose": true
+	},
+	"source": {
+		"include": ["README.md", "src"]
+	},
+	"plugins": ["plugins/markdown"],
+	"markdown": {
+		"parser": "gfm",
+		"hardwrap": true
+	},
+	"tags": {
+		"allowUnknownTags" : true
+	}
+}

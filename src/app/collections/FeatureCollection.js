@@ -6,15 +6,40 @@ define('app/collections/FeatureCollection', [
 	'loglevel',
 	'backbone.localStorage'
 
-], function(FeatureModel, _, Backbone, logger) {
+],
+/**
+* FeatureCollection
+* @exports collections/FeatureCollection
+*/
+function(FeatureModel, _, Backbone, logger) {
 
 	'use strict';
 
-	var FeatureCollection = Backbone.Collection.extend({
+	/**
+	* @class
+	* @extends Backbone.View
+	*/
+	var FeatureCollection = Backbone.Collection.extend(/** @lends module:collections/FeatureCollection~FeatureCollection.prototype */{
 
+		/**
+		* The model.
+		* @type {FeatureModel}
+		*/
 		model: FeatureModel,
+
+		/**
+		* The Backbone.LocalStorage instance.
+		* @type {Backbone.LocalStorage}
+		*/
 		localStorage: new Backbone.LocalStorage('watai:soja:features'),
 
+		/**
+		* Takes a WebSocket message and create the given feature if it
+		* does not exists in the database. Returns the given model instance
+		* or `undefined` if an error occurred (the error is logged).
+		* @param {object} data - WebSocket message
+		* @returns {FeatureModel|null}
+		*/
 		createUnique: function createUnique(data) {
 			var exists, feature;
 			data = _.extend({
