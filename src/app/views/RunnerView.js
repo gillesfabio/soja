@@ -12,7 +12,7 @@ define(function(require) {
 
 	var RunnerView = Backbone.View.extend({
 
-		template: _.template(template),
+		template: Handlebars.compile(template),
 
 		initialize: function initialize(options) {
 			this.options = options || {};

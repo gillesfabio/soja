@@ -7,12 +7,12 @@ define(function(require) {
 	var _        = require('underscore');
 	var Backbone = require('backbone');
 	var moment   = require('moment');
-	var template = require('text!app/templates/runner-info.html');
+	var template = require('text!app/templates/runner-info.hbs');
 	var logger   = require('loglevel');
 
 	var RunnerInfoView = Backbone.View.extend({
 
-		template: _.template(template),
+		template: Handlebars.compile(template),
 
 		initialize: function initialize() {
 			logger.debug('RunnerInfoView: initialize');
