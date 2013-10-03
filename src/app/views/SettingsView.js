@@ -28,6 +28,7 @@ define(function(require) {
 				features : null
 			}, options);
 			this.initCollections();
+			this.initFeedback();
 		},
 
 		initCollections: function initCollections() {
@@ -46,6 +47,10 @@ define(function(require) {
 			return this;
 		},
 
+		initFeedback: function initFeedback() {
+			this.feedback = null;
+		},
+
 		fetch: function fetch() {
 			if (this.runners)  this.runners.fetch();
 			if (this.features) this.features.fetch();
@@ -57,12 +62,18 @@ define(function(require) {
 				collection.reset();
 				collection.localStorage._clear();
 			});
+			this.feedback = {
+				type	: 'success',
+				message	: 'You successfully flushed the database.'
+			};
+			this.render();
 			return this;
 		},
 
 		render: function render() {
 			logger.debug('SettingsView: render');
-			$(this.el).html(this.template());
+			$(this.el).html(this.template({feedback: this.feedback}));
+			//this.feedback = null;
 			return this;
 		}
 	});

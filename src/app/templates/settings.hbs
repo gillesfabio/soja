@@ -1,4 +1,10 @@
 <div id="settings">
+	{{#if feedback}}
+	<div class="alert alert-dismissable alert-{{feedback.type}}">
+	  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	  {{feedback.message}}
+	</div>
+	{{/if}}
 	<div class="panel panel-default">
 			<div class="panel-heading">
 			<h3 class="panel-title">Flush Database</h3>
