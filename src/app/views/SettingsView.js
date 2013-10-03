@@ -76,7 +76,7 @@ define(function(require) {
 		render: function render() {
 			logger.debug('SettingsView: render');
 			$(this.el).html(this.template({feedback: this.feedback}));
-			//this.feedback = null;
+			this.feedback = null;
 			return this;
 		}
 	});

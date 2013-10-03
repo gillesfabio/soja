@@ -54,6 +54,7 @@ define(function(require) {
 				output = $('#fixtures').html(view.render().el).html();
 				expect(output).to.have.string('alert-success');
 				expect(output).to.have.string('I am the feedback message');
+				expect(view.feedback).to.be.null;
 			});
 		});
 	});
