@@ -4,10 +4,7 @@
 	</div>
 	<div class="panel-body">
 		<ul class="list-unstyled">
-			<li>
-				<i class="icon-time"></i>
-				<strong>Last run:</strong> {{#if lastRunDat}}lastRunDate{{else}}never{{/if}}
-			</li>
+			<li><i class="icon-time"></i> <strong>Last run:</strong> {{#if lastRunDate}}{{lastRunDate}}{{else}}never{{/if}}</li>
 			<li class="{{#if connected}}list-item-ok{{else}}list-item-failure{{/if}}">
 				<i class="{{#if connected}}icon-thumbs-up-alt{{else}}icon-thumbs-down-alt{{/if}}"></i>
 				<strong>Server:</strong> {{#if connected}}connected{{else}}not connected{{/if}}
