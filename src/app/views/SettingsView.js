@@ -19,7 +19,7 @@ define(function(require) {
 		template: Handlebars.compile(template),
 
 		events: {
-			'click .clean-database': 'cleanDatabase'
+			'click .flush-database': 'flushDatabase'
 		},
 
 		initialize: function initialize(options) {
@@ -51,8 +51,8 @@ define(function(require) {
 			if (this.features) this.features.fetch();
 		},
 
-		cleanDatabase: function cleanDatabase() {
-			logger.debug('SettingsView: clean database');
+		flushDatabase: function flushDatabase() {
+			logger.debug('SettingsView: flush database');
 			return this;
 		},
 
