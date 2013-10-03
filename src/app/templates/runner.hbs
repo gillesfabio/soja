@@ -3,36 +3,34 @@
 </div>
 <div class="row">
 	<div class="col-md-12">
-		<% if (features.length) { %>
+		{{#if features.length}}
 		<div id="runner-tests">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<% if (runner) { %>
-					<h3 class="panel-title"><%= runner.name %></h3>
-					<% } %>
+					{{#if runner}}<h3 class="panel-title">{{runner.name}}</h3>{{/if}}
 				</div>
 				<div class="panel-body feature">
 					<ul class="list-unstyled" id="runner-features">
-						<% _.each(features, function(feature) { %>
-						<li class="<%= feature.status === 'success' ? 'feature-success' : 'feature-failure' %>">
-							<i class="icon-<%= feature.status === 'success' ? 'ok' : 'remove' %>"></i>  <%= feature.description %>
-							<% if (feature.status === 'failure' && feature.reason) { %>
-							<ul class="feature-reason-detail">
-								<% if (feature.reason.title) { %><li><%= feature.reason.title %></li><% } %>
-								<% if (feature.reason.help) { %><li><%= feature.reason.help.replace('<', '').replace('>', '') %></li><% } %>
-							</ul>
-							<% if (feature.reason.source) { %>
-							<pre class="runner-failure-reason">
-<%= feature.reason.source %>
-							</pre>
-							<% } %>
-							<% } %>
+						{{#each features}}
+						<li class="{{#if_eq status compare="success"}}feature-success{{else}}feature-failure{{/if_eq}}">
+							<i class="icon-{{#if_eq status compare="success"}}ok{{else}}remove{{/if_eq}}></i> {{description}}
+							{{#if_eq status compare='failure'}}
+								{{#if reason}}
+									<ul class="feature-reason-detail">
+										{{#if reason.title}}<li>{{reason.title}}</li>{{/if}}
+										{{#if reason.help}}<li>{{reason.help}}</li>{{/if}}
+									</ul>
+									{{#if reason.source}}
+										<pre class="runner-failure-reason">{{reason.source}}</pre>
+									{{/if}}
+								{{/if}}
+							{{/if}}
 						</li>
-						<% }); %>
+						{{/each}}
 					</ul>
 				</div>
 			</div>
 		</div>
-		<% } %>
+		{{/if}}
 	</div>
 </div>
