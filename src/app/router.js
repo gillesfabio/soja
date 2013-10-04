@@ -3,6 +3,7 @@ define([
 	'backbone',
 	'app/views/RunnerView',
 	'app/views/SettingsView',
+	'app/views/StatsView',
 	'app/collections/RunnerCollection',
 	'app/collections/FeatureCollection',
 	'loglevel'
@@ -12,7 +13,7 @@ define([
 * Router
 * @exports Router
 */
-function(Backbone, RunnerView, SettingsView, RunnerCollection, FeatureCollection, logger) {
+function(Backbone, RunnerView, SettingsView, StatsView, RunnerCollection, FeatureCollection, logger) {
 
 	'use strict';
 
@@ -27,8 +28,9 @@ function(Backbone, RunnerView, SettingsView, RunnerCollection, FeatureCollection
 		* @type {object}
 		*/
 		routes: {
-			''			: 'runner',
-			'settings'	: 'settings'
+			''          : 'runner',
+			'settings'  : 'settings',
+			'stats'     : 'stats'
 		},
 
 		/**
@@ -57,8 +59,20 @@ function(Backbone, RunnerView, SettingsView, RunnerCollection, FeatureCollection
 			});
 			view.fetch();
 			$('#content').html(view.render().el);
-		}
+		},
 
+		/**
+		* The stats action.
+		*/
+		stats: function stats() {
+			logger.info('Router: stats');
+			var view = new StatsView({
+				runners  : new RunnerCollection(),
+				features : new FeatureCollection()
+			});
+			view.fetch();
+			$('#content').html(view.render().el);
+		}
 	});
 
 	return Router;
