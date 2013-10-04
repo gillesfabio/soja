@@ -3,9 +3,11 @@ define(function(require) {
 	'use strict';
 
 	var _                 = require('underscore');
+	var _s                = require('underscore.string');
 	var Backbone          = require('backbone');
 	var LocalStorage      = require('backbone.localStorage');
 	var logger            = require('loglevel');
+	var moment            = require('moment');
 	var RunnerCollection  = require('app/collections/RunnerCollection');
 	var FeatureCollection = require('app/collections/FeatureCollection');
 
@@ -35,12 +37,16 @@ define(function(require) {
 	*/
 	function createRunners() {
 		var created = [];
-		var runner, i;
+		var runner, runDate, i;
 		for (i = 0; i < NB_RUNNERS; i++) {
-			runner = runners.create({runDate: randomDate(), name: 'Runner #' + (i + 1)});
+			runDate = randomDate();
+			runner = runners.create({
+				runDate: runDate,
+				name: _s.sprintf('Runner — %s', moment(runDate).format('L'))
+			});
 			created.push(runner);
 		}
-		logger.info('Fixtures: created ' + created.length + ' runners');
+		logger.info(_s.sprintf('Fixtures: created %d runners', created.length));
 		return created;
 	}
 
@@ -57,12 +63,12 @@ define(function(require) {
 			for (i = 0; i < NB_FEATURES; i++) {
 				feature = {
 					runDate     : runner.attributes.runDate,
-					description : 'Feature #' + (i + 1),
+					description : _s.sprintf('Feature #%d', i + 1),
 					status      : statuses[Math.floor(Math.random() * statuses.length)]
 				};
 				if (feature.status === 'failure') {
 					feature.reason = {
-						'title'  : 'Failure #' + (i + 1),
+						'title'  : _s.sprintf('Failure #%d', i + 1),
 						'help'   : '<https://github.com/MattiSG/Watai/wiki/Troubleshooting>',
 						'source' : '- Something went wrong'
 					};
@@ -71,7 +77,7 @@ define(function(require) {
 				created.push(feature);
 			}
 		});
-		logger.info('Fixtures: created ' + created.length + ' features');
+		logger.info(_s.sprintf('Fixtures: created %d features', created.length));
 		return created;
 	}
 
