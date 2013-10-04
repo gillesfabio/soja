@@ -6,6 +6,7 @@ define([
 	'app/views/StatsView',
 	'app/collections/RunnerCollection',
 	'app/collections/FeatureCollection',
+	'app/config',
 	'loglevel'
 
 ],
@@ -13,7 +14,7 @@ define([
 * Router
 * @exports Router
 */
-function(Backbone, RunnerView, SettingsView, StatsView, RunnerCollection, FeatureCollection, logger) {
+function(Backbone, RunnerView, SettingsView, StatsView, RunnerCollection, FeatureCollection, config, logger) {
 
 	'use strict';
 
@@ -38,12 +39,13 @@ function(Backbone, RunnerView, SettingsView, StatsView, RunnerCollection, Featur
 		*/
 		runner: function runner() {
 			logger.info('Router: runner');
-			var ws   = new WebSocket('ws://localhost:9999');
-			var view = new RunnerView({
-				ws       : ws,
+			var opts, view;
+			opts = {
 				runners  : new RunnerCollection(),
 				features : new FeatureCollection()
-			});
+			};
+			if (config.env !== 'staging') opts.ws = new WebSocket('ws://localhost:9999');
+			view = new RunnerView(opts);
 			view.fetch();
 			$('#content').html(view.render().el);
 		},

@@ -62,6 +62,9 @@ function(Backbone, Router, config, fixtures, logger) {
 	switch (config.env) {
 		case 'dev':
 			logger.enableAll();
+			break;
+		case 'staging':
+			logger.enableAll();
 			fixtures.create();
 			break;
 		case 'prod':
