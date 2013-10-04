@@ -18,7 +18,7 @@ Installation:
 
 	git clone https://github.com/gillesfabio/soja.git
 	cd soja
-	make install
+	grunt install
 
 Lost? Follow your OS specific instructions thereafter.
 
@@ -52,7 +52,7 @@ Now, you can clone the Soja repository and install the stack:
 
 	git clone https://github.com/gillesfabio/soja.git
 	cd soja
-	make install # npm install; bower install; gem install compass
+	grunt install
 
 Done.
 
@@ -99,8 +99,7 @@ the latest version of JSDoc in a single one command:
 
 Then you can easily generate and browse it:
 
-	make doc
-	open doc/index.html
+	grunt doc
 
 ### Any question?
 
