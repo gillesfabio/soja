@@ -6,6 +6,14 @@ module.exports = function(grunt) {
 	'use strict';
 
 	grunt.initConfig({
+		shell: {
+			npmInstall     : { command: 'npm install' },
+			bowerInstall   : { command: 'bower install' },
+			compassInstall : { command: 'gem install compass' },
+			cleanDoc       : { command: 'rm -rf ./doc' },
+			generateDoc    : { command: './node_modules/jsdoc/jsdoc -c jsdoc.json' },
+			openDoc        : { command: 'open ./doc/index.html' }
+		},
 		jshint: {
 			all: [
 				'Gruntfile.js',
@@ -64,11 +72,24 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-compass');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-express');
+	grunt.loadNpmTasks('grunt-shell');
 
 	grunt.registerTask('default', [
 		'jshint',
 		'compass',
 		'express:app'
+	]);
+
+	grunt.registerTask('install', [
+		'shell:npmInstall',
+		'shell:bowerInstall',
+		'shell:compassInstall'
+	]);
+
+	grunt.registerTask('doc', [
+		'shell:cleanDoc',
+		'shell:generateDoc',
+		'shell:openDoc'
 	]);
 
 	grunt.registerTask('test', [
