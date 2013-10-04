@@ -53,7 +53,7 @@ define(function(require) {
 	*/
 	function createFeatures() {
 		var created      = [];
-		var statuses     = ['success', 'failures'];
+		var statuses     = ['success', 'failure'];
 		var runnerModels = createRunners();
 		var feature, status, reason, i;
 		runnerModels.forEach(function(runner) {
