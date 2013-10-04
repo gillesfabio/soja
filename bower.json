@@ -24,13 +24,14 @@
     "jquery": "2.x",
     "bootstrap": "3.x",
     "underscore": "1.5.x",
+    "underscore.string": "2.3.x",
     "backbone": "1.0.x",
     "backbone.localStorage": "1.1.x",
     "momentjs": "2.2.x",
     "font-awesome": "3.2.x",
     "loglevel": "0.4.x",
     "handlebars": "1.x",
-    "handlebars-helpers": "~1.0.0"
+    "handlebars-helpers": "1.x"
   },
   "devDependencies": {
     "mocha": "1.x",

@@ -5,6 +5,7 @@ requirejs.config({
 	paths: {
 		'jquery'				: 'vendor/jquery/jquery',
 		'underscore'			: 'vendor/underscore/underscore',
+		'underscore.string'		: 'vendor/underscore.string/lib/underscore.string',
 		'backbone'				: 'vendor/backbone/backbone',
 		'backbone.localStorage'	: 'vendor/backbone.localStorage/backbone.localStorage',
 		'bootstrap'				: 'vendor/bootstrap/dist/js/bootstrap',
