@@ -38,7 +38,8 @@ function(RunnerModel, _, Backbone, logger) {
 		* Orders by `runDate`.
 		*/
 		comparator: function(model) {
-			return model.get('runDate');
+			var date = new Date(model.get('runDate'));
+			return date.getTime();
 		},
 
 		/**

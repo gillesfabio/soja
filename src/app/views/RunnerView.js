@@ -9,12 +9,13 @@ define(
 
 	var _                 = require('underscore');
 	var Backbone          = require('backbone');
-	var RunnerModel       = require('app/models/RunnerModel');
-	var FeatureModel      = require('app/models/FeatureModel');
-	var RunnerInfoView    = require('app/views/RunnerInfoView');
 	var tpl               = require('text!app/templates/runner.hbs');
 	var logger            = require('loglevel');
 	var Handlebars        = require('handlebars');
+
+	var RunnerCollection  = require('app/collections/RunnerCollection');
+	var FeatureCollection = require('app/collections/FeatureCollection');
+	var RunnerInfoView    = require('app/views/RunnerInfoView');
 
 	/**
 	* @class
@@ -43,24 +44,19 @@ define(
 		* @param {object} options - View Options
 		*/
 		initialize: function initialize(options) {
-			this.options = options || {};
-			this.initView();
+			this.options = _.extend({
+				ws       : null,
+				runners  : null,
+				features : null,
+			}, options);
+			this.ws            = this.options.ws;
+			this.runners       = this.options.runners;
+			this.features      = this.options.features;
+			this.currentRunner = null;
+			this.collections   = [];
 			this.initCollections();
 			this.initSubviews();
 			this.initEvents();
-		},
-
-		/**
-		* Initializes view properties.
-		* @private
-		*/
-		initView: function initView() {
-			logger.debug('RunnerView: initialize view');
-			if (!_.has(this.options, 'ws') && !this.options.ws && !this.options.ws instanceof WebSocket) {
-				throw new Error('RunnerView: "ws" argument is required and must be a WebSocket instance');
-			}
-			this.ws = this.options.ws;
-			this.currentRunner = null;
 		},
 
 		/**
@@ -69,14 +65,11 @@ define(
 		*/
 		initCollections: function initCollections() {
 			logger.debug('RunnerView: initialize collections');
-			this.collections = [];
-			this.runners  = (_.has(this.options, 'runners') && this.options.runners) ? this.options.runners : null;
-			this.features = (_.has(this.options, 'features') && this.options.features) ? this.options.features : null;
-			if (this.runners) {
+			if (this.runners && this.runners instanceof RunnerCollection) {
 				this.collections.push(this.runners);
 				logger.debug('RunnerView: added runners (RunnerCollection) to collections');
 			}
-			if (this.features) {
+			if (this.features && this.features instanceof FeatureCollection) {
 				this.collections.push(this.features);
 				logger.debug('RunnerView: added features (FeatureCollection) to collections');
 			}
@@ -103,9 +96,11 @@ define(
 			_.bindAll(this, 'onSocketOpen', 'onSocketClose', 'onSocketMessage', 'render');
 			this.listenTo(this.features, 'change', this.render);
 			this.listenTo(this.runners, 'change', this.render);
-			this.ws.onopen    = this.onSocketOpen;
-			this.ws.onclose   = this.onSocketClose;
-			this.ws.onmessage = this.onSocketMessage;
+			if (this.ws) {
+				this.ws.onopen    = this.onSocketOpen;
+				this.ws.onclose   = this.onSocketClose;
+				this.ws.onmessage = this.onSocketMessage;
+			}
 		},
 
 		/**
@@ -113,8 +108,8 @@ define(
 		*/
 		fetch: function fetch() {
 			logger.debug('RunnerView: fetch collections data');
-			this.features.fetch();
-			this.runners.fetch();
+			if (this.runners && this.runners instanceof RunnerCollection)    this.runners.fetch();
+			if (this.features && this.features instanceof FeatureCollection) this.features.fetch();
 			return this;
 		},
 
@@ -223,8 +218,11 @@ define(
 		* @returns {Object|null}
 		*/
 		getCurrentRunner: function getCurrentRunner() {
-			if (this.currentRunner)      return this.currentRunner.toJSON();
-			if (this.runners.size() > 0) return this.runners.last().toJSON();
+			if (this.currentRunner) return this.currentRunner.toJSON();
+			if (this.runners.size() > 0) {
+				this.runners.sort();
+				return this.runners.last().toJSON();
+			}
 			return null;
 		},
 

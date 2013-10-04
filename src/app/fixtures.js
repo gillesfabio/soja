@@ -11,9 +11,6 @@ define(function(require) {
 	var RunnerCollection  = require('app/collections/RunnerCollection');
 	var FeatureCollection = require('app/collections/FeatureCollection');
 
-	RunnerCollection.prototype.localStorage = new Backbone.LocalStorage('watai:soja:fixtures:runners');
-	FeatureCollection.prototype.localStorage = new Backbone.LocalStorage('watai:soja:fixtures:features');
-
 	var runners     = new RunnerCollection();
 	var features    = new FeatureCollection();
 	var collections = [runners, features];
@@ -55,11 +52,11 @@ define(function(require) {
 	* @returns {Array} Created features.
 	*/
 	function createFeatures() {
-		var created  = [];
-		var statuses = ['success', 'failures'];
+		var created      = [];
+		var statuses     = ['success', 'failures'];
+		var runnerModels = createRunners();
 		var feature, status, reason, i;
-		runners = createRunners();
-		runners.forEach(function(runner) {
+		runnerModels.forEach(function(runner) {
 			for (i = 0; i < NB_FEATURES; i++) {
 				feature = {
 					runDate     : runner.attributes.runDate,
@@ -96,9 +93,16 @@ define(function(require) {
 	* Creates fixtures.
 	*/
 	function create(options) {
-		options = _.extend({destroy: true}, options);
+		options = _.extend({
+			destroy: true,
+			namespace: 'fixtures'
+		}, options);
+		var runnerLS  = new Backbone.LocalStorage(_s.sprintf('watai:soja:%s:runners', options.namespace));
+		var featureLS = new Backbone.LocalStorage(_s.sprintf('watai:soja:%s:features', options.namespace));
+		RunnerCollection.prototype.localStorage = runnerLS;
+		FeatureCollection.prototype.localStorage = featureLS;
 		if (options.destroy) destroy();
-		createFeatures();
+		return createFeatures();
 	}
 
 	return {
