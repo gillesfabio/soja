@@ -12,6 +12,7 @@
     "grunt-express": "1.2.x",
     "grunt-contrib-jshint": "0.6.x",
     "grunt-contrib-compass": "0.5.x",
+    "grunt-shell": "0.4.x",
     "ws": "0.4.x"
   },
   "devDependencies": {
