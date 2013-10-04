@@ -44,6 +44,7 @@ require([
 	'backbone',
 	'app/router',
 	'app/config',
+	'app/fixtures',
 	'loglevel',
 	'handlebars-helpers'
 
@@ -52,13 +53,15 @@ require([
 * main (application's entry point)
 * @exports main
 */
-function(Backbone, Router, config, logger) {
+function(Backbone, Router, config, fixtures, logger) {
 
 	'use strict';
+
 
 	switch (config.env) {
 		case 'dev':
 			logger.enableAll();
+			fixtures.create();
 			break;
 		case 'prod':
 			logger.disableAll();
@@ -66,6 +69,8 @@ function(Backbone, Router, config, logger) {
 		default:
 			logger.disableAll();
 	}
+
+	logger.info('Environment: ' + config.env);
 
 	var router = new Router();
 	Backbone.history.start();
