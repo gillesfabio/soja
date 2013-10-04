@@ -35,6 +35,13 @@ function(RunnerModel, _, Backbone, logger) {
 		localStorage: new Backbone.LocalStorage('watai:soja:runners'),
 
 		/**
+		* Orders by `runDate`.
+		*/
+		comparator: function(model) {
+			return model.get('runDate');
+		},
+
+		/**
 		* Takes a WebSocket message and create the given runner if it
 		* does not exists in the database. Returns the given model instance
 		* or `undefined` if an error occurred (the error is logged).

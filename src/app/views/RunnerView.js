@@ -23,7 +23,7 @@ define(
 	* @requires Handlebars
 	* @extends Backbone.View
 	* @property {WebSocket} ws - The WebSocket client instance.
-	* @property {RunnerModel} runner - The current runner model instance.
+	* @property {RunnerModel} currentRunner - The current runner model instance.
 	* @property {RunnerCollection} runners - The view's RunnerCollection instance.
 	* @property {FeatureCollection} features - The view's FeatureCollection instance.
 	* @property {Array} collections - Contains all collections.
@@ -60,7 +60,7 @@ define(
 				throw new Error('RunnerView: "ws" argument is required and must be a WebSocket instance');
 			}
 			this.ws = this.options.ws;
-			this.runner = null;
+			this.currentRunner = null;
 		},
 
 		/**
@@ -185,34 +185,6 @@ define(
 		},
 
 		/**
-		* Takes data sent by WebSocket and creates the runner if it does not
-		* already exists in the database.
-		*
-		* @param {object} data - WebSocket "onmessage" event data.
-		* @private
-		*/
-		createRunner: function createRunner(data) {
-			this.runner = this.runners.createUnique(data);
-			if (this.runner) {
-				this.runnerInfoView.data.lastRunDate = this.runner.toJSON().runDate;
-				logger.debug('RunnerView: lastRunDate:' + this.runnerInfoView.data.lastRunDate);
-			}
-			return this;
-		},
-
-		/**
-		* Takes data sent by WebSocket and creates the feature if it does not
-		* already exists in the database.
-		*
-		* @param {object} data - WebSocket "onmessage" event data.
-		* @private
-		*/
-		createFeature: function createFeature(data) {
-			this.features.createUnique(data);
-			return this;
-		},
-
-		/**
 		* Closes the WebSocket server connection.
 		* @private
 		*/
@@ -222,14 +194,66 @@ define(
 		},
 
 		/**
+		* Takes data sent by WebSocket and creates the runner if it does not
+		* already exists in the database.
+		*
+		* @param {object} data - WebSocket "onmessage" event data.
+		* @private
+		*/
+		createRunner: function createRunner(data) {
+			this.currentRunner = this.runners.createUnique(data);
+			return this;
+		},
+
+		/**
+		* Takes data sent by WebSocket and creates the feature if it does not
+		* already exists in the database.
+		*
+		* @param {Object} data - WebSocket "onmessage" event data.
+		* @private
+		*/
+		createFeature: function createFeature(data) {
+			this.features.createUnique(data);
+			return this;
+		},
+
+		/**
+		* Returns the current runner model object (`toJSON` is called, so it's
+		* not a runner model instance) or `null` if no runner has been created yet.
+		* @returns {Object|null}
+		*/
+		getCurrentRunner: function getCurrentRunner() {
+			if (this.currentRunner)      return this.currentRunner.toJSON();
+			if (this.runners.size() > 0) return this.runners.last().toJSON();
+			return null;
+		},
+
+		/**
+		* Returns the latest features (of the last run) as an array of objects
+		* (`toJSON` is called, so it's not a `FeatureCollection` instance) or
+		* an empty array if no feature has been created yet.
+		* @returns {Array}
+		*/
+		getLatestFeatures: function getLatestFeatures() {
+			if (this.features.size() > 0) return this.features.latest().toJSON();
+			return [];
+		},
+
+		/**
 		* Renders the view.
 		*/
 		render: function render() {
 			logger.debug('RunnerView: render');
+			var runner   = this.getCurrentRunner();
+			var features = this.getLatestFeatures();
 			$(this.el).html(this.template({
-				runner   : this.runner ? this.runner.toJSON() : null,
-				features : this.features ? this.features.toJSON() : []
+				runner   : runner,
+				features : features
 			}));
+			if (runner) {
+				this.runnerInfoView.data.lastRunDate = runner.runDate;
+				logger.debug('RunnerView: lastRunDate:' + this.runnerInfoView.data.lastRunDate);
+			}
 			$(this.el).find('#runner-info').html(this.runnerInfoView.render().el);
 			return this;
 		}

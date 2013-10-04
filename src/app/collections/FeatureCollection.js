@@ -34,6 +34,20 @@ function(FeatureModel, _, Backbone, logger) {
 		localStorage: new Backbone.LocalStorage('watai:soja:features'),
 
 		/**
+		* Orders by `runDate`.
+		*/
+		comparator: function comparator(model) {
+			return model.get('runDate');
+		},
+
+		/**
+		* Only returns last run features.
+		*/
+		latest: function latest() {
+			return new FeatureCollection(this.where({runDate: this.last().attributes.runDate}));
+		},
+
+		/**
 		* Takes a WebSocket message and create the given feature if it
 		* does not exists in the database. Returns the given model instance
 		* or `undefined` if an error occurred (the error is logged).
