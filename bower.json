@@ -31,7 +31,9 @@
     "font-awesome": "3.2.x",
     "loglevel": "0.4.x",
     "handlebars": "1.x",
-    "handlebars-helpers": "1.x"
+    "handlebars-helpers": "1.x",
+    "d3": "3.x",
+    "nvd3": "1.1.12-beta"
   },
   "devDependencies": {
     "mocha": "1.x",

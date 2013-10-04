@@ -13,7 +13,9 @@ requirejs.config({
 		'text'					: 'vendor/requirejs-text/text',
 		'loglevel'				: 'vendor/loglevel/dist/loglevel',
 		'handlebars'			: 'vendor/handlebars/handlebars',
-		'handlebars-helpers'	: 'vendor/handlebars-helpers/helpers'
+		'handlebars-helpers'	: 'vendor/handlebars-helpers/helpers',
+		'd3'					: 'vendor/d3/d3',
+		'nvd3'					: 'vendor/nvd3/nv.d3'
 	},
 
 	shim: {
@@ -36,6 +38,13 @@ requirejs.config({
 		'handlebars-helpers': {
 			deps: ['handlebars'],
 			exports: 'Handlebars'
+		},
+		'd3': {
+			exports: 'd3'
+		},
+		'nvd3': {
+			deps: ['d3'],
+			exports: 'nv'
 		}
 	}
 });
