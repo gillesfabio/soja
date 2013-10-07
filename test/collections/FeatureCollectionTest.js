@@ -100,6 +100,30 @@ define(function(require) {
 					expect(model.attributes.runner.name).to.equal(randomRunner.name);
 				});
 			});
+
+			it('should properly return succeeded feature count', function() {
+				fixtures.create({namespace: 'test'});
+				collection.fetch();
+				expect(collection.succeededCount()).to.equal(collection.where({status: 'success'}).length);
+			});
+
+			it('should properly return succeeded feature count only for latest run', function() {
+				fixtures.create({namespace: 'test'});
+				collection.fetch();
+				expect(collection.latest().succeededCount()).to.equal(collection.latest().where({status: 'success'}).length);
+			});
+
+			it('should properly return failed feature count', function() {
+				fixtures.create({namespace: 'test'});
+				collection.fetch();
+				expect(collection.failedCount()).to.equal(collection.where({status: 'failure'}).length);
+			});
+
+			it('should properly return failed feature count only for latest run', function() {
+				fixtures.create({namespace: 'test'});
+				collection.fetch();
+				expect(collection.latest().failedCount()).to.equal(collection.latest().where({status: 'failure'}).length);
+			});
 		});
 	});
 });

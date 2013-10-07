@@ -1,37 +1,30 @@
-<div class="row">
-	<div id="runner-info" class="col-md-6"></div>
-	<div id="runner-stats" class="col-md-6"></div>
-</div>
-<div class="row">
-	<div class="col-md-12">
-		{{#if features.length}}
-		<div id="runner-tests">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					{{#if runner}}<h3 class="panel-title">{{runner.name}}</h3>{{/if}}
-				</div>
-				<div class="panel-body feature">
-					<ul class="list-unstyled" id="runner-features">
-						{{#each features}}
-						<li class="{{#if_eq status compare="success"}}feature-success{{else}}feature-failure{{/if_eq}}">
-							<i class="icon-{{#if_eq status compare="success"}}ok{{else}}remove{{/if_eq}}"></i> {{description}}
-							{{#if_eq status compare='failure'}}
-								{{#if reason}}
-									<ul class="list-unstyled feature-reason-detail">
-										{{#if reason.title}}<li><strong>{{reason.title}}</strong></li>{{/if}}
-										{{#if reason.help}}<li><em>{{reason.help}}</em></li>{{/if}}
-									</ul>
-									{{#if reason.source}}
-										<pre class="runner-failure-reason">{{reason.source}}</pre>
-									{{/if}}
-								{{/if}}
-							{{/if_eq}}
-						</li>
-						{{/each}}
-					</ul>
-				</div>
-			</div>
+<div id="runner-info"></div>
+{{#if features.length}}
+<div id="runner-tests">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			{{#if runner}}<h3 class="panel-title">{{runner.name}}</h3>{{/if}}
 		</div>
-		{{/if}}
+		<div class="panel-body feature">
+			<ul class="list-unstyled" id="runner-features">
+				{{#each features}}
+				<li class="{{#if_eq status compare="success"}}feature-success{{else}}feature-failure{{/if_eq}}">
+					<i class="icon-{{#if_eq status compare="success"}}ok{{else}}remove{{/if_eq}}"></i> {{description}}
+					{{#if_eq status compare='failure'}}
+						{{#if reason}}
+							<ul class="list-unstyled feature-reason-detail">
+								{{#if reason.title}}<li><strong>{{reason.title}}</strong></li>{{/if}}
+								{{#if reason.help}}<li><em>{{reason.help}}</em></li>{{/if}}
+							</ul>
+							{{#if reason.source}}
+								<pre class="runner-failure-reason">{{reason.source}}</pre>
+							{{/if}}
+						{{/if}}
+					{{/if_eq}}
+				</li>
+				{{/each}}
+			</ul>
+		</div>
 	</div>
 </div>
+{{/if}}

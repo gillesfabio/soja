@@ -13,7 +13,7 @@ define(function(require) {
 	var fixtures          = require('app/fixtures');
 	var helpers           = require('helpers');
 
-	var server = 'ws://localhost:9999';
+	var WS_SERVER = 'ws://localhost:9999';
 
 	var ws, view, runners, features, output;
 
@@ -29,7 +29,7 @@ define(function(require) {
 			beforeEach(function() {
 				$('#fixtures').empty();
 				helpers.clean([features, runners]);
-				ws = new WebSocket(server);
+				ws = new WebSocket(WS_SERVER);
 				view = new RunnerView({
 					ws       : ws,
 					runners  : runners,
@@ -68,18 +68,6 @@ define(function(require) {
 				this.timeout(5000);
 				setTimeout(function() {
 					expect(view.features.models.length).to.equal(4);
-					done();
-				}, 4000);
-			});
-
-			it('should properly render RunnerInfoView subview', function(done) {
-				this.timeout(5000);
-				setTimeout(function() {
-					view.runnerInfoView.data.connected = true;
-					view.runnerInfoView.data.lastRunDate = new Date();
-					output = $('#fixtures').html(view.render().el).html();
-					expect(output).to.have.string('<strong>Last run:</strong> a few seconds ago');
-					expect(output).to.have.string('<strong>Server:</strong> connected');
 					done();
 				}, 4000);
 			});

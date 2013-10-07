@@ -87,7 +87,11 @@ define(
 		initSubviews: function initSubviews() {
 			logger.debug('RunnerView: initialize subviews');
 			this.subviews = [];
-			this.runnerInfoView = new RunnerInfoView();
+			this.runnerInfoView = new RunnerInfoView({
+				ws       : this.ws,
+				runners  : this.runners,
+				features : this.features
+			});
 			this.subviews.push(this.runnerInfoView);
 			logger.debug('RunnerView: added runnerInfoView (RunnerInfoView) to subviews');
 		},
@@ -141,7 +145,6 @@ define(
 		onSocketOpen: function onSocketOpen() {
 			logger.debug('RunnerView: onSocketOpen');
 			this.reset();
-			this.runnerInfoView.data.connected = true;
 			this.render();
 			return this;
 		},
@@ -153,7 +156,6 @@ define(
 		*/
 		onSocketClose: function onSocketClose() {
 			logger.debug('RunnerView: onSocketClose');
-			this.runnerInfoView.data.connected = false;
 			this.render();
 			return this;
 		},
@@ -258,14 +260,7 @@ define(
 			logger.debug('RunnerView: render');
 			var runner   = this.getCurrentRunner();
 			var features = this.getLatestFeatures();
-			$(this.el).html(this.template({
-				runner   : runner,
-				features : features
-			}));
-			if (runner) {
-				this.runnerInfoView.data.lastRunDate = runner.runDate;
-				logger.debug('RunnerView: lastRunDate:' + this.runnerInfoView.data.lastRunDate);
-			}
+			$(this.el).html(this.template({runner: runner, features: features}));
 			$(this.el).find('#runner-info').html(this.runnerInfoView.render().el);
 			return this;
 		}

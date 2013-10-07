@@ -1,3 +1,9 @@
+$success-foreground: #468847;
+$success-background: #dff0d8;
+$failure-foreground: #b94a48;
+$failure-background: #f2dede;
+$quiet-foreground: #909090;
+
 html {
 	-webkit-font-smoothing: antialiased;
 }
@@ -47,4 +53,79 @@ body {
 	-o-tab-size: 2;
 	overflow: auto;
 	margin-bottom: 10px;
+}
+
+.panel-title {
+	font-weight: 300;
+}
+
+#runner-info {
+
+	.panel-body .row, .runner-info,
+	.runner-summary {
+		height: 120px !important;
+	}
+
+	.runner-summary-body,
+	.runner-info-body {
+		padding: 0px 14px 0px 14px;
+		margin: 0;
+	}
+
+	.runner-info-body,
+	.runner-summary-body {
+		text-align: center;
+	}
+
+	.runner-info-body h2 {
+		font-size: 14px;
+	}
+
+	.runner-info-rundate h2 {
+		font-weight: 300;
+		font-size: 18px;
+		color: #444;
+	}
+
+	.runner-info-server-status h2 {
+		font-size: 30px;
+	}
+
+	.runner-info-body h2,
+	.runner-summary-body h2 {
+		height      : 80px;
+		line-height : 90px;
+		width       : 100%;
+		padding     : 0;
+		margin      : 0;
+	}
+
+	.runner-info-body p,
+	.runner-summary-body p {
+		position       : absolute;
+		bottom         : 0;
+		height         : 40px;
+		line-height    : 40px;
+		width          : 100%;
+		padding        : 0 !important;
+		margin         : 0 -15px 0 -15px !important;
+		font-weight    : bold;
+		font-size      : 12px;
+		text-transform : uppercase;
+	}
+
+	.runner-info-body p,
+	.runner-summary-total {
+		color: $quiet-foreground;
+	}
+
+	.runner-summary-success {
+		color: $success-foreground;
+		background-color: $success-background;
+	}
+
+	.runner-summary-failure {
+		color: $failure-foreground;
+		background-color: $failure-background;
+	}
 }

@@ -16,6 +16,7 @@ define(
 	var logger     = require('loglevel');
 	var moment     = require('moment');
 	var tpl        = require('text!app/templates/runner-info.hbs');
+	var helpers    = require('app/helpers');
 
 	/**
 	* @class
@@ -24,7 +25,6 @@ define(
 	* @requires Handlebars
 	* @requires Moment
 	* @extends Backbone.View
-	* @property {object} data - View's template context data.
 	*/
 	var RunnerInfoView = Backbone.View.extend(/** @lends module:views/RunnerInfoView~RunnerInfoView.prototype */{
 
@@ -37,40 +37,85 @@ define(
 
 		/**
 		* View initialization.
+		*
+		* @param {Object}            options          - View options
+		* @param {WebSocketServer}   options.ws       - The WebSocketServer instance.
+		* @param {RunnerCollection}  options.runners  - The runner collection instance.
+		* @param {FeatureCollection} options.features - The feature collection instance.
 		*/
-		initialize: function initialize() {
+		initialize: function initialize(options) {
 			logger.debug('RunnerInfoView: initialize');
-			this.data = {
-				connected: false,
-				lastRunDate: null
-			};
+			this.options = _.extend({
+				ws       : null,
+				runners  : null,
+				features : null
+			}, options);
+			this.connected = false;
+			this.ws        = this.options.ws;
+			this.runners   = this.options.runners;
+			this.features  = this.options.features;
+			this.initEvents();
 		},
 
 		/**
-		* Returns the last run date formatted with Moment.js
-		* `fromNow` method (example: "a few seconds ago").
+		* Initializes events.
 		*
-		* If `lastRunDate` instance variable is not defined, returns
-		* `null` (and not `undefined`), which is the default value.
-		*
-		* @return {string|null}
+		* @private
 		*/
-		lastRunDateFormatted: function lastRunDateFormatted() {
-			if (this.data.lastRunDate) return moment(this.data.lastRunDate).fromNow();
-			return this.data.lastRunDate;
+		initEvents: function initEvents() {
+			logger.debug('RunnerInfoView: initializes events');
+			_.bindAll(this, 'onSocketOpen', 'onSocketClose', 'onSocketMessage', 'render');
+			this.listenTo(this.runners, 'change', this.render);
+			this.listenTo(this.features, 'change', this.render);
+			if (this.ws) {
+				this.ws.onopen    = this.onSocketOpen;
+				this.ws.onclose   = this.onSocketClose;
+				this.ws.onmessage = this.onSocketMessage;
+			}
+			return this;
 		},
 
 		/**
-		* Renders the view with the following context:
-		*
-		*    - `lastRunDate`: the last run date formatted with Moment.js
-		*    - `connected`: Boolean representing the current server connection status.
+		* Calls on WebSocketServer connection.
+		*/
+		onSocketOpen: function onSocketOpen() {
+			logger.debug('RunnerInfoView: ws open');
+			this.connected = true;
+			this.render();
+			return this;
+		},
+
+		/**
+		* Calls on WebSocketServer close.
+		*/
+		onSocketClose: function onSocketClose() {
+			logger.debug('RunnerInfoView: ws close');
+			this.connected = false;
+			this.render();
+			return this;
+		},
+
+		/**
+		* Calls on WebSocketServer message.
+		*/
+		onSocketMessage: function onSocketMessage() {
+			logger.debug('RunnerInfoView: ws close');
+			this.connected = true;
+			this.render();
+			return this;
+		},
+
+		/**
+		* Renders the view.
 		*/
 		render: function render() {
 			logger.debug('RunnerInfoView: render');
 			$(this.el).html(this.template({
-				lastRunDate : this.lastRunDateFormatted(),
-				connected   : this.data.connected
+				connected      : this.connected,
+				runner         : this.runners.last() ? this.runners.last().toJSON() : null,
+				totalCount     : this.features.latest().size(),
+				succeededCount : this.features.succeededCount({latest: true}),
+				failedCount    : this.features.failedCount({latest: true})
 			}));
 			return this;
 		}

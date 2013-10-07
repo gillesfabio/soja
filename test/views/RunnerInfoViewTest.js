@@ -4,9 +4,24 @@ define(function(require) {
 
 	'use strict';
 
-	var expect			= require('chai').expect;
-	var Backbone        = require('backbone');
-	var RunnerInfoView	= require('app/views/RunnerInfoView');
+	var expect            = require('chai').expect;
+	var Backbone          = require('backbone');
+	var moment            = require('moment');
+	var RunnerCollection  = require('app/collections/RunnerCollection');
+	var FeatureCollection = require('app/collections/FeatureCollection');
+	var RunnerInfoView    = require('app/views/RunnerInfoView');
+	var fixtures          = require('app/fixtures');
+	var helpers           = require('helpers');
+
+	var WS_SERVER = 'ws://localhost:9999';
+
+	var ws, view, runners, features, output;
+
+	RunnerCollection.prototype.localStorage  = new Backbone.LocalStorage('watai:soja:test:runners');
+	FeatureCollection.prototype.localStorage = new Backbone.LocalStorage('watai:soja:test:features');
+
+	runners  = new RunnerCollection();
+	features = new FeatureCollection();
 
 	describe('Views', function() {
 		describe('RunnerInfoView', function() {
@@ -15,50 +30,85 @@ define(function(require) {
 				$('#fixtures').empty();
 			});
 
+			beforeEach(function() {
+				$('#fixtures').empty();
+				helpers.clean([features, runners]);
+			});
+
 			afterEach(function() {
 				$('#fixtures').empty();
 			});
 
-			it('should properly return "connected" template variable', function() {
-				var view = new RunnerInfoView();
-				expect(view.data.connected).to.equal(false);
-				view.data.connected = true;
-				expect(view.data.connected).to.equal(true);
-			});
-
-			it('should properly return "lastRunDate" template variable (returned by formattedLastRunDate())', function() {
-				var view = new RunnerInfoView();
-				expect(view.data.lastRunDate).to.be.null;
-				view.data.lastRunDate = new Date();
-				expect(view.lastRunDateFormatted()).to.equal('a few seconds ago');
-			});
-
-			it('should properly render view with: connected:false, lastRunDate: now', function() {
-				var view, output;
-				view = new RunnerInfoView();
-				view.data.connected = false;
-				view.data.lastRunDate = new Date();
+			it('should properly set last run date for the first launch (shows "Never")', function() {
+				view = new RunnerInfoView({
+					ws       : null,
+					runners  : runners,
+					features : features
+				});
 				output = $('#fixtures').html(view.render().el).html();
-				expect(output).to.have.string('<strong>Last run:</strong> a few seconds ago');
-				expect(output).to.have.string('<strong>Server:</strong> not connected');
+				expect(output).to.have.string('Never');
 			});
 
-			it('should properly render view with: connected:true, lastRunDate: now', function() {
-				var view, output;
-				view = new RunnerInfoView();
-				view.data.connected = true;
-				view.data.lastRunDate = new Date();
+			it('should properly set last run date', function() {
+				fixtures.create({namespace: 'test'});
+				view = new RunnerInfoView({
+					ws       : null,
+					runners  : runners,
+					features : features
+				});
+				runners.fetch();
+				features.fetch();
 				output = $('#fixtures').html(view.render().el).html();
-				expect(output).to.have.string('<strong>Last run:</strong> a few seconds ago');
-				expect(output).to.have.string('<strong>Server:</strong> connected');
+				expect(output).to.have.string(moment(runners.last().attributes.runDate).fromNow());
 			});
 
-			it('should properly render view with: connected:false, lastRunDate: null', function() {
-				var view, output;
-				view = new RunnerInfoView();
+			it('should properly set server status up', function(done) {
+				this.timeout(3000);
+				ws = new WebSocket(WS_SERVER);
+				view = new RunnerInfoView({
+					ws       : ws,
+					runners  : runners,
+					features : features
+				});
+				setTimeout(function() {
+					output = $('#fixtures').html(view.render().el).html();
+					expect(output).to.have.string('icon-thumbs-up-alt');
+					done();
+				}, 2000);
+			});
+
+			it('should properly set server status down', function() {
+				view = new RunnerInfoView({
+					ws       : null,
+					runners  : runners,
+					features : features
+				});
 				output = $('#fixtures').html(view.render().el).html();
-				expect(output).to.have.string('<strong>Last run:</strong> never');
-				expect(output).to.have.string('<strong>Server:</strong> not connected');
+				expect(output).to.have.string('icon-thumbs-down-alt');
+			});
+
+			it('should properly set total count', function() {
+				fixtures.create({namespace: 'test'});
+				runners.fetch();
+				features.fetch();
+				output = $('#fixtures').html(view.render().el).html();
+				expect(output).to.have.string('<h2 class="runner-summary-total-count">' + features.latest().size() + '</h2>');
+			});
+
+			it('should properly set succeeded count', function() {
+				fixtures.create({namespace: 'test'});
+				runners.fetch();
+				features.fetch();
+				output = $('#fixtures').html(view.render().el).html();
+				expect(output).to.have.string('<h2 class="runner-summary-succeeded-count">' + features.succeededCount({latest: true}) + '</h2>');
+			});
+
+			it('should properly set failed count', function() {
+				fixtures.create({namespace: 'test'});
+				runners.fetch();
+				features.fetch();
+				output = $('#fixtures').html(view.render().el).html();
+				expect(output).to.have.string('<h2 class="runner-summary-failed-count">' + features.failedCount({latest: true}) + '</h2>');
 			});
 		});
 	});

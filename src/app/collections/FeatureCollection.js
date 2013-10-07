@@ -60,10 +60,41 @@ function(FeatureModel, _, Backbone, logger) {
 		},
 
 		/**
+		* Returns count for a given `where` clause.
+		*
+		* @param   {Object}  options        - Method options.
+		* @param   {Object}  options.where  - Object to pass to `where` method.
+		* @returns {Integer|null}
+		*/
+		countWhere: function countWhere(options) {
+			options = _.extend({where: {}}, options);
+			var models = this.where(options.where);
+			return models ? models.length : null;
+		},
+
+		/**
+		* Returns count of succeeded features.
+		*
+		* @returns {Integer|null}
+		*/
+		succeededCount: function succeededCount() {
+			return this.countWhere({where: {status: 'success'}});
+		},
+
+		/**
+		* Returns count of failed features.
+		*
+		* @returns {Integer|null}
+		*/
+		failedCount: function failedCount() {
+			return this.countWhere({where: {status: 'failure'}});
+		},
+
+		/**
 		* Returns features of a given `Runner` (identified by its `name`).
 		*
-		* @param {String} name - The `Runner` name.
-		* @returns {Array} Features of the given `Runner`.
+		* @param   {String} name - The `Runner` name.
+		* @returns {Array}  Features of the given `Runner`.
 		*/
 		findByRunner: function findByRunner(name) {
 			var models = this.filter(function(model) {

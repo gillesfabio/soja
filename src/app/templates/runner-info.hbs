@@ -1,14 +1,50 @@
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<h3 class="panel-title">Information</h3>
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Information</h3>
+			</div>
+			<div class="panel-body runner-info-body">
+				<div class="row">
+					<div class="col-xs-6 col-sm-6 col-md-6 runner-info-rundate runner-info">
+						<h2>{{#if runner.runDate}}{{dateFromNow runner.runDate}}{{else}}Never{{/if}}</h2>
+						<p>Last run</p>
+					</div>
+					<div class="col-xs-6 col-sm-6 col-md-6 runner-info-server-status runner-info">
+						<h2>
+							{{#if connected}}
+							<i class="icon-thumbs-up-alt"></i>
+							{{else}}
+							<i class="icon-thumbs-down-alt"></i>
+							{{/if}}
+						</h2>
+						<p>Server Status</p>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div class="panel-body">
-		<ul class="list-unstyled">
-			<li><i class="icon-time"></i> <strong>Last run:</strong> {{#if lastRunDate}}{{lastRunDate}}{{else}}never{{/if}}</li>
-			<li class="{{#if connected}}list-item-ok{{else}}list-item-failure{{/if}}">
-				<i class="{{#if connected}}icon-thumbs-up-alt{{else}}icon-thumbs-down-alt{{/if}}"></i>
-				<strong>Server:</strong> {{#if connected}}connected{{else}}not connected{{/if}}
-			</li>
-		</ul>
+	<div class="col-xs-12 col-sm-12 col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Summary</h3>
+			</div>
+			<div class="panel-body runner-summary-body">
+				<div class="row">
+					<div class="col-xs-4 col-sm-4 col-md-4 runner-summary-total runner-summary">
+						<h2 class="runner-summary-total-count">{{totalCount}}</h2>
+						<p>Total</p>
+					</div>
+					<div class="col-xs-4 col-sm-4 col-md-4 runner-summary-success runner-summary">
+						<h2 class="runner-summary-succeeded-count">{{succeededCount}}</h2>
+						<p>Succeeded</p>
+					</div>
+					<div class="col-xs-4 col-sm-4 col-md-4 runner-summary-failure runner-summary">
+						<h2 class="runner-summary-failed-count">{{failedCount}}</h2>
+						<p >Failed</p>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
