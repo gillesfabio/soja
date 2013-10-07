@@ -33,51 +33,52 @@ module.exports = function(grunt) {
 					outputStyle: 'expanded',
 					noLineComments: true,
 					force: true
-				},
-				files: {
-					'src/app/styles/dist/app.css': 'src/app/styles/app/scss'
 				}
-			}
-		},
-		watch: {
-			compass: {
-				files: [
-					'src/app/styles/sass/*.scss'
-				],
-				tasks: ['compass']
 			}
 		},
 		express: {
 			app: {
 				options: {
-					port         : 8888,
-					bases        : ['src', __dirname],
-					serverreload : true,
-					showStack    : true
+					port  : 8888,
+					bases : ['src', __dirname],
+					debug : true
 				}
 			},
 			test: {
 				options: {
-					port         : 9999,
-					server       : path.resolve('./test/server.js'),
-					livereload   : true,
-					serverreload : true,
-					showStack    : true
+					port   : 9999,
+					server : path.resolve('./test/server.js'),
+					debug  : true
 				}
+			}
+		},
+		watch: {
+			compass: {
+				files: ['src/app/styles/sass/*'],
+				tasks: ['compass']
 			}
 		}
 	});
 
+	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-compass');
-	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-express');
 	grunt.loadNpmTasks('grunt-shell');
 
-	grunt.registerTask('default', [
-		'jshint',
-		'compass',
-		'express:app'
+	grunt.registerTask('lint', [
+		'jshint'
+	]);
+
+	grunt.registerTask('build', [
+		'lint',
+		'compass'
+	]);
+
+	grunt.registerTask('server', [
+		'build',
+		'express:app',
+		'watch'
 	]);
 
 	grunt.registerTask('install', [
@@ -93,7 +94,7 @@ module.exports = function(grunt) {
 	]);
 
 	grunt.registerTask('test', [
-		'jshint',
+		'lint',
 		'express:test'
 	]);
 };

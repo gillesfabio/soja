@@ -6,14 +6,14 @@
   "license": "AGPL",
   "private": true,
   "dependencies": {
-    "express": "3.x",
-    "grunt": "0.4.x",
-    "grunt-contrib-watch": "0.5.x",
-    "grunt-express": "1.2.x",
-    "grunt-contrib-jshint": "0.6.x",
-    "grunt-contrib-compass": "0.5.x",
-    "grunt-shell": "0.4.x",
-    "ws": "0.4.x"
+    "express": ">=3.x",
+    "grunt": ">=0.4.x",
+    "grunt-contrib-watch": ">=0.5.x",
+    "grunt-express": ">=1.2.x",
+    "grunt-contrib-jshint": ">=0.6.x",
+    "grunt-contrib-compass": ">=0.6.x",
+    "grunt-shell": ">=0.4.x",
+    "ws": ">=0.4.x"
   },
   "devDependencies": {
     "jsdoc": "git://github.com/jsdoc3/jsdoc.git"
