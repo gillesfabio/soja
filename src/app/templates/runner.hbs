@@ -17,9 +17,9 @@
 							<i class="icon-{{#if_eq status compare="success"}}ok{{else}}remove{{/if_eq}}"></i> {{description}}
 							{{#if_eq status compare='failure'}}
 								{{#if reason}}
-									<ul class="feature-reason-detail">
-										{{#if reason.title}}<li>{{reason.title}}</li>{{/if}}
-										{{#if reason.help}}<li>{{reason.help}}</li>{{/if}}
+									<ul class="list-unstyled feature-reason-detail">
+										{{#if reason.title}}<li><strong>{{reason.title}}</strong></li>{{/if}}
+										{{#if reason.help}}<li><em>{{reason.help}}</em></li>{{/if}}
 									</ul>
 									{{#if reason.source}}
 										<pre class="runner-failure-reason">{{reason.source}}</pre>
