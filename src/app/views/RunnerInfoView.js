@@ -68,9 +68,9 @@ define(
 			this.listenTo(this.runners, 'change', this.render);
 			this.listenTo(this.features, 'change', this.render);
 			if (this.ws) {
-				this.ws.onopen    = this.onSocketOpen;
-				this.ws.onclose   = this.onSocketClose;
-				this.ws.onmessage = this.onSocketMessage;
+				this.ws.addEventListener('open', this.onSocketOpen);
+				this.ws.addEventListener('close', this.onSocketClose);
+				this.ws.addEventListener('message', this.onSocketMessage);
 			}
 			return this;
 		},
