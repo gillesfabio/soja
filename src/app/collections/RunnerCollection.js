@@ -9,6 +9,7 @@ define('app/collections/RunnerCollection', [
 ],
 /**
 * RunnerCollection
+*
 * @exports collections/RunnerCollection
 */
 function(RunnerModel, _, Backbone, logger) {
@@ -17,6 +18,7 @@ function(RunnerModel, _, Backbone, logger) {
 
 	/**
 	* RunnerCollection
+	*
 	* @class
 	* @extends Backbone.View
 	*/
@@ -24,12 +26,14 @@ function(RunnerModel, _, Backbone, logger) {
 
 		/**
 		* The model.
+		*
 		* @type {RunnerModel}
 		*/
 		model: RunnerModel,
 
 		/**
 		* The Backbone.LocalStorage instance.
+		*
 		* @type {Backbone.LocalStorage}
 		*/
 		localStorage: new Backbone.LocalStorage('watai:soja:runners'),
@@ -38,14 +42,14 @@ function(RunnerModel, _, Backbone, logger) {
 		* Orders by `runDate`.
 		*/
 		comparator: function(model) {
-			var date = new Date(model.get('runDate'));
-			return date.getTime();
+			return new Date(model.get('runDate')).getTime();
 		},
 
 		/**
 		* Takes a WebSocket message and create the given runner if it
 		* does not exists in the database. Returns the given model instance
 		* or `undefined` if an error occurred (the error is logged).
+		*
 		* @param {object} data - WebSocket message
 		* @returns {RunnerModel|null}
 		*/

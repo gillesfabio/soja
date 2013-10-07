@@ -6,11 +6,22 @@ define(function(require) {
 
 	var expect            = require('chai').expect;
 	var Backbone          = require('backbone');
+	var RunnerCollection  = require('app/collections/RunnerCollection');
 	var FeatureCollection = require('app/collections/FeatureCollection');
+	var fixtures          = require('app/fixtures');
 
 	var collection, model, runDate, data1, data2;
 
+	RunnerCollection.prototype.localStorage = new Backbone.LocalStorage('watai:soja:test:features');
 	FeatureCollection.prototype.localStorage = new Backbone.LocalStorage('watai:soja:test:features');
+
+	function dateComparator(a, b) {
+		a = new Date(a);
+		b = new Date(b);
+		if (a > b) return -1;
+		if (a < b) return 1;
+		return 0;
+	}
 
 	describe('Collections', function() {
 		describe('FeatureCollection', function() {
@@ -26,14 +37,14 @@ define(function(require) {
 				collection = new FeatureCollection();
 
 				data1 = {
-					runDate     : runDate,
+					runner      : {name: 'Runner', runDate: runDate},
 					status      : 'success',
 					description : 'This is a message',
 					reasons     : []
 				};
 
 				data2 = {
-					runDate      : runDate,
+					runner      : {name: 'Runner', runDate: runDate},
 					status       : 'success',
 					description  : 'This is another message',
 					reasons      : []
@@ -55,7 +66,47 @@ define(function(require) {
 				expect(model).to.be.ok;
 				expect(collection.models.length).to.equal(2);
 			});
+
+			it('should properly sort models', function() {
+				var sortedDates = [];
+				var modelsDates = [];
+				fixtures.create({namespace: 'test'});
+				collection.fetch();
+				collection.models.forEach(function(model) {
+					modelsDates.push(model.attributes.runner.runDate);
+				});
+				sortedDates = modelsDates.sort(dateComparator);
+				expect(modelsDates).to.equal(sortedDates);
+			});
+
+			it('should properly return latest models', function() {
+				var dates = [];
+				var lastDate, latest;
+				fixtures.create({namespace: 'test'});
+				collection.fetch();
+				collection.models.forEach(function(model) {
+					dates.push(model.attributes.runner.runDate);
+				});
+				dates    = dates.sort(dateComparator);
+				lastDate = dates[0];
+				latest   = collection.latest();
+				latest.models.forEach(function(model) {
+					expect(model.attributes.runner.runDate).to.equal(lastDate);
+				});
+			});
+
+			it('should properly return models for a given Runner', function() {
+				var runners = new RunnerCollection();
+				var randomRunner;
+				fixtures.create({namespace: 'test'});
+				collection.fetch();
+				runners.fetch();
+				randomRunner = runners.shuffle()[0].toJSON();
+				collection = collection.findByRunner(randomRunner.name);
+				collection.models.forEach(function(model) {
+					expect(model.attributes.runner.name).to.equal(randomRunner.name);
+				});
+			});
 		});
 	});
-
 });

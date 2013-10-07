@@ -6,6 +6,7 @@ define('app/models/RunnerModel', [
 ],
 /**
 * RunnerModel
+*
 * @exports models/RunnerModel
 */
 function(Backbone) {

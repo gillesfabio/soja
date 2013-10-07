@@ -61,6 +61,7 @@ require([
 ],
 /**
 * main (application's entry point)
+*
 * @exports main
 */
 function(Backbone, Router, config, fixtures, logger) {

@@ -1,6 +1,7 @@
 define(
 	/**
 	* Settings View.
+	*
 	* @exports views/SettingsView
 	*/
 	function(require) {
@@ -29,18 +30,21 @@ define(
 
 		/**
 		* The view container ID.
+		*
 		* @type {string}
 		*/
 		id: 'settings',
 
 		/**
 		* The view template.
+		*
 		* @type {string}
 		*/
 		template: Handlebars.compile(tpl),
 
 		/**
 		* The view events.
+		*
 		* @type {object}
 		*/
 		events: {
@@ -49,6 +53,7 @@ define(
 
 		/**
 		* Initilizes view.
+		*
 		* @param {object} options - The view options.
 		*/
 		initialize: function initialize(options) {
@@ -62,6 +67,7 @@ define(
 
 		/**
 		* Initializes view collections.
+		*
 		* @private
 		*/
 		initCollections: function initCollections() {

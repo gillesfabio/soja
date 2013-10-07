@@ -3,6 +3,7 @@
 define(
 	/**
 	* Stats View
+	*
 	* @exports views/StatsView
 	*/
 	function(require) {
@@ -27,6 +28,7 @@ define(
 
 		/**
 		* The view template.
+		*
 		* @type {String}
 		*/
 		template: Handlebars.compile(tpl),

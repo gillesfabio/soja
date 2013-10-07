@@ -26,7 +26,7 @@ wss.on('connection', function(ws) {
 	for (var i = 0; i < 4; i++) {
 		ws.send(JSON.stringify({
 			type        : 'watai:websocket:feature',
-			runDate     : runDate,
+			runner      : {name: 'Runner', runDate: runDate},
 			status      : 'success',
 			description : 'This is feature ' + '#' + (i + 1),
 			reasons     : []

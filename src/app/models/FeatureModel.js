@@ -6,6 +6,7 @@ define('app/models/FeatureModel', [
 ],
 /**
 * FeatureModel
+*
 * @exports models/FeatureModel
 */
 function(Backbone) {

@@ -3,6 +3,7 @@
 define(
 	/**
 	* Runner Info View
+	*
 	* @exports views/RunnerInfoView
 	*/
 	function(require) {
@@ -29,6 +30,7 @@ define(
 
 		/**
 		* The view template.
+		*
 		* @type {String}
 		*/
 		template: Handlebars.compile(tpl),

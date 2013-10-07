@@ -9,6 +9,7 @@ define('app/collections/FeatureCollection', [
 ],
 /**
 * FeatureCollection
+*
 * @exports collections/FeatureCollection
 */
 function(FeatureModel, _, Backbone, logger) {
@@ -23,45 +24,70 @@ function(FeatureModel, _, Backbone, logger) {
 
 		/**
 		* The model.
+		*
 		* @type {FeatureModel}
 		*/
 		model: FeatureModel,
 
 		/**
 		* The Backbone.LocalStorage instance.
+		*
 		* @type {Backbone.LocalStorage}
 		*/
 		localStorage: new Backbone.LocalStorage('watai:soja:features'),
 
 		/**
-		* Orders by `runDate`.
+		* Orders by `runner.runDate`.
 		*/
 		comparator: function comparator(model) {
-			return model.get('runDate');
+			if (model.attributes.runner && model.attributes.runner.runDate) {
+				return new Date(model.attributes.runner.runDate).getTime();
+			}
 		},
 
 		/**
 		* Only returns last run features.
+		*
+		* @returns {Array} Latest features (based on `runner.runDate` date).
 		*/
 		latest: function latest() {
-			return new FeatureCollection(this.where({runDate: this.last().attributes.runDate}));
+			var last = this.last();
+			var models = this.filter(function(model) {
+				return (model.attributes.runner.name === last.attributes.runner.name &&
+						model.attributes.runner.runDate === last.attributes.runner.runDate);
+			});
+			return new FeatureCollection(models);
+		},
+
+		/**
+		* Returns features of a given `Runner` (identified by its `name`).
+		*
+		* @param {String} name - The `Runner` name.
+		* @returns {Array} Features of the given `Runner`.
+		*/
+		findByRunner: function findByRunner(name) {
+			var models = this.filter(function(model) {
+				return model.attributes.runner.name === name;
+			});
+			return new FeatureCollection(models);
 		},
 
 		/**
 		* Takes a WebSocket message and create the given feature if it
 		* does not exists in the database. Returns the given model instance
 		* or `undefined` if an error occurred (the error is logged).
+		*
 		* @param {object} data - WebSocket message
 		* @returns {FeatureModel|null}
 		*/
 		createUnique: function createUnique(data) {
 			var exists, feature;
 			data = _.extend({
-				runDate     : null,
+				runner      : {name: null, runDate: null},
 				status      : null,
 				description : null
 			}, data);
-			if (!data.runDate && !data.status && !data.description) {
+			if (!data.runner.name && !data.runner.runDate && !data.status && !data.description) {
 				logger.warn("Something is wrong with: " + JSON.stringify(data));
 				return;
 			}

@@ -20,6 +20,7 @@ define(function(require) {
 
 	/**
 	* Helper to generate a random date.
+	*
 	* @returns {Date} The random date.
 	*/
 	function randomDate() {
@@ -30,6 +31,7 @@ define(function(require) {
 
 	/**
 	* Creates sample runners.
+	*
 	* @returns {Array} Created runners.
 	*/
 	function createRunners() {
@@ -49,6 +51,7 @@ define(function(require) {
 
 	/**
 	* Creates sample features.
+	*
 	* @returns {Array} Created features.
 	*/
 	function createFeatures() {
@@ -59,7 +62,7 @@ define(function(require) {
 		runnerModels.forEach(function(runner) {
 			for (i = 0; i < NB_FEATURES; i++) {
 				feature = {
-					runDate     : runner.attributes.runDate,
+					runner      : {name: runner.attributes.name, runDate: runner.attributes.runDate},
 					description : _s.sprintf('Feature #%d', i + 1),
 					status      : statuses[Math.floor(Math.random() * statuses.length)]
 				};

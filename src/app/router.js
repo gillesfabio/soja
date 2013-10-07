@@ -12,6 +12,7 @@ define([
 ],
 /**
 * Router
+*
 * @exports Router
 */
 function(Backbone, RunnerView, SettingsView, StatsView, RunnerCollection, FeatureCollection, config, logger) {
@@ -26,6 +27,7 @@ function(Backbone, RunnerView, SettingsView, StatsView, RunnerCollection, Featur
 
 		/**
 		* The application's routes.
+		*
 		* @type {object}
 		*/
 		routes: {

@@ -1,6 +1,7 @@
 define(
 	/**
 	* Runner View.
+	*
 	* @exports views/RunnerView
 	*/
 	function(require) {
@@ -35,12 +36,14 @@ define(
 
 		/**
 		* The view template.
+		*
 		* @type {string}
 		*/
 		template: Handlebars.compile(tpl),
 
 		/**
 		* Initializes view.
+		*
 		* @param {object} options - View Options
 		*/
 		initialize: function initialize(options) {
@@ -61,6 +64,7 @@ define(
 
 		/**
 		* Initializes view collections.
+		*
 		* @private
 		*/
 		initCollections: function initCollections() {
@@ -77,6 +81,7 @@ define(
 
 		/**
 		* Initializes view's subviews.
+		*
 		* @private
 		*/
 		initSubviews: function initSubviews() {
@@ -89,6 +94,7 @@ define(
 
 		/**
 		* Initializes view events.
+		*
 		* @private
 		*/
 		initEvents: function initEvents() {
@@ -105,6 +111,7 @@ define(
 
 		/**
 		* Fetches view collections data.
+		*
 		*/
 		fetch: function fetch() {
 			logger.debug('RunnerView: fetch collections data');
@@ -115,6 +122,7 @@ define(
 
 		/**
 		* Resets collections
+		*
 		* @private
 		*/
 		reset: function clear() {
@@ -127,6 +135,7 @@ define(
 
 		/**
 		* WebSocket "onopen" event callback.
+		*
 		* @private
 		*/
 		onSocketOpen: function onSocketOpen() {
@@ -139,6 +148,7 @@ define(
 
 		/**
 		* WebSocket "onclose" event callback.
+		*
 		* @private
 		*/
 		onSocketClose: function onSocketClose() {
@@ -150,6 +160,7 @@ define(
 
 		/**
 		* WebSocket "onmessage" event callback.
+		*
 		* @param {object} event - The event
 		* @private
 		*/
@@ -181,6 +192,7 @@ define(
 
 		/**
 		* Closes the WebSocket server connection.
+		*
 		* @private
 		*/
 		closeConnection: function closeConnection() {
@@ -215,6 +227,7 @@ define(
 		/**
 		* Returns the current runner model object (`toJSON` is called, so it's
 		* not a runner model instance) or `null` if no runner has been created yet.
+		*
 		* @returns {Object|null}
 		*/
 		getCurrentRunner: function getCurrentRunner() {
@@ -230,6 +243,7 @@ define(
 		* Returns the latest features (of the last run) as an array of objects
 		* (`toJSON` is called, so it's not a `FeatureCollection` instance) or
 		* an empty array if no feature has been created yet.
+		*
 		* @returns {Array}
 		*/
 		getLatestFeatures: function getLatestFeatures() {
