@@ -4,14 +4,12 @@ define(function(require) {
 
 	'use strict';
 
-	// Vendor
-	var expect   = require('chai').expect;
-	var Backbone = require('backbone');
-
-	// App
+	var expect            = require('chai').expect;
+	var Backbone          = require('backbone');
 	var SettingsView      = require('app/views/SettingsView');
 	var RunnerCollection  = require('app/collections/RunnerCollection');
 	var FeatureCollection = require('app/collections/FeatureCollection');
+	var helpers           = require('helpers');
 
 	RunnerCollection.prototype.localStorage  = new Backbone.LocalStorage('watai:soja:test:runners');
 	FeatureCollection.prototype.localStorage = new Backbone.LocalStorage('watai:soja:test:features');
@@ -21,14 +19,12 @@ define(function(require) {
 
 	var view, output;
 
-
 	describe('Views', function() {
 		describe('SettingsView', function() {
 
 			beforeEach(function() {
 				$('#fixtures').empty();
-				runners.localStorage._clear();
-				features.localStorage._clear();
+				helpers.clean([features, runners]);
 				view = new SettingsView({runners: runners, features: features});
 				view.fetch();
 			});

@@ -11,6 +11,7 @@ define(function(require) {
 	var RunnerCollection  = require('app/collections/RunnerCollection');
 	var FeatureCollection = require('app/collections/FeatureCollection');
 	var fixtures          = require('app/fixtures');
+	var helpers           = require('helpers');
 
 	var server = 'ws://localhost:9999';
 
@@ -22,27 +23,12 @@ define(function(require) {
 	runners  = new RunnerCollection();
 	features = new FeatureCollection();
 
-	function clean() {
-		features.reset();
-		features.localStorage._clear();
-		runners.reset();
-		runners.localStorage._clear();
-	}
-
-	function dateComparator(a, b) {
-		a = new Date(a);
-		b = new Date(b);
-		if (a > b) return -1;
-		if (a < b) return 1;
-		return 0;
-	}
-
 	describe('Views', function() {
 		describe('RunnerView', function() {
 
 			beforeEach(function() {
 				$('#fixtures').empty();
-				clean();
+				helpers.clean([features, runners]);
 				ws = new WebSocket(server);
 				view = new RunnerView({
 					ws       : ws,
@@ -103,7 +89,7 @@ define(function(require) {
 				setTimeout(function() {
 					var dates    = [];
 					var lastDate = null;
-					clean();
+					helpers.clean([features, runners]);
 					expect(view.runners.size()).to.equal(0);
 					expect(view.features.size()).to.equal(0);
 					fixtures.create({namespace: 'test'});
@@ -115,7 +101,7 @@ define(function(require) {
 					view.runners.models.forEach(function(model) {
 						dates.push(model.attributes.runDate);
 					});
-					dates = dates.sort(dateComparator);
+					dates = dates.sort(helpers.dateComparator);
 					lastDate = dates[0];
 					expect(view.getCurrentRunner().runDate).to.equal(lastDate);
 					done();
@@ -128,7 +114,7 @@ define(function(require) {
 					var dates          = [];
 					var lastDate       = null;
 					var latestFeatures = [];
-					clean();
+					helpers.clean([runners, features]);
 					expect(view.runners.size()).to.equal(0);
 					expect(view.features.size()).to.equal(0);
 					fixtures.create({namespace: 'test'});
@@ -140,7 +126,7 @@ define(function(require) {
 					view.features.models.forEach(function(model) {
 						dates.push(model.attributes.runDate);
 					});
-					dates = dates.sort(dateComparator);
+					dates = dates.sort(helpers.dateComparator);
 					lastDate = dates[0];
 					latestFeatures = view.getLatestFeatures();
 					latestFeatures.forEach(function(feature) {

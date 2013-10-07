@@ -8,25 +8,18 @@ define(function(require) {
 	var Backbone         = require('backbone');
 	var RunnerCollection = require('app/collections/RunnerCollection');
 	var fixtures         = require('app/fixtures');
+	var helpers          = require('helpers');
 
 	var collection, runDate, model, data1, data2;
 
 	RunnerCollection.prototype.localStorage = new Backbone.LocalStorage('watai:soja:test:runners');
-
-	function dateComparator(a, b) {
-		a = new Date(a);
-		b = new Date(b);
-		if (a > b) return -1;
-		if (a < b) return 1;
-		return 0;
-	}
 
 	describe('Collections', function() {
 		describe('RunnerCollection', function() {
 
 			beforeEach(function() {
 				collection = new RunnerCollection();
-				collection.localStorage._clear();
+				helpers.clean([collection]);
 				runDate = new Date().toISOString();
 			});
 
@@ -65,7 +58,7 @@ define(function(require) {
 				collection.models.forEach(function(model) {
 					modelsDates.push(model.attributes.runDate);
 				});
-				sortedDates = modelsDates.sort(dateComparator);
+				sortedDates = modelsDates.sort(helpers.dateComparator);
 				expect(modelsDates).to.equal(sortedDates);
 			});
 		});

@@ -9,26 +9,19 @@ define(function(require) {
 	var RunnerCollection  = require('app/collections/RunnerCollection');
 	var FeatureCollection = require('app/collections/FeatureCollection');
 	var fixtures          = require('app/fixtures');
+	var helpers           = require('helpers');
 
 	var collection, model, runDate, data1, data2;
 
 	RunnerCollection.prototype.localStorage = new Backbone.LocalStorage('watai:soja:test:features');
 	FeatureCollection.prototype.localStorage = new Backbone.LocalStorage('watai:soja:test:features');
 
-	function dateComparator(a, b) {
-		a = new Date(a);
-		b = new Date(b);
-		if (a > b) return -1;
-		if (a < b) return 1;
-		return 0;
-	}
-
 	describe('Collections', function() {
 		describe('FeatureCollection', function() {
 
 			beforeEach(function() {
 				collection = new FeatureCollection();
-				collection.localStorage._clear();
+				helpers.clean([collection]);
 				runDate = new Date().toISOString();
 			});
 
@@ -75,7 +68,7 @@ define(function(require) {
 				collection.models.forEach(function(model) {
 					modelsDates.push(model.attributes.runner.runDate);
 				});
-				sortedDates = modelsDates.sort(dateComparator);
+				sortedDates = modelsDates.sort(helpers.dateComparator);
 				expect(modelsDates).to.equal(sortedDates);
 			});
 
@@ -87,7 +80,7 @@ define(function(require) {
 				collection.models.forEach(function(model) {
 					dates.push(model.attributes.runner.runDate);
 				});
-				dates    = dates.sort(dateComparator);
+				dates    = dates.sort(helpers.dateComparator);
 				lastDate = dates[0];
 				latest   = collection.latest();
 				latest.models.forEach(function(model) {
