@@ -2,7 +2,7 @@ define([
 
 	'backbone',
 	'app/views/RunnerView',
-	'app/views/SettingsView',
+	'app/views/DatabaseView',
 	'app/views/StatsView',
 	'app/collections/RunnerCollection',
 	'app/collections/FeatureCollection',
@@ -15,7 +15,7 @@ define([
 *
 * @exports Router
 */
-function(Backbone, RunnerView, SettingsView, StatsView, RunnerCollection, FeatureCollection, config, logger) {
+function(Backbone, RunnerView, DatabaseView, StatsView, RunnerCollection, FeatureCollection, config, logger) {
 
 	'use strict';
 
@@ -32,7 +32,7 @@ function(Backbone, RunnerView, SettingsView, StatsView, RunnerCollection, Featur
 		*/
 		routes: {
 			''          : 'runner',
-			'settings'  : 'settings',
+			'database'  : 'database',
 			'stats'     : 'stats'
 		},
 
@@ -53,11 +53,11 @@ function(Backbone, RunnerView, SettingsView, StatsView, RunnerCollection, Featur
 		},
 
 		/**
-		* The settings action.
+		* The database action.
 		*/
-		settings: function settings() {
-			logger.info('Router: settings');
-			var view = new SettingsView({
+		database: function settings() {
+			logger.info('Router: database');
+			var view = new DatabaseView({
 				runners  : new RunnerCollection(),
 				features : new FeatureCollection()
 			});

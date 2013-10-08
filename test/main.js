@@ -76,7 +76,7 @@ require([
 		'collections/FeatureCollectionTest',
 		'views/RunnerViewTest',
 		'views/RunnerInfoViewTest',
-		'views/SettingsViewTest'
+		'views/DatabaseViewTest'
 
 	], function() {
 

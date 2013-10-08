@@ -131,6 +131,7 @@ define(
 		*/
 		reset: function clear() {
 			logger.debug('RunnerView: reset collections');
+			this.runners.reset();
 			this.features.reset();
 			return this;
 		},

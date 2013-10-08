@@ -1,8 +1,8 @@
 define(
 	/**
-	* Settings View.
+	* Database View.
 	*
-	* @exports views/SettingsView
+	* @exports views/DatabaseView
 	*/
 	function(require) {
 
@@ -12,7 +12,7 @@ define(
 	var Backbone   = require('backbone');
 	var Handlebars = require('handlebars');
 	var logger     = require('loglevel');
-	var tpl        = require('text!app/templates/settings.hbs');
+	var tpl        = require('text!app/templates/database.hbs');
 	var bootstrap  = require('bootstrap');
 
 	var RunnerCollection  = require('app/collections/RunnerCollection');
@@ -26,14 +26,14 @@ define(
 	* @extends Backbone.View
 	* @property {object} data - View's template context data.
 	*/
-	var SettingsView = Backbone.View.extend(/** @lends module:views/SettingsView~SettingsView.prototype */{
+	var DatabaseView = Backbone.View.extend(/** @lends module:views/DatabaseView~DatabaseView.prototype */{
 
 		/**
 		* The view container ID.
 		*
 		* @type {string}
 		*/
-		id: 'settings',
+		id: 'database',
 
 		/**
 		* The view template.
@@ -71,16 +71,16 @@ define(
 		* @private
 		*/
 		initCollections: function initCollections() {
-			logger.debug('SettingsView: initialize collections');
+			logger.debug('DatabaseView: initialize collections');
 			this.collections = [];
 			this.runners = this.options.runners;
 			if (this.runners && this.runners instanceof RunnerCollection) {
-				logger.debug('SettingsView: added runners (RunnerCollection) to collections');
+				logger.debug('DatabaseView: added runners (RunnerCollection) to collections');
 				this.collections.push(this.runners);
 			}
 			this.features = this.options.features;
 			if (this.features && this.features instanceof FeatureCollection) {
-				logger.debug('SettingsView: added features (FeatureCollection) to collections');
+				logger.debug('DatabaseView: added features (FeatureCollection) to collections');
 				this.collections.push(this.features);
 			}
 			return this;
@@ -98,7 +98,7 @@ define(
 		* Flushes the application database (then renders the view).
 		*/
 		flushDatabase: function flushDatabase() {
-			logger.debug('SettingsView: flush database');
+			logger.debug('DatabaseView: flush database');
 			this.collections.forEach(function(collection) {
 				collection.reset();
 				collection.localStorage._clear();
@@ -115,13 +115,13 @@ define(
 		* Renders the view.
 		*/
 		render: function render() {
-			logger.debug('SettingsView: render');
+			logger.debug('DatabaseView: render');
 			$(this.el).html(this.template({feedback: this.feedback}));
 			this.feedback = null;
 			return this;
 		}
 	});
 
-	return SettingsView;
+	return DatabaseView;
 
 });

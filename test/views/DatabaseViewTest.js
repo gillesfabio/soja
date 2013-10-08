@@ -6,7 +6,7 @@ define(function(require) {
 
 	var expect            = require('chai').expect;
 	var Backbone          = require('backbone');
-	var SettingsView      = require('app/views/SettingsView');
+	var DatabaseView      = require('app/views/DatabaseView');
 	var RunnerCollection  = require('app/collections/RunnerCollection');
 	var FeatureCollection = require('app/collections/FeatureCollection');
 	var helpers           = require('helpers');
@@ -20,12 +20,12 @@ define(function(require) {
 	var view, output;
 
 	describe('Views', function() {
-		describe('SettingsView', function() {
+		describe('DatabaseView', function() {
 
 			beforeEach(function() {
 				$('#fixtures').empty();
 				helpers.clean([features, runners]);
-				view = new SettingsView({runners: runners, features: features});
+				view = new DatabaseView({runners: runners, features: features});
 				view.fetch();
 			});
 
