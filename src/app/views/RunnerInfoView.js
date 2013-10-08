@@ -114,8 +114,8 @@ define(
 				connected      : this.connected,
 				runner         : this.runners.last() ? this.runners.last().toJSON() : null,
 				totalCount     : this.features.latest().size(),
-				succeededCount : this.features.succeededCount({latest: true}),
-				failedCount    : this.features.failedCount({latest: true})
+				succeededCount : this.features.latest().succeededCount(),
+				failedCount    : this.features.latest().failedCount()
 			}));
 			return this;
 		}
