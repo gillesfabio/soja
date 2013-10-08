@@ -33,7 +33,8 @@
     "handlebars": "1.x",
     "handlebars-helpers": "1.x",
     "d3": "3.x",
-    "nvd3": "1.1.12-beta"
+    "nvd3": "1.1.12-beta",
+    "jszip": "https://github.com/Stuk/jszip.git#~1.0.1"
   },
   "devDependencies": {
     "mocha": "1.x",

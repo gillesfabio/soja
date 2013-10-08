@@ -40,7 +40,7 @@ define(function(require) {
 				}
 				expect(runners.models.length).to.equal(100);
 				expect(features.models.length).to.equal(100);
-				view.flushDatabase();
+				view.flush();
 				expect(runners.models.length).to.equal(0);
 				expect(features.models.length).to.equal(0);
 			});

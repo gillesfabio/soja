@@ -17,7 +17,9 @@ requirejs.config({
 		'handlebars'			: 'vendor/handlebars/handlebars',
 		'handlebars-helpers'	: 'vendor/handlebars-helpers/helpers',
 		'd3'					: 'vendor/d3/d3',
-		'nvd3'					: 'vendor/nvd3/nv.d3'
+		'nvd3'					: 'vendor/nvd3/nv.d3',
+		'jszip'                 : 'vendor/jszip/jszip',
+		'jszip-load'            : 'vendor/jszip/jszip-load'
 	},
 
 	shim: {
@@ -50,6 +52,13 @@ requirejs.config({
 		'nvd3': {
 			deps: ['d3'],
 			exports: 'nv'
+		},
+		'jszip': {
+			exports: 'JSZip'
+		},
+		'jszip-load': {
+			exports: 'JSZip',
+			deps: ['jszip']
 		}
 	}
 });
