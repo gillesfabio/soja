@@ -1,19 +1,35 @@
-$success-foreground: #468847;
-$success-background: #dff0d8;
-$failure-foreground: #b94a48;
-$failure-background: #f2dede;
-$quiet-foreground: #909090;
+/* Variables: colors
+---------------------------------------------------------------------------- */
+$success-foreground : #468847;
+$success-background : #dff0d8;
+$failure-foreground : #b94a48;
+$failure-background : #f2dede;
+$quiet-foreground   : #909090;
 
+/* General
+---------------------------------------------------------------------------- */
 html {
 	-webkit-font-smoothing: antialiased;
 }
+
 body {
 	font-family: 'Lato', sans-serif;
 }
+
+/* Bootstrap navbar
+---------------------------------------------------------------------------- */
 .navbar-brand {
 	font-weight: bold;
 }
 
+/* Bootstrap panels
+---------------------------------------------------------------------------- */
+.panel-title {
+	font-weight: 300;
+}
+
+/* Tests
+---------------------------------------------------------------------------- */
 .list-item-ok {
 	color: #468847;
 }
@@ -55,10 +71,27 @@ body {
 	margin-bottom: 10px;
 }
 
-.panel-title {
-	font-weight: 300;
+/* Settings
+---------------------------------------------------------------------------- */
+.sj-setting-label, .sj-setting-desc {
+	margin: 0;
+	padding: 0;
+	line-height: 22px;
 }
 
+.sj-setting-label {
+	font-weight: 700;
+	color: #444;
+}
+
+.sj-setting-desc {
+	font-weight: 300;
+	padding-bottom: 10px;
+	color: $quiet-foreground;
+}
+
+/* Status
+---------------------------------------------------------------------------- */
 #runner-info {
 
 	.panel-body .row, .runner-info,
@@ -130,26 +163,24 @@ body {
 	}
 }
 
-.progress {
-	display: none;
-}
-
+/* Bootstrap extra
+---------------------------------------------------------------------------- */
 .btn-file {
-	position: relative;
-	overflow: hidden;
+	position : relative;
+	overflow : hidden;
 }
 
 .btn-file input[type=file] {
-	position: absolute;
-	top: 0;
-	right: 0;
-	min-width: 100%;
-	min-height: 100%;
-	font-size: 999px;
-	text-align: right;
-	filter: alpha(opacity=0);
-	opacity: 0;
-	background: red;
-	cursor: inherit;
-	display: block;
+	position	: absolute;
+	top			: 0;
+	right		: 0;
+	min-width	: 100%;
+	min-height	: 100%;
+	font-size	: 999px;
+	text-align	: right;
+	filter		: alpha(opacity=0);
+	opacity		: 0;
+	background	: red;
+	cursor		: inherit;
+	display		: block;
 }

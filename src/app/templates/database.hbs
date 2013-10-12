@@ -5,51 +5,54 @@
 </div>
 {{/if}}
 
-<div class="panel panel-default">
+<div class="panel panel-danger" id="sj-database-flush">
 	<div class="panel-heading">
 		<h3 class="panel-title">Flush</h3>
 		</div>
 		<div class="panel-body">
 			<div class="row">
-				<div class="col-md-10">
-					<p>Once you flush your local database, there is no going back. Please be certain.</p>
+				<div class="col-md-10 sj-database-description" id="sj-database-flush-description">
+					<p class="sj-setting-label">Once you flush your local database, there is no going back. Please be certain.</p>
+					<p class="sj-setting-desc">This operation will permanently delete your database.</p>
 				</div>
-				<div class="col-md-2 text-center">
-					<button type="button" class="btn btn-danger flush">Flush</button>
+				<div class="col-md-2 text-center sj-database-actions" id="sj-database-flush-actions">
+					<button type="button" class="btn btn-block btn-danger flush">Flush</button>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
-<div class="panel panel-default">
+<div class="panel panel-info" id="sj-database-export">
 	<div class="panel-heading">
 		<h3 class="panel-title">Export</h3>
 		</div>
 		<div class="panel-body">
 			<div class="row">
-				<div class="col-md-10">
-					<p>Export the Soja database.</p>
+				<div class="col-md-10 sj-database-description" id="sj-database-export-description">
+					<p class="sj-setting-label">Export the Soja database.</p>
+					<p class="sj-setting-desc">Generates a zip archive with current database data.</p>
 				</div>
-				<div class="col-md-2 text-center">
-					<button type="button" class="btn btn-default dump">Export</button>
+				<div class="col-md-2 text-center sj-database-actions" id="sj-database-export-actions">
+					<button type="button" class="btn btn-block btn-default dump">Create Zip</button>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
-<div class="panel panel-default">
+<div class="panel panel-info" id="sj-database-import">
 	<div class="panel-heading">
 		<h3 class="panel-title">Import</h3>
 		</div>
 		<div class="panel-body">
 			<div class="row">
-				<div class="col-md-10">
-					<p>Import a previous export into the Soja database.</p>
+				<div class="col-md-10 sj-database-description" id="sj-database-import-description">
+					<p class="sj-setting-label">Import a previous export into the Soja database.</p>
+					<p class="sj-setting-desc">Give it the previously exported ZIP archive.</p>
 				</div>
-				<div class="col-md-2 text-center">
-					<span class="btn btn-default btn-file">
+				<div class="col-md-2 text-center sj-database-actions" id="sj-database-import-actions">
+					<span class="btn btn-block btn-default btn-file">
 						Import <input type="file" class="load">
 					</span>
 				</div>
