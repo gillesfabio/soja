@@ -10,6 +10,7 @@ define(function(require) {
 	var RunnerCollection  = require('app/collections/RunnerCollection');
 	var FeatureCollection = require('app/collections/FeatureCollection');
 	var helpers           = require('helpers');
+	var fixtures          = require('fixtures');
 
 	RunnerCollection.prototype.localStorage  = new Backbone.LocalStorage('watai:soja:test:runners');
 	FeatureCollection.prototype.localStorage = new Backbone.LocalStorage('watai:soja:test:features');
@@ -43,6 +44,17 @@ define(function(require) {
 				view.flush();
 				expect(runners.models.length).to.equal(0);
 				expect(features.models.length).to.equal(0);
+			});
+
+			it('should properly export the database', function() {
+				fixtures.create({namespace: 'test'});
+				runners.fetch();
+				features.fetch();
+
+			});
+
+			it('should properly import a previous database export', function() {
+
 			});
 
 			it('should properly show the feedback message', function() {

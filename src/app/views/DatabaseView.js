@@ -125,9 +125,29 @@ define(
 		*/
 		dump: function dump() {
 			logger.debug('DatabaseView: dump');
+			this.createZip(function(blob) {
+				var filename = _s.sprintf('soja-db-%s.zip', moment().format('YYYY-MM-DD'));
+				var href = window.URL.createObjectURL(blob);
+				var link = _s.sprintf('<a href="%s" download="%s">%s</a>', href, filename, filename);
+				$('#sj-database-export-actions button', this.el).fadeOut(600, function() {
+					$('#sj-database-export-actions', this.el).html(link).fadeIn();
+				}.bind(this));
+				this.feedback = {type: 'success', message: 'Successfully exported the database.'};
+				//this.render();
+			}.bind(this));
+			return this;
+		},
+
+		/**
+		* Creates the ZIP archive with the database dump.
+		*
+		* @param {Function} callback - The callback to returns when blob has been created.
+		*/
+		createZip: function createZip(callback) {
+			logger.debug('DatabaseView: createZip');
 			var zip  = new JSZip();
 			var data = {};
-			var download;
+			var blob;
 			this.runners.fetch({
 				success: function() {
 					this.features.fetch({
@@ -135,15 +155,14 @@ define(
 							data.runners = this.runners.models;
 							data.features = this.features.models;
 							zip.file(DUMP_FILENAME, JSON.stringify(data));
-							download = zip.generate();
-							window.location.href="data:application/zip;base64," + download;
-							this.feedback = {type: 'success', message: 'Successfully exported the database.'};
-							this.render();
+							blob = zip.generate({type: 'blob'});
+							callback(blob);
 						}.bind(this)
 					});
 				}.bind(this)
 			});
 			return this;
+
 		},
 
 		/**
@@ -159,7 +178,7 @@ define(
 				return this;
 			}
 			reader.onload = this.readerOnLoad.bind(this);
-			reader.readAsArrayBuffer(file);
+			reader.readAsBinaryString(file);
 			return this;
 		},
 
@@ -171,10 +190,11 @@ define(
 		*/
 		readerOnLoad: function readerOnLoad(event) {
 			logger.debug('DatabaseView: readerOnLoad');
-			var zip = new JSZip(event.target.result);
+			var zip = new JSZip();
 			var data;
+			zip.load(event.target.result);
 			if (zip.files && zip.files.hasOwnProperty(DUMP_FILENAME)) {
-				data = JSON.parse(zip.files[DUMP_FILENAME].data);
+				data = JSON.parse(zip.files[DUMP_FILENAME].asText());
 				this.restore(data);
 			}
 			return this;
