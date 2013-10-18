@@ -18,7 +18,8 @@ requirejs.config({
 		'nvd3'					: 'vendor/nvd3/nv.d3',
 		'jszip'                 : 'vendor/jszip/jszip',
 		'jszip-load'            : 'vendor/jszip/jszip-load',
-		'jszip-inflate'         : 'vendor/jszip/jszip-inflate'
+		'jszip-inflate'         : 'vendor/jszip/jszip-inflate',
+		'async'                 : 'vendor/async/lib/async'
 	},
 
 	shim: {
@@ -59,6 +60,9 @@ requirejs.config({
 		'jszip-inflate': {
 			exports: 'JSZip',
 			deps: ['jszip']
+		},
+		'async': {
+			exports: 'async'
 		}
 	}
 });

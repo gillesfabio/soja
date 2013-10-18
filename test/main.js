@@ -19,7 +19,9 @@ requirejs.config({
 		'd3'					: 'vendor/d3/d3',
 		'nvd3'					: 'vendor/nvd3/nv.d3',
 		'jszip'                 : 'vendor/jszip/jszip',
-		'jszip-load'            : 'vendor/jszip/jszip-load'
+		'jszip-load'            : 'vendor/jszip/jszip-load',
+		'jszip-inflate'         : 'vendor/jszip/jszip-inflate',
+		'async'                 : 'vendor/async/lib/async'
 	},
 
 	shim: {
@@ -59,6 +61,13 @@ requirejs.config({
 		'jszip-load': {
 			exports: 'JSZip',
 			deps: ['jszip']
+		},
+		'jszip-inflate': {
+			exports: 'JSZip',
+			deps: ['jszip']
+		},
+		'async': {
+			exports: 'async'
 		}
 	}
 });
@@ -81,10 +90,10 @@ require([
 		'handlebars-helpers',
 		'bootstrap',
 
-		'collections/RunnerCollectionTest',
-		'collections/FeatureCollectionTest',
-		'views/RunnerViewTest',
-		'views/RunnerInfoViewTest',
+		//'collections/RunnerCollectionTest',
+		//'collections/FeatureCollectionTest',
+		//'views/RunnerViewTest',
+		//'views/RunnerInfoViewTest',
 		'views/DatabaseViewTest'
 
 	], function() {

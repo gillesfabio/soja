@@ -34,7 +34,8 @@
     "handlebars-helpers": "1.x",
     "d3": "3.x",
     "nvd3": "1.1.12-beta",
-    "jszip": "https://github.com/Stuk/jszip.git#~1.0.1"
+    "jszip": "https://github.com/Stuk/jszip.git#~1.0.1",
+    "async": "0.2.x"
   },
   "devDependencies": {
     "mocha": "1.x",
