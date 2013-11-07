@@ -16,8 +16,6 @@ requirejs.config({
 		'loglevel'				: 'vendor/loglevel/dist/loglevel',
 		'handlebars'			: 'vendor/handlebars/handlebars',
 		'handlebars-helpers'	: 'vendor/handlebars-helpers/helpers',
-		'd3'					: 'vendor/d3/d3',
-		'nvd3'					: 'vendor/nvd3/nv.d3',
 		'jszip'                 : 'vendor/jszip/jszip',
 		'jszip-load'            : 'vendor/jszip/jszip-load',
 		'jszip-inflate'         : 'vendor/jszip/jszip-inflate',
@@ -47,13 +45,6 @@ requirejs.config({
 		'handlebars-helpers': {
 			deps: ['handlebars'],
 			exports: 'Handlebars'
-		},
-		'd3': {
-			exports: 'd3'
-		},
-		'nvd3': {
-			deps: ['d3'],
-			exports: 'nv'
 		},
 		'jszip': {
 			exports: 'JSZip'
@@ -90,10 +81,10 @@ require([
 		'handlebars-helpers',
 		'bootstrap',
 
-		//'collections/RunnerCollectionTest',
-		//'collections/FeatureCollectionTest',
-		//'views/RunnerViewTest',
-		//'views/RunnerInfoViewTest',
+		'collections/RunnerCollectionTest',
+		'collections/FeatureCollectionTest',
+		'views/RunnerViewTest',
+		'views/RunnerInfoViewTest',
 		'views/DatabaseViewTest'
 
 	], function() {
