@@ -60,7 +60,7 @@ Done.
 
 Run the server:
 
-	grunt
+	grunt server
 
 Launch your favorite browser and go to `http://localhost:8888`:
 
