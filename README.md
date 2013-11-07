@@ -46,7 +46,7 @@ Once the OS X Command Line Tools or Xcode are installed, open a terminal
 	brew install git node
 
 	# Install Grunt and Bower
-	sudo npm install -g grunt bower
+	sudo npm install -g grunt-cli bower
 
 Now, you can clone the Soja repository and install the stack:
 
