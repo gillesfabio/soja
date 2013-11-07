@@ -3,7 +3,7 @@ define(function() {
 	'use strict';
 
 	return {
-		'env'      : 'staging', // dev|prod
+		'env'      : 'dev', // dev|prod
 		'fixtures' : true
 	};
 });
