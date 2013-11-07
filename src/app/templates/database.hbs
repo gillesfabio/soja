@@ -34,7 +34,7 @@
 					<p class="sj-setting-desc">Generates a zip archive with current database data.</p>
 				</div>
 				<div class="col-md-2 text-center sj-database-actions" id="sj-database-export-actions">
-					<button type="button" class="btn btn-block btn-default dump">Create Zip</button>
+					{{#unless downloadLink }}<button type="button" class="btn btn-block btn-default dump">Create Zip</button>{{else}}{{{ downloadLink }}}{{/unless}}
 				</div>
 			</div>
 		</div>

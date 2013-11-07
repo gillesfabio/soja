@@ -23,8 +23,6 @@ define(
 	var RunnerCollection  = require('app/collections/RunnerCollection');
 	var FeatureCollection = require('app/collections/FeatureCollection');
 
-	var DUMP_FILENAME = 'soja-db.json';
-
 	/**
 	* @class
 	* @requires Underscore
@@ -61,6 +59,13 @@ define(
 		},
 
 		/**
+		* The dump file name.
+		*
+		* @type {String}
+		*/
+		DUMP_FILENAME: 'soja-db.json',
+
+		/**
 		* Initilizes view.
 		*
 		* @param {object} options - The view options.
@@ -71,6 +76,7 @@ define(
 				features : null
 			}, options);
 			this.feedback = null;
+			this.downloadLink = null;
 			this.initCollections();
 		},
 
@@ -128,9 +134,9 @@ define(
 			this.createZip(function(blob) {
 				var filename = _s.sprintf('soja-db-%s.zip', moment().format('YYYY-MM-DD'));
 				var href = window.URL.createObjectURL(blob);
-				var link = _s.sprintf('<a href="%s" class="btn btn-primary" download="%s">Download Zip archive</a>', href, filename, filename);
-				$('#sj-database-export-actions', this.el).html(link);
+				this.downloadLink = _s.sprintf('<a href="%s" class="btn btn-primary" download="%s">Download Zip archive</a>', href, filename);
 				this.feedback = {type: 'success', message: 'Successfully exported the database.'};
+				this.render();
 			}.bind(this));
 			return this;
 		},
@@ -151,7 +157,7 @@ define(
 						success: function() {
 							data.runners = this.runners.models;
 							data.features = this.features.models;
-							zip.file(DUMP_FILENAME, JSON.stringify(data));
+							zip.file(this.DUMP_FILENAME, JSON.stringify(data));
 							blob = zip.generate({type: 'blob'});
 							callback(blob);
 						}.bind(this)
@@ -187,11 +193,10 @@ define(
 		*/
 		readerOnLoad: function readerOnLoad(event) {
 			logger.debug('DatabaseView: readerOnLoad');
-			var zip = new JSZip();
+			var zip = new JSZip(event.target.result);
 			var data;
-			zip.load(event.target.result);
-			if (zip.files && zip.files.hasOwnProperty(DUMP_FILENAME)) {
-				data = JSON.parse(zip.files[DUMP_FILENAME].asText());
+			if (zip.files && zip.files.hasOwnProperty(this.DUMP_FILENAME)) {
+				data = JSON.parse(zip.files[this.DUMP_FILENAME].asText());
 				this.restore(data);
 			}
 			return this;
@@ -223,7 +228,10 @@ define(
 		*/
 		render: function render() {
 			logger.debug('DatabaseView: render');
-			$(this.el).html(this.template({feedback: this.feedback}));
+			$(this.el).html(this.template({
+				feedback     : this.feedback,
+				downloadLink : this.downloadLink
+			}));
 			this.feedback = null;
 			return this;
 		}
