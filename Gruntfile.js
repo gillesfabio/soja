@@ -6,8 +6,10 @@ module.exports = function(grunt) {
 	'use strict';
 
 	grunt.initConfig({
+
+		pkg: grunt.file.readJSON('package.json'),
+
 		shell: {
-			npmInstall     : { command: 'npm install' },
 			bowerInstall   : { command: 'bower install' },
 			compassInstall : { command: 'gem install compass' },
 			cleanDoc       : { command: 'rm -rf ./doc' },
@@ -82,7 +84,6 @@ module.exports = function(grunt) {
 	]);
 
 	grunt.registerTask('install', [
-		'shell:npmInstall',
 		'shell:bowerInstall',
 		'shell:compassInstall'
 	]);

@@ -52,7 +52,7 @@ Now, you can clone the Soja repository and install the stack:
 
 	git clone https://github.com/gillesfabio/soja.git
 	cd soja
-	grunt install
+	npm install && grunt install
 
 Done.
 
