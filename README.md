@@ -18,7 +18,7 @@ Installation:
 
 	git clone https://github.com/gillesfabio/soja.git
 	cd soja
-	grunt install
+	make init
 
 Lost? Follow your OS specific instructions thereafter.
 
@@ -52,7 +52,7 @@ Now, you can clone the Soja repository and install the stack:
 
 	git clone https://github.com/gillesfabio/soja.git
 	cd soja
-	npm install && grunt install
+	make init
 
 Done.
 

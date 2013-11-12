@@ -10,12 +10,11 @@ module.exports = function(grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 
 		shell: {
-			bowerInstall   : { command: 'bower install' },
-			compassInstall : { command: 'gem install compass' },
 			cleanDoc       : { command: 'rm -rf ./doc' },
 			generateDoc    : { command: './node_modules/jsdoc/jsdoc -c jsdoc.json' },
 			openDoc        : { command: 'open ./doc/index.html' }
 		},
+
 		jshint: {
 			all: [
 				'Gruntfile.js',
@@ -27,6 +26,7 @@ module.exports = function(grunt) {
 				jshintrc: '.jshintrc'
 			}
 		},
+
 		compass: {
 			dist: {
 				options: {
@@ -38,6 +38,7 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+
 		express: {
 			app: {
 				options: {
@@ -54,6 +55,7 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+
 		watch: {
 			compass: {
 				files: ['src/app/styles/sass/*'],
@@ -81,11 +83,6 @@ module.exports = function(grunt) {
 		'build',
 		'express:app',
 		'watch'
-	]);
-
-	grunt.registerTask('install', [
-		'shell:bowerInstall',
-		'shell:compassInstall'
 	]);
 
 	grunt.registerTask('doc', [
