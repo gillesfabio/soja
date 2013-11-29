@@ -27,17 +27,7 @@ module.exports = function(grunt) {
 			}
 		},
 
-		compass: {
-			dist: {
-				options: {
-					sassDir: 'src/app/styles/sass',
-					cssDir: 'src/app/styles/css',
-					outputStyle: 'expanded',
-					noLineComments: true,
-					force: true
-				}
-			}
-		},
+		watch : {},
 
 		express: {
 			app: {
@@ -54,19 +44,11 @@ module.exports = function(grunt) {
 					debug  : true
 				}
 			}
-		},
-
-		watch: {
-			compass: {
-				files: ['src/app/styles/sass/*'],
-				tasks: ['compass']
-			}
 		}
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
-	grunt.loadNpmTasks('grunt-contrib-compass');
 	grunt.loadNpmTasks('grunt-express');
 	grunt.loadNpmTasks('grunt-shell');
 
@@ -75,8 +57,7 @@ module.exports = function(grunt) {
 	]);
 
 	grunt.registerTask('build', [
-		'lint',
-		'compass'
+		'lint'
 	]);
 
 	grunt.registerTask('server', [

@@ -1,7 +1,5 @@
 .DS_Store
 vendor
 node_modules
-src/app/styles/css
-.sass-cache
 doc
 docs
