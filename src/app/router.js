@@ -46,7 +46,7 @@ function(Backbone, RunnerView, DatabaseView, StatsView, RunnerCollection, Featur
 				runners  : new RunnerCollection(),
 				features : new FeatureCollection()
 			};
-			if (config.env !== 'staging') opts.ws = new WebSocket('ws://localhost:9999');
+			if (config.env !== 'staging') opts.ws = new WebSocket('ws://localhost:8888');
 			view = new RunnerView(opts);
 			view.fetch();
 			$('#content').html(view.render().el);

@@ -1,9 +1,13 @@
+'use strict';
+
 var path = require('path');
+
+var APP_PORT = 8888,
+	APP_TEST_PORT = 9999,
+	SERVERS_RELATIVE_PATH = './servers/';
 
 
 module.exports = function(grunt) {
-
-	'use strict';
 
 	grunt.initConfig({
 
@@ -30,18 +34,23 @@ module.exports = function(grunt) {
 		watch : {},
 
 		express: {
+			options: {
+			},
 			app: {
 				options: {
-					port  : 8888,
-					bases : ['src', __dirname],
-					debug : true
+					hostname : '*',
+					server   : path.resolve(SERVERS_RELATIVE_PATH + 'app'),
+					port     : APP_PORT,
+					bases    : ['src', __dirname],
+					debug    : true
 				}
 			},
 			test: {
 				options: {
-					port   : 9999,
-					server : path.resolve('./test/server.js'),
-					debug  : true
+					hostname : '*',
+					server   : path.resolve(SERVERS_RELATIVE_PATH + 'test'),
+					port     : APP_TEST_PORT,
+					debug    : true
 				}
 			}
 		}
