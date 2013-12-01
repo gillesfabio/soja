@@ -143,7 +143,7 @@ define(
 		*/
 		onSocketOpen: function onSocketOpen() {
 			logger.debug('RunnerView: onSocketOpen');
-			this.reset();
+			//this.reset();
 			this.render();
 			return this;
 		},
