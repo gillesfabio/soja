@@ -34,8 +34,6 @@ module.exports = function(grunt) {
 		watch : {},
 
 		express: {
-			options: {
-			},
 			app: {
 				options: {
 					hostname : '*',
@@ -50,6 +48,7 @@ module.exports = function(grunt) {
 					hostname : '*',
 					server   : path.resolve(SERVERS_RELATIVE_PATH + 'test'),
 					port     : APP_TEST_PORT,
+					bases    : [path.resolve('./test'), __dirname, path.resolve('./src')],
 					debug    : true
 				}
 			}

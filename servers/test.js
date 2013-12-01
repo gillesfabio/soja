@@ -1,17 +1,20 @@
 'use strict';
 
-var express         = require('express'),
-	path            = require('path'),
-	app             = express(),
-	server          = require('http').createServer(app),
-	WebSocketServer = require('ws').Server,
-	wss             = new WebSocketServer({server: server});
+var http            = require('http');
+var path            = require('path');
+var express         = require('express');
+var WebSocketServer = require('ws').Server;
 
-app.use(express.static(__dirname));
-app.use(express.static(path.join(__dirname, '..')));
-app.use(express.static(path.join(__dirname, '..', 'src')));
+var app    = express();
+var server = http.createServer(app);
+var wss    = new WebSocketServer({server: server});
 
-server.listen(9999);
+app.use(express.logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded());
+app.use(function staticsPlaceholder(req, res, next) {
+	return next();
+});
 
 wss.on('connection', function(ws) {
 
@@ -34,8 +37,7 @@ wss.on('connection', function(ws) {
 	}
 });
 
-exports = module.exports = server;
-
-exports.use = function() {
+module.exports = server;
+module.exports.use = function() {
 	app.use.apply(app, arguments);
 };
