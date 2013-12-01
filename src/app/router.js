@@ -40,7 +40,6 @@ function(Backbone, RunnerView, DatabaseView, StatsView, RunnerCollection, Featur
 		* The runner action.
 		*/
 		runner: function runner() {
-			logger.info('Router: runner');
 			var opts, view;
 			opts = {
 				runners  : new RunnerCollection(),
@@ -56,7 +55,6 @@ function(Backbone, RunnerView, DatabaseView, StatsView, RunnerCollection, Featur
 		* The database action.
 		*/
 		database: function settings() {
-			logger.info('Router: database');
 			var view = new DatabaseView({
 				runners  : new RunnerCollection(),
 				features : new FeatureCollection()
@@ -69,7 +67,6 @@ function(Backbone, RunnerView, DatabaseView, StatsView, RunnerCollection, Featur
 		* The stats action.
 		*/
 		stats: function stats() {
-			logger.info('Router: stats');
 			var view = new StatsView({
 				runners  : new RunnerCollection(),
 				features : new FeatureCollection()

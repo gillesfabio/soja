@@ -119,7 +119,7 @@ function(FeatureModel, _, Backbone, logger) {
 				description : null
 			}, data);
 			if (!data.runner.name && !data.runner.runDate && !data.status && !data.description) {
-				logger.warn("Something is wrong with: " + JSON.stringify(data));
+				logger.warn("Something went wrong with: " + JSON.stringify(data));
 				return;
 			}
 			exists = this.findWhere({

@@ -37,7 +37,6 @@ define(
 		* View initialization.
 		*/
 		initialize: function initialize() {
-			logger.debug('StatsView: initialize');
 		},
 
 		fetch: function fetch() {
@@ -47,7 +46,6 @@ define(
 		* Renders the view with the following context:
 		*/
 		render: function render() {
-			logger.debug('StatsView: render');
 			$(this.el).html(this.template());
 			return this;
 		}

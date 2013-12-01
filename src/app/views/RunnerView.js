@@ -68,15 +68,8 @@ define(
 		* @private
 		*/
 		initCollections: function initCollections() {
-			logger.debug('RunnerView: initialize collections');
-			if (this.runners && this.runners instanceof RunnerCollection) {
-				this.collections.push(this.runners);
-				logger.debug('RunnerView: added runners (RunnerCollection) to collections');
-			}
-			if (this.features && this.features instanceof FeatureCollection) {
-				this.collections.push(this.features);
-				logger.debug('RunnerView: added features (FeatureCollection) to collections');
-			}
+			if (this.runners && this.runners instanceof RunnerCollection) this.collections.push(this.runners);
+			if (this.features && this.features instanceof FeatureCollection) this.collections.push(this.features);
 		},
 
 		/**
@@ -85,7 +78,6 @@ define(
 		* @private
 		*/
 		initSubviews: function initSubviews() {
-			logger.debug('RunnerView: initialize subviews');
 			this.subviews = [];
 			this.runnerInfoView = new RunnerInfoView({
 				ws       : this.ws,
@@ -93,7 +85,6 @@ define(
 				features : this.features
 			});
 			this.subviews.push(this.runnerInfoView);
-			logger.debug('RunnerView: added runnerInfoView (RunnerInfoView) to subviews');
 		},
 
 		/**
@@ -102,7 +93,6 @@ define(
 		* @private
 		*/
 		initEvents: function initEvents() {
-			logger.debug('RunnerView: initialize events');
 			_.bindAll(this, 'onSocketOpen', 'onSocketClose', 'onSocketMessage', 'render');
 			this.listenTo(this.features, 'change', this.render);
 			this.listenTo(this.runners, 'change', this.render);
@@ -118,7 +108,6 @@ define(
 		*
 		*/
 		fetch: function fetch() {
-			logger.debug('RunnerView: fetch collections data');
 			if (this.runners && this.runners instanceof RunnerCollection)    this.runners.fetch();
 			if (this.features && this.features instanceof FeatureCollection) this.features.fetch();
 			return this;
@@ -130,7 +119,6 @@ define(
 		* @private
 		*/
 		reset: function clear() {
-			logger.debug('RunnerView: reset collections');
 			this.runners.reset();
 			this.features.reset();
 			return this;
@@ -142,8 +130,6 @@ define(
 		* @private
 		*/
 		onSocketOpen: function onSocketOpen() {
-			logger.debug('RunnerView: onSocketOpen');
-			//this.reset();
 			this.render();
 			return this;
 		},
@@ -154,7 +140,6 @@ define(
 		* @private
 		*/
 		onSocketClose: function onSocketClose() {
-			logger.debug('RunnerView: onSocketClose');
 			this.render();
 			return this;
 		},
@@ -166,7 +151,6 @@ define(
 		* @private
 		*/
 		onSocketMessage: function onSocketMessage(event) {
-			logger.debug('RunnerView: onSocketMessage');
 			if (!_.has(event, data) && !event.data) {
 				logger.warn("RunnerView: something went wrong with " + JSON.stringify(event));
 				return this;
@@ -197,7 +181,6 @@ define(
 		* @private
 		*/
 		closeConnection: function closeConnection() {
-			logger.debug('RunnerView: close WebSocket connection');
 			this.ws.close();
 		},
 
@@ -256,7 +239,6 @@ define(
 		* Renders the view.
 		*/
 		render: function render() {
-			logger.debug('RunnerView: render');
 			var runner   = this.getCurrentRunner();
 			var features = this.getLatestFeatures();
 			$(this.el).html(this.template({runner: runner, features: features}));

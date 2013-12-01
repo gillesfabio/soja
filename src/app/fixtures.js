@@ -89,7 +89,6 @@ define(function(require) {
 			collection.reset();
 			collection.localStorage._clear();
 		});
-		logger.info('Fixtures: destroyed collections');
 	}
 
 	/**

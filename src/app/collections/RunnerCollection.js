@@ -60,7 +60,7 @@ function(RunnerModel, _, Backbone, logger) {
 				name    : null
 			}, data);
 			if (!data.runDate && !data.name) {
-				logger.warn('Something is wrong with: ' + JSON.stringify(data));
+				logger.warn('Something went wrong with: ' + JSON.stringify(data));
 				return;
 			}
 			exists = this.findWhere({

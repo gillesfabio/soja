@@ -44,7 +44,6 @@ define(
 		* @param {FeatureCollection} options.features - The feature collection instance.
 		*/
 		initialize: function initialize(options) {
-			logger.debug('RunnerInfoView: initialize');
 			this.options = _.extend({
 				ws       : null,
 				runners  : null,
@@ -63,7 +62,6 @@ define(
 		* @private
 		*/
 		initEvents: function initEvents() {
-			logger.debug('RunnerInfoView: initializes events');
 			_.bindAll(this, 'onSocketOpen', 'onSocketClose', 'onSocketMessage', 'render');
 			this.listenTo(this.runners, 'change', this.render);
 			this.listenTo(this.features, 'change', this.render);
@@ -79,7 +77,6 @@ define(
 		* Calls on WebSocketServer connection.
 		*/
 		onSocketOpen: function onSocketOpen() {
-			logger.debug('RunnerInfoView: ws open');
 			this.connected = true;
 			this.render();
 			return this;
@@ -89,7 +86,6 @@ define(
 		* Calls on WebSocketServer close.
 		*/
 		onSocketClose: function onSocketClose() {
-			logger.debug('RunnerInfoView: ws close');
 			this.connected = false;
 			this.render();
 			return this;
@@ -99,7 +95,6 @@ define(
 		* Calls on WebSocketServer message.
 		*/
 		onSocketMessage: function onSocketMessage() {
-			logger.debug('RunnerInfoView: ws close');
 			this.connected = true;
 			this.render();
 			return this;
@@ -109,7 +104,6 @@ define(
 		* Renders the view.
 		*/
 		render: function render() {
-			logger.debug('RunnerInfoView: render');
 			$(this.el).html(this.template({
 				connected      : this.connected,
 				runner         : this.runners.last() ? this.runners.last().toJSON() : null,

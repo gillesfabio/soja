@@ -86,18 +86,11 @@ define(
 		* @private
 		*/
 		initCollections: function initCollections() {
-			logger.debug('DatabaseView: initialize collections');
 			this.collections = [];
 			this.runners = this.options.runners;
-			if (this.runners && this.runners instanceof RunnerCollection) {
-				logger.debug('DatabaseView: added runners (RunnerCollection) to collections');
-				this.collections.push(this.runners);
-			}
+			if (this.runners && this.runners instanceof RunnerCollection) this.collections.push(this.runners);
 			this.features = this.options.features;
-			if (this.features && this.features instanceof FeatureCollection) {
-				logger.debug('DatabaseView: added features (FeatureCollection) to collections');
-				this.collections.push(this.features);
-			}
+			if (this.features && this.features instanceof FeatureCollection) this.collections.push(this.features);
 			return this;
 		},
 
@@ -113,7 +106,6 @@ define(
 		* Flushes the application database (then renders the view).
 		*/
 		flush: function flushDatabase() {
-			logger.debug('DatabaseView: flush');
 			this.collections.forEach(function(collection) {
 				collection.reset();
 				collection.localStorage._clear();
@@ -130,7 +122,6 @@ define(
 		* Dumps the application database.
 		*/
 		dump: function dump() {
-			logger.debug('DatabaseView: dump');
 			this.createZip(function(blob) {
 				var filename = _s.sprintf('soja-db-%s.zip', moment().format('YYYY-MM-DD'));
 				var href = window.URL.createObjectURL(blob);
@@ -147,7 +138,6 @@ define(
 		* @param {Function} callback - The callback to returns when blob has been created.
 		*/
 		createZip: function createZip(callback) {
-			logger.debug('DatabaseView: createZip');
 			var zip  = new JSZip();
 			var data = {};
 			var blob;
@@ -172,7 +162,6 @@ define(
 		* Loads data into the application database.
 		*/
 		load: function load(event) {
-			logger.debug('DatabaseView: load');
 			var file = event.target.files[0];
 			var reader = new FileReader();
 			if (!file.type.match('application/zip')) {
@@ -192,7 +181,6 @@ define(
 		* @param {Object} event - The event.
 		*/
 		readerOnLoad: function readerOnLoad(event) {
-			logger.debug('DatabaseView: readerOnLoad');
 			var zip = new JSZip(event.target.result);
 			var data;
 			if (zip.files && zip.files.hasOwnProperty(this.DUMP_FILENAME)) {
@@ -209,7 +197,6 @@ define(
 		* @param {Object} data - The dumped data parsed with `JSON.parse()`.
 		*/
 		restore: function restore(data) {
-			logger.debug('DatabaseView: restore');
 			if (!data) return this;
 			data.runners.forEach(function(runner) {
 				this.runners.create(runner);
@@ -227,7 +214,6 @@ define(
 		* Renders the view.
 		*/
 		render: function render() {
-			logger.debug('DatabaseView: render');
 			$(this.el).html(this.template({
 				feedback     : this.feedback,
 				downloadLink : this.downloadLink
