@@ -5,6 +5,11 @@ web testing framework.
 
 ![Soja in Action](https://raw.github.com/gillesfabio/soja/master/soja-screenshot.png)
 
+## Status
+
+**This project is currently experimental and requires a [dedicated Watai branch](https://github.com/gillesfabio/Watai/tree/ws-view)
+that is not yet merged in master. So it is not ready for production use.**
+
 ## Installation
 
 Prerequisites:
