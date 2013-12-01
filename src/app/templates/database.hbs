@@ -1,5 +1,5 @@
 {{#if feedback}}
-<div class="alert alert-dismissable alert-{{feedback.type}}">
+<div class="alert alert-square alert-dismissable alert-{{feedback.type}}">
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
   {{feedback.message}}
 </div>
@@ -16,7 +16,7 @@
 					<p class="sj-setting-desc">This operation will permanently delete your database.</p>
 				</div>
 				<div class="col-md-2 text-center sj-database-actions" id="sj-database-flush-actions">
-					<button type="button" class="btn btn-block btn-danger flush">Flush</button>
+					<button type="button" class="btn btn-square btn-block btn-danger flush">Flush</button>
 				</div>
 			</div>
 		</div>
@@ -34,7 +34,7 @@
 					<p class="sj-setting-desc">Generates a zip archive with current database data.</p>
 				</div>
 				<div class="col-md-2 text-center sj-database-actions" id="sj-database-export-actions">
-					{{#unless downloadLink }}<button type="button" class="btn btn-block btn-default dump">Create Zip</button>{{else}}{{{ downloadLink }}}{{/unless}}
+					{{#unless downloadLink }}<button type="button" class="btn btn-square btn-block btn-primary dump">Create Zip</button>{{else}}{{{ downloadLink }}}{{/unless}}
 				</div>
 			</div>
 		</div>
@@ -52,7 +52,7 @@
 					<p class="sj-setting-desc">Give it the previously exported ZIP archive.</p>
 				</div>
 				<div class="col-md-2 text-center sj-database-actions" id="sj-database-import-actions">
-					<span class="btn btn-block btn-default btn-file">
+					<span class="btn btn-square btn-block btn-primary btn-file">
 						Import <input type="file" class="load">
 					</span>
 				</div>

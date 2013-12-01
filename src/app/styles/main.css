@@ -1,167 +1,254 @@
-/* Variables: colors
----------------------------------------------------------------------------- */
+/*
+
+Color Scheme
+------------
+
+Background                 : #34495e
+Foreground                 : #909090
+Navbar and components      : #263544
+Titles                     : #82b6ea
+Links                      : #ecf0f1
+
+Failures Background        : #a5281b
+Failures Foreground        : #e74c3c
+
+Successes Background       : #50a118
+Successes Foreground       : #87eb41
+
+Feature Success Background : #dff0d8
+Feature Success Foreground : #468847
+
+Feature Failure Background : #f2dede
+Feature Failure Foreground : #b94a48
+
+*/
+
 /* General
 ---------------------------------------------------------------------------- */
 html {
-  -webkit-font-smoothing: antialiased;
+	-webkit-font-smoothing : antialiased;
 }
 
 body {
-  font-family: 'Lato', sans-serif;
+	font-family      : 'Lato', 'Lucida Grande', 'Arial', sans-serif;
+	background-color : #34495e;
 }
 
 /* Bootstrap navbar
 ---------------------------------------------------------------------------- */
+.navbar {
+	background : #263544;
+	border     : 0;
+}
+
+.navbar-nav a {
+	font-weight : 300;
+	color       : #ecf0f1 !important;
+	font-size   : 15px;
+}
+
 .navbar-brand {
-  font-weight: bold;
+	text-transform : uppercase;
+	color          : #82b6ea !important;
+	font-weight    : 700;
 }
 
 /* Bootstrap panels
 ---------------------------------------------------------------------------- */
+.panel {
+	border-radius : 0;
+	border        : 0;
+}
+
+.panel-heading {
+	border        : 0;
+	border-radius : 0;
+}
+
+.panel-default > .panel-heading {
+	background: #263544;
+	border: 0;
+}
+
 .panel-title {
-  font-weight: 300;
+	font-weight    : 400;
+	text-transform : uppercase;
+	color          : #82b6ea;
+}
+
+.panel-danger > .panel-heading {
+	background-color : #a5281b;
+}
+
+.panel-danger > .panel-heading > .panel-title {
+	color : #fff;
+}
+
+/* Bootstrap alerts
+---------------------------------------------------------------------------- */
+.alert {
+	font-weight : bold;
+	color       : #fff !important;
+}
+
+/* Welcome
+---------------------------------------------------------------------------- */
+#welcome {
+	font-size   : 120%;
+	text-align  : center;
 }
 
 /* Tests
 ---------------------------------------------------------------------------- */
 .list-item-ok {
-  color: #468847;
+	color : #468847;
 }
 
 .list-item-failure {
-  color: #b94a48;
+	color: #b94a48;
 }
 
 .feature-success {
-  background: #dff0d8;
-  color: #468847;
+	background : #dff0d8;
+	color      : #468847;
 }
 
 .feature-failure {
-  background: #f2dede;
-  color: #b94a48;
+	background : #f2dede;
+	color      : #b94a48;
 }
 
 .feature-reason-detail {
-  padding: 10px;
-  line-height: 10px;
+	padding     : 10px;
+	line-height : 10px;
 }
 
 #runner-features li {
-  margin: 5px 0 5px 0;
-  padding: 5px 10px 5px 10px;
+	margin  : 1px 0 1px 0;
+	padding : 15px;
 }
 
 #runner-features i {
-  margin-right: 5px;
+	margin-right : 5px;
 }
 
 #runner-features pre {
-  font-size: 11px;
-  tab-size: 2;
-  -moz-tab-size: 2;
-  -o-tab-size: 2;
-  overflow: auto;
-  margin-bottom: 10px;
+	font-size     : 11px;
+	tab-size      : 2;
+	-moz-tab-size : 2;
+	-o-tab-size   : 2;
+	overflow      : auto;
+	margin-bottom : 10px;
 }
 
 /* Settings
 ---------------------------------------------------------------------------- */
 .sj-setting-label, .sj-setting-desc {
-  margin: 0;
-  padding: 0;
-  line-height: 22px;
+	margin      : 0;
+	padding     : 0;
+	line-height : 22px;
 }
 
 .sj-setting-label {
-  font-weight: 700;
-  color: #444;
+	font-weight : 700;
+	color       : #444;
 }
 
 .sj-setting-desc {
-  font-weight: 300;
-  padding-bottom: 10px;
-  color: #909090;
+	font-weight    : 300;
+	padding-bottom : 10px;
+	color          : #909090;
 }
 
 /* Status
 ---------------------------------------------------------------------------- */
 #runner-info .panel-body .row, #runner-info .runner-info,
 #runner-info .runner-summary {
-  height: 120px !important;
+	height: 120px !important;
 }
+
 #runner-info .runner-summary-body,
 #runner-info .runner-info-body {
-  padding: 0px 14px 0px 14px;
-  margin: 0;
+	padding : 0px 14px 0px 14px;
+	margin  : 0;
 }
+
 #runner-info .runner-info-body,
 #runner-info .runner-summary-body {
   text-align: center;
 }
+
 #runner-info .runner-info-body h2 {
   font-size: 14px;
 }
+
 #runner-info .runner-info-rundate h2 {
-  font-weight: 300;
-  font-size: 18px;
-  color: #444;
+	font-weight : 300;
+	font-size   : 18px;
+	color       : #444;
 }
+
 #runner-info .runner-info-server-status h2 {
-  font-size: 30px;
+	font-size: 30px;
 }
+
 #runner-info .runner-info-body h2,
 #runner-info .runner-summary-body h2 {
-  height: 80px;
-  line-height: 90px;
-  width: 100%;
-  padding: 0;
-  margin: 0;
+	height      : 80px;
+	line-height : 90px;
+	width       : 100%;
+	padding     : 0;
+	margin      : 0;
 }
+
 #runner-info .runner-info-body p,
 #runner-info .runner-summary-body p {
-  position: absolute;
-  bottom: 0;
-  height: 40px;
-  line-height: 40px;
-  width: 100%;
-  padding: 0 !important;
-  margin: 0 -15px 0 -15px !important;
-  font-weight: bold;
-  font-size: 12px;
-  text-transform: uppercase;
+	position       : absolute;
+	bottom         : 0;
+	height         : 40px;
+	line-height    : 40px;
+	width          : 100%;
+	padding        : 0 !important;
+	margin         : 0 -15px 0 -15px !important;
+	font-weight    : bold;
+	font-size      : 12px;
+	text-transform : uppercase;
 }
+
 #runner-info .runner-info-body p,
 #runner-info .runner-summary-total {
-  color: #909090;
+	color: #909090;
 }
+
 #runner-info .runner-summary-success {
-  color: #468847;
-  background-color: #dff0d8;
+	color            : #50a118;
+	background-color : #87eb41;
 }
+
 #runner-info .runner-summary-failure {
-  color: #b94a48;
-  background-color: #f2dede;
+	color            : #a5281b;
+	background-color : #e74c3c;
 }
 
 /* Bootstrap extra
 ---------------------------------------------------------------------------- */
 .btn-file {
-  position: relative;
-  overflow: hidden;
+	position    : relative;
+	overflow    : hidden;
+	font-weight : bold;
 }
 
 .btn-file input[type=file] {
-  position: absolute;
-  top: 0;
-  right: 0;
-  min-width: 100%;
-  min-height: 100%;
-  font-size: 999px;
-  text-align: right;
-  filter: alpha(opacity=0);
-  opacity: 0;
-  background: red;
-  cursor: inherit;
-  display: block;
+	position   : absolute;
+	top        : 0;
+	right      : 0;
+	min-width  : 100%;
+	min-height : 100%;
+	font-size  : 999px;
+	text-align : right;
+	filter     : alpha(opacity=0);
+	opacity    : 0;
+	background : red;
+	cursor     : inherit;
+	display    : block;
 }

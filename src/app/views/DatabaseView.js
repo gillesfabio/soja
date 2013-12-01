@@ -125,7 +125,7 @@ define(
 			this.createZip(function(blob) {
 				var filename = _s.sprintf('soja-db-%s.zip', moment().format('YYYY-MM-DD'));
 				var href = window.URL.createObjectURL(blob);
-				this.downloadLink = _s.sprintf('<a href="%s" class="btn btn-primary" download="%s">Download Zip archive</a>', href, filename);
+				this.downloadLink = _s.sprintf('<a href="%s" class="btn btn-square btn-primary" download="%s">Download Zip archive</a>', href, filename);
 				this.feedback = {type: 'success', message: 'Successfully exported the database.'};
 				this.render();
 			}.bind(this));
