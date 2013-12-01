@@ -3,6 +3,8 @@
 **Soja** is a realtime web user interface for [Watai](http://github.com/MattiSG/Watai)
 web testing framework.
 
+![Soja in Action](https://raw.github.com/gillesfabio/soja/master/soja-screenshot.png)
+
 ## Installation
 
 Prerequisites:
