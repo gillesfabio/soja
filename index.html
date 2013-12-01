@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Soja by gillesfabio</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Soja</h1>
+        <p>Web User Interface for Watai (WORK IN PROGRESS).</p>
+        <p class="view"><a href="https://github.com/gillesfabio/soja">View the Project on GitHub <small>gillesfabio/soja</small></a></p>
+        <ul>
+          <li><a href="https://github.com/gillesfabio/soja/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/gillesfabio/soja/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/gillesfabio/soja">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="soja" class="anchor" href="#soja"><span class="octicon octicon-link"></span></a>Soja</h1>
+
+<p><strong>Soja</strong> is a realtime web user interface for <a href="http://github.com/MattiSG/Watai">Watai</a>
+web testing framework.</p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Prerequisites:</p>
+
+<ul>
+<li><a href="http://git-scm.com/">Git</a></li>
+<li><a href="http://nodejs.org">Node</a></li>
+<li><a href="http://npm.org">NPM</a></li>
+<li><a href="http://gruntjs.com">Grunt</a></li>
+<li><a href="http://bower.io">Bower</a></li>
+</ul><p>Installation:</p>
+
+<pre><code>git clone https://github.com/gillesfabio/soja.git
+cd soja
+make init
+</code></pre>
+
+<p>Lost? Follow your OS specific instructions thereafter.</p>
+
+<h3>
+<a name="mac-os-x" class="anchor" href="#mac-os-x"><span class="octicon octicon-link"></span></a>Mac OS X</h3>
+
+<p>The steps are:</p>
+
+<ul>
+<li>Install <a href="https://developer.apple.com/downloads">OS X Command Line Tools</a> or <a href="http://itunes.apple.com/us/app/xcode/id497799835">Xcode</a>
+</li>
+<li>Install <a href="http://brew.sh/">Homebrew</a>
+</li>
+<li>Install <a href="http://git-scm.com/">Git</a>
+</li>
+<li>Install <a href="http://nodejs.org">Node</a> (NPM is already provided by Node)</li>
+<li>Install <a href="http://gruntjs.com">Grunt</a>
+</li>
+<li>Install <a href="http://bower.io">Bower</a>
+</li>
+<li>Install <a href="http://github.com/gillesfabio/soja">Soja</a>
+</li>
+</ul><p>Once the OS X Command Line Tools or Xcode are installed, open a terminal
+(<code>Applications/Utilities/Terminal.app</code>) and execute the following commands
+(if needed):</p>
+
+<pre><code># Install Homebrew
+ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+
+# Install Git and Node
+brew install git node
+
+# Install Grunt and Bower
+sudo npm install -g grunt-cli bower
+</code></pre>
+
+<p>Now, you can clone the Soja repository and install the stack:</p>
+
+<pre><code>git clone https://github.com/gillesfabio/soja.git
+cd soja
+make init
+</code></pre>
+
+<p>Done.</p>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Run the server:</p>
+
+<pre><code>grunt server
+</code></pre>
+
+<p>Launch your favorite browser and go to <code>http://localhost:8888</code>:</p>
+
+<pre><code>open http://localhost:8888
+</code></pre>
+
+<p>Now, execute your Watai test suite and see the results in the browser.</p>
+
+<h2>
+<a name="contribute" class="anchor" href="#contribute"><span class="octicon octicon-link"></span></a>Contribute</h2>
+
+<p>Feel free to contribute by creating issues and submitting pull requests.
+Please <a href="http://github.com/gillesfabio/soja/issues">create an issue</a> first
+on GitHub before submitting any pull request. Your code must follow
+the <a href="https://github.com/MattiSG/Watai/wiki/Code-conventions">Watai's code conventions</a>.</p>
+
+<h3>
+<a name="tests" class="anchor" href="#tests"><span class="octicon octicon-link"></span></a>Tests</h3>
+
+<p>Tests are written on top of <a href="http://chaijs.com/api/bdd/">Chai</a> (BDD) and
+<a href="http://visionmedia.github.io/mocha/">Mocha</a>.</p>
+
+<p>To execute the test suite, run the following command:</p>
+
+<pre><code>grunt test
+</code></pre>
+
+<p>In your favorite browser, go to <code>http://localhost:9999</code>:</p>
+
+<pre><code>open http://localhost:9999
+</code></pre>
+
+<h3>
+<a name="developer-documentation" class="anchor" href="#developer-documentation"><span class="octicon octicon-link"></span></a>Developer Documentation</h3>
+
+<p>The documentation is powered by <a href="http://usejsdoc.org/">JSDoc3</a>.</p>
+
+<p>If your OS is OS X, you can use <a href="http://brew.sh/">Homebrew</a> to install
+the latest version of JSDoc in a single one command:</p>
+
+<pre><code>brew install jsdoc3
+</code></pre>
+
+<p>Then you can easily generate and browse it:</p>
+
+<pre><code>grunt doc
+</code></pre>
+
+<h3>
+<a name="any-question" class="anchor" href="#any-question"><span class="octicon octicon-link"></span></a>Any question?</h3>
+
+<p>If you have any question, create an issue or contact the author.</p>
+
+<p>If you have any question related to <a href="https://github.com/MattiSG/Watai">Watai</a>, please
+don't create an issue here. Go to the Watai's project page.</p>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/gillesfabio">gillesfabio</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
