@@ -11,7 +11,7 @@ define(function(require) {
 	var FeatureCollection = require('app/collections/FeatureCollection');
 	var RunnerInfoView    = require('app/views/RunnerInfoView');
 	var fixtures          = require('app/fixtures');
-	var helpers           = require('helpers');
+	var helpers           = require('test/helpers');
 
 	var WS_SERVER = 'ws://localhost:9999';
 
@@ -28,15 +28,12 @@ define(function(require) {
 
 			beforeEach(function() {
 				$('#fixtures').empty();
-			});
-
-			beforeEach(function() {
-				$('#fixtures').empty();
 				helpers.clean([features, runners]);
 			});
 
 			afterEach(function() {
 				$('#fixtures').empty();
+				helpers.clean([features, runners]);
 			});
 
 			it('should properly set last run date for the first launch (shows "Never")', function() {
@@ -95,22 +92,41 @@ define(function(require) {
 				expect(output).to.have.string('<h2 class="runner-summary-total-count">' + features.latest().size() + '</h2>');
 			});
 
-			it('should properly set succeeded count', function() {
+			it('should properly set succeeded count', function(done) {
+				this.timeout(3000);
 				fixtures.create({namespace: 'test'});
 				runners.fetch();
 				features.fetch();
-				output = $('#fixtures').html(view.render().el).html();
-				expect(output).to.have.string('<h2 class="runner-summary-succeeded-count">' + features.succeededCount({latest: true}) + '</h2>');
+				ws = new WebSocket(WS_SERVER);
+				view = new RunnerInfoView({
+					ws       : ws,
+					runners  : runners,
+					features : features
+				});
+				setTimeout(function() {
+					output = $('#fixtures').html(view.render().el).html();
+					expect(output).to.have.string('<h2 class="runner-summary-succeeded-count">' + features.latest().succeededCount() + '</h2>');
+					done();
+				}, 2000);
 			});
 
-			it('should properly set failed count', function() {
+			it('should properly set failed count', function(done) {
+				this.timeout(3000);
 				fixtures.create({namespace: 'test'});
 				runners.fetch();
 				features.fetch();
-				output = $('#fixtures').html(view.render().el).html();
-				expect(output).to.have.string('<h2 class="runner-summary-failed-count">' + features.failedCount({latest: true}) + '</h2>');
+				ws = new WebSocket(WS_SERVER);
+				view = new RunnerInfoView({
+					ws       : ws,
+					runners  : runners,
+					features : features
+				});
+				setTimeout(function() {
+					output = $('#fixtures').html(view.render().el).html();
+					expect(output).to.have.string('<h2 class="runner-summary-failed-count">' + features.latest().failedCount() + '</h2>');
+					done();
+				}, 2000);
 			});
 		});
 	});
-
 });

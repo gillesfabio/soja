@@ -11,7 +11,7 @@ define(function(require) {
 	var RunnerCollection  = require('app/collections/RunnerCollection');
 	var FeatureCollection = require('app/collections/FeatureCollection');
 	var fixtures          = require('app/fixtures');
-	var helpers           = require('helpers');
+	var helpers           = require('test/helpers');
 
 	var WS_SERVER = 'ws://localhost:9999';
 
@@ -40,6 +40,7 @@ define(function(require) {
 
 			afterEach(function() {
 				$('#fixtures').empty();
+				if (view.ws) view.ws.close();
 			});
 
 			it('should properly initialize view', function() {

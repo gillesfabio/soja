@@ -8,7 +8,7 @@ define(function(require) {
 	var Backbone         = require('backbone');
 	var RunnerCollection = require('app/collections/RunnerCollection');
 	var fixtures         = require('app/fixtures');
-	var helpers          = require('helpers');
+	var helpers          = require('test/helpers');
 
 	var collection, runDate, model, data1, data2;
 

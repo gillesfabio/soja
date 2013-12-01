@@ -48,7 +48,7 @@ module.exports = function(grunt) {
 					hostname : '*',
 					server   : path.resolve(SERVERS_RELATIVE_PATH + 'test'),
 					port     : APP_TEST_PORT,
-					bases    : [path.resolve('./test'), __dirname, path.resolve('./src')],
+					bases    : [path.resolve('./test'), path.resolve('./src'), __dirname],
 					debug    : true
 				}
 			}
