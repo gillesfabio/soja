@@ -28,7 +28,7 @@ instructions thereafter.
 
 You can use [Homebrew](http://brew.sh/) to easily setup your system. Soja
 provides a bootstrap script to auto-install requirements. But you need to
-install, at least, [Git](http://git-scm.com/)) and the [Apple Command Line Tools](https://developer.apple.com/downloads)
+install, at least, [Git](http://git-scm.com/) and the [Apple Command Line Tools](https://developer.apple.com/downloads)
 or [Xcode](http://itunes.apple.com/us/app/xcode/id497799835) before running
 this script. Once they are installed:
 
