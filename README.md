@@ -35,6 +35,7 @@ this script. Once they are installed:
 	git clone https://github.com/gillesfabio/soja.git
 	cd soja
 	./scripts/osx/install.sh
+	make init
 
 ### Vagrant & Docker
 
