@@ -39,10 +39,13 @@
         <ul></ul>
       </nav>
       <section>
-        <p><strong>Soja</strong> is a realtime web user interface for <a href="http://github.com/MattiSG/Watai">Watai</a>
+        <h1>
+<a name="soja" class="anchor" href="#soja"><span class="octicon octicon-link"></span></a>Soja</h1>
+
+<p><strong>Soja</strong> is a web user interface for <a href="http://github.com/MattiSG/Watai">Watai</a>
 web testing framework.</p>
 
-<p><img src="https://raw.github.com/gillesfabio/soja/master/soja-screenshot.png" alt="Soja in Action"></p>
+<p><img src="https://raw.github.com/gillesfabio/soja/master/resources/screenshot.png" alt="Soja in Action"></p>
 
 <h2>
 <a name="status" class="anchor" href="#status"><span class="octicon octicon-link"></span></a>Status</h2>
@@ -53,64 +56,76 @@ that is not yet merged in master. So it is not ready for production use.</strong
 <h2>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
-<p>Prerequisites:</p>
-
-<ul>
-<li><a href="http://git-scm.com/">Git</a></li>
-<li><a href="http://nodejs.org">Node</a></li>
-<li><a href="http://npm.org">NPM</a></li>
-<li><a href="http://gruntjs.com">Grunt</a></li>
-<li><a href="http://bower.io">Bower</a></li>
-</ul><p>Installation:</p>
+<p>Soja requires <a href="http://nodejs.org">Node</a>, <a href="http://gruntjs.com">Grunt</a>
+and <a href="http://bower.io">Bower</a> (optionally <a href="http://git-scm.com/">Git</a>). Clone
+the repository (or download archive from GitHub) and perform the project
+initialization with <code>make init</code>:</p>
 
 <pre><code>git clone https://github.com/gillesfabio/soja.git
 cd soja
 make init
 </code></pre>
 
-<p>Lost? Follow your OS specific instructions thereafter.</p>
+<p>If you need some help to install these requirements, follow your OS specific
+instructions thereafter.</p>
 
 <h3>
 <a name="mac-os-x" class="anchor" href="#mac-os-x"><span class="octicon octicon-link"></span></a>Mac OS X</h3>
 
-<p>The steps are:</p>
-
-<ul>
-<li>Install <a href="https://developer.apple.com/downloads">OS X Command Line Tools</a> or <a href="http://itunes.apple.com/us/app/xcode/id497799835">Xcode</a>
-</li>
-<li>Install <a href="http://brew.sh/">Homebrew</a>
-</li>
-<li>Install <a href="http://git-scm.com/">Git</a>
-</li>
-<li>Install <a href="http://nodejs.org">Node</a> (NPM is already provided by Node)</li>
-<li>Install <a href="http://gruntjs.com">Grunt</a>
-</li>
-<li>Install <a href="http://bower.io">Bower</a>
-</li>
-<li>Install <a href="http://github.com/gillesfabio/soja">Soja</a>
-</li>
-</ul><p>Once the OS X Command Line Tools or Xcode are installed, open a terminal
-(<code>Applications/Utilities/Terminal.app</code>) and execute the following commands
-(if needed):</p>
-
-<pre><code># Install Homebrew
-ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
-
-# Install Git and Node
-brew install git node
-
-# Install Grunt and Bower
-sudo npm install -g grunt-cli bower
-</code></pre>
-
-<p>Now, you can clone the Soja repository and install the stack:</p>
+<p>You can use <a href="http://brew.sh/">Homebrew</a> to easily setup your system. Soja
+provides a bootstrap script to auto-install requirements. But you need to
+install, at least, <a href="http://git-scm.com/">Git</a>) and the <a href="https://developer.apple.com/downloads">Apple Command Line Tools</a>
+or <a href="http://itunes.apple.com/us/app/xcode/id497799835">Xcode</a> before running
+this script. Once they are installed:</p>
 
 <pre><code>git clone https://github.com/gillesfabio/soja.git
 cd soja
-make init
+./scripts/osx/install.sh
 </code></pre>
 
-<p>Done.</p>
+<h3>
+<a name="vagrant--docker" class="anchor" href="#vagrant--docker"><span class="octicon octicon-link"></span></a>Vagrant &amp; Docker</h3>
+
+<p>If you rather prefer to use <a href="http://vagrantup.com">Vagrant</a> and <a href="http://docker.io">Docker</a>,
+Soja provides configurations to setup a virtual machine and a Docker container
+in a few minutes.</p>
+
+<p>OS X users can use the bootstrap script to auto-install <a href="http://virtualbox.org">VirtualBox</a>
+and Vagrant on their systems (this script will install Homebrew and
+<a href="https://github.com/phinze/homebrew-cask">Homebrew Cask</a>):</p>
+
+<pre><code>git clone https://github.com/gillesfabio/soja.git
+cd soja
+./scripts/osx/install-vagrant.sh
+</code></pre>
+
+<p>Once done, start the Vagrant VM and connect you:</p>
+
+<pre><code>vagrant up &amp;&amp; vagrant ssh
+</code></pre>
+
+<p>This Vagrant VM is Docker ready and a Docker image named <code>soja</code> will be built
+at provisioning. You can access the <code>soja</code> folder at <code>/soja</code> in the VM.
+Don't forget to mount the <code>/soja</code> folder as a Docker volume when you execute
+any Docker commands. Example:</p>
+
+<pre><code>docker run -v /soja:/soja &lt;IMAGE&gt; &lt;COMMAND&gt;
+</code></pre>
+
+<p>Let's run the server:</p>
+
+<pre><code>SOJA_SERVER=$(docker run -v /soja:/soja -name soja-server -p 8888:8888 -d soja grunt server)
+</code></pre>
+
+<p>Open your browser and go to the URL <code>http://localhost:8888</code>.</p>
+
+<p>Let's kill it and remove the container:</p>
+
+<pre><code>docker kill $SOJA_SERVER
+docker rm $SOJA_SERVER
+</code></pre>
+
+<p>Well. Feel free to execute it again and launch some Watai tests.</p>
 
 <h2>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
