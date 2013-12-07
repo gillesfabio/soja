@@ -1,9 +1,9 @@
 # Soja
 
-**Soja** is a realtime web user interface for [Watai](http://github.com/MattiSG/Watai)
+**Soja** is a web user interface for [Watai](http://github.com/MattiSG/Watai)
 web testing framework.
 
-![Soja in Action](https://raw.github.com/gillesfabio/soja/master/soja-screenshot.png)
+![Soja in Action](https://raw.github.com/gillesfabio/soja/master/resources/screenshot.png)
 
 ## Status
 
@@ -12,54 +12,67 @@ that is not yet merged in master. So it is not ready for production use.**
 
 ## Installation
 
-Prerequisites:
-
-* [Git](http://git-scm.com/)
-* [Node](http://nodejs.org)
-* [NPM](http://npm.org)
-* [Grunt](http://gruntjs.com)
-* [Bower](http://bower.io)
-
-Installation:
+Soja requires [Node](http://nodejs.org), [Grunt](http://gruntjs.com)
+and [Bower](http://bower.io) (optionally [Git](http://git-scm.com/)). Clone
+the repository (or download archive from GitHub) and perform the project
+initialization with `make init`:
 
 	git clone https://github.com/gillesfabio/soja.git
 	cd soja
 	make init
 
-Lost? Follow your OS specific instructions thereafter.
+If you need some help to install these requirements, follow your OS specific
+instructions thereafter.
 
 ### Mac OS X
 
-The steps are:
-
-* Install [OS X Command Line Tools](https://developer.apple.com/downloads) or [Xcode](http://itunes.apple.com/us/app/xcode/id497799835)
-* Install [Homebrew](http://brew.sh/)
-* Install [Git](http://git-scm.com/)
-* Install [Node](http://nodejs.org) (NPM is already provided by Node)
-* Install [Grunt](http://gruntjs.com)
-* Install [Bower](http://bower.io)
-* Install [Soja](http://github.com/gillesfabio/soja)
-
-Once the OS X Command Line Tools or Xcode are installed, open a terminal
-(`Applications/Utilities/Terminal.app`) and execute the following commands
-(if needed):
-
-	# Install Homebrew
-	ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
-
-	# Install Git and Node
-	brew install git node
-
-	# Install Grunt and Bower
-	sudo npm install -g grunt-cli bower
-
-Now, you can clone the Soja repository and install the stack:
+You can use [Homebrew](http://brew.sh/) to easily setup your system. Soja
+provides a bootstrap script to auto-install requirements. But you need to
+install, at least, [Git](http://git-scm.com/)) and the [Apple Command Line Tools](https://developer.apple.com/downloads)
+or [Xcode](http://itunes.apple.com/us/app/xcode/id497799835) before running
+this script. Once they are installed:
 
 	git clone https://github.com/gillesfabio/soja.git
 	cd soja
-	make init
+	./scripts/osx/install.sh
 
-Done.
+### Vagrant & Docker
+
+If you rather prefer to use [Vagrant](http://vagrantup.com) and [Docker](http://docker.io),
+Soja provides configurations to setup a virtual machine and a Docker container
+in a few minutes.
+
+OS X users can use the bootstrap script to auto-install [VirtualBox](http://virtualbox.org)
+and Vagrant on their systems (this script will install Homebrew and
+[Homebrew Cask](https://github.com/phinze/homebrew-cask)):
+
+	git clone https://github.com/gillesfabio/soja.git
+	cd soja
+	./scripts/osx/install-vagrant.sh
+
+Once done, start the Vagrant VM and connect you:
+
+	vagrant up && vagrant ssh
+
+This Vagrant VM is Docker ready and a Docker image named `soja` will be built
+at provisioning. You can access the `soja` folder at `/soja` in the VM.
+Don't forget to mount the `/soja` folder as a Docker volume when you execute
+any Docker commands. Example:
+
+	docker run -v /soja:/soja <IMAGE> <COMMAND>
+
+Let's run the server:
+
+	SOJA_SERVER=$(docker run -v /soja:/soja -name soja-server -p 8888:8888 -d soja grunt server)
+
+Open your browser and go to the URL `http://localhost:8888`.
+
+Let's kill it and remove the container:
+
+	docker kill $SOJA_SERVER
+	docker rm $SOJA_SERVER
+
+Well. Feel free to execute it again and launch some Watai tests.
 
 ## Usage
 
