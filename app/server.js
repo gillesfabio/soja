@@ -11,7 +11,7 @@ var wss      = new WSServer({server: server});
 // Paths
 // ----------------------------------------------------------------------------
 var APP_STATIC_PATH = path.resolve('./app/static');
-var APP_FRONTEND_TESTS_PATH = path.resolve('./test/frontend');
+var APP_FRONTEND_TESTS_PATH = path.resolve('./tests/frontend');
 var BOWER_COMPONENTS_PATH = path.resolve('./bower_components');
 
 // Global configuration
