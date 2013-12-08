@@ -11,9 +11,9 @@ define(function(require) {
 	var RunnerCollection  = require('app/collections/RunnerCollection');
 	var FeatureCollection = require('app/collections/FeatureCollection');
 	var fixtures          = require('app/fixtures');
-	var helpers           = require('test/helpers');
+	var helpers           = require('helpers');
 
-	var WS_SERVER = 'ws://localhost:9999';
+	var WS_SERVER = 'ws://localhost:8888';
 
 	var ws, view, runners, features, output;
 

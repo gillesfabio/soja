@@ -8,6 +8,5 @@ brew install git
 brew install node
 brew install jsdoc3
 
-# Install Grunt and Bower
-sudo npm install -g grunt-cli
+# Install Bower
 sudo npm install -g bower

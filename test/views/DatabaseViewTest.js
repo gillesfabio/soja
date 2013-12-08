@@ -9,8 +9,8 @@ define(function(require) {
 	var DatabaseView      = require('app/views/DatabaseView');
 	var RunnerCollection  = require('app/collections/RunnerCollection');
 	var FeatureCollection = require('app/collections/FeatureCollection');
-	var helpers           = require('test/helpers');
 	var fixtures          = require('app/fixtures');
+	var helpers           = require('helpers');
 	var JSZip             = require('jszip');
 	var JSZipLoad         = require('jszip-load');
 	var JSZipInflate      = require('jszip-inflate');

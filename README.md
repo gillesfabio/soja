@@ -12,10 +12,9 @@ that is not yet merged in master. So it is not ready for production use.**
 
 ## Installation
 
-Soja requires [Node](http://nodejs.org), [Grunt](http://gruntjs.com)
-and [Bower](http://bower.io) (optionally [Git](http://git-scm.com/)). Clone
-the repository (or download archive from GitHub) and perform the project
-initialization with `make init`:
+Soja requires [Node](http://nodejs.org) and [Bower](http://bower.io)
+(optionally [Git](http://git-scm.com/)). Clone the repository (or download
+archive from GitHub) and perform the project initialization with `make init`:
 
 	git clone https://github.com/gillesfabio/soja.git
 	cd soja
@@ -64,7 +63,7 @@ any Docker commands. Example:
 
 Let's run the server:
 
-	SOJA_SERVER=$(docker run -v /soja:/soja -name soja-server -p 8888:8888 -d soja grunt server)
+	SOJA_SERVER=$(docker run -v /soja:/soja -name soja-server -p 8888:8888 -d soja npm start)
 
 Open your browser and go to the URL `http://localhost:8888`.
 
@@ -79,7 +78,7 @@ Well. Feel free to execute it again and launch some Watai tests.
 
 Run the server:
 
-	grunt server
+	npm start
 
 Launch your favorite browser and go to `http://localhost:8888`:
 
@@ -101,24 +100,19 @@ Tests are written on top of [Chai](http://chaijs.com/api/bdd/) (BDD) and
 
 To execute the test suite, run the following command:
 
-	grunt test
+	npm test
 
-In your favorite browser, go to `http://localhost:9999`:
+In your favorite browser, go to `http://localhost:8888/test`:
 
-	open http://localhost:9999
+	open http://localhost:8888/test
 
 ### Developer Documentation
 
 The documentation is powered by [JSDoc3](http://usejsdoc.org/).
 
-If your OS is OS X, you can use [Homebrew](http://brew.sh/) to install
-the latest version of JSDoc in a single one command:
+To generate it, first install JSDoc3, then execute this command:
 
-	brew install jsdoc3
-
-Then you can easily generate and browse it:
-
-	grunt doc
+	make docs
 
 ### Any question?
 

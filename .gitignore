@@ -1,5 +1,5 @@
 .DS_Store
-vendor
+components
 node_modules
 doc
 docs

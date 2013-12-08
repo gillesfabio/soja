@@ -9,7 +9,7 @@ define(function(require) {
 	var RunnerCollection  = require('app/collections/RunnerCollection');
 	var FeatureCollection = require('app/collections/FeatureCollection');
 	var fixtures          = require('app/fixtures');
-	var helpers           = require('test/helpers');
+	var helpers           = require('helpers');
 
 	var collection, model, runDate, data1, data2;
 
