@@ -18,7 +18,7 @@ archive from GitHub) and perform the project initialization with `make init`:
 
 	git clone https://github.com/gillesfabio/soja.git
 	cd soja
-	make init
+	make install
 
 If you need some help to install these requirements, follow your OS specific
 instructions thereafter.
@@ -34,7 +34,7 @@ this script. Once they are installed:
 	git clone https://github.com/gillesfabio/soja.git
 	cd soja
 	./scripts/osx/install.sh
-	make init
+	make install
 
 ### Vagrant & Docker
 
