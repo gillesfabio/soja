@@ -48,14 +48,13 @@ that is not yet merged in master. So it is not ready for production use.</strong
 <h2>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
-<p>Soja requires <a href="http://nodejs.org">Node</a>, <a href="http://gruntjs.com">Grunt</a>
-and <a href="http://bower.io">Bower</a> (optionally <a href="http://git-scm.com/">Git</a>). Clone
-the repository (or download archive from GitHub) and perform the project
-initialization with <code>make init</code>:</p>
+<p>Soja requires <a href="http://nodejs.org">Node</a> and <a href="http://bower.io">Bower</a>
+(optionally <a href="http://git-scm.com/">Git</a>). Clone the repository (or download
+archive from GitHub) and perform the project initialization with <code>make init</code>:</p>
 
 <pre><code>git clone https://github.com/gillesfabio/soja.git
 cd soja
-make init
+make install
 </code></pre>
 
 <p>If you need some help to install these requirements, follow your OS specific
@@ -73,7 +72,7 @@ this script. Once they are installed:</p>
 <pre><code>git clone https://github.com/gillesfabio/soja.git
 cd soja
 ./scripts/osx/install.sh
-make init
+make install
 </code></pre>
 
 <h3>
@@ -107,7 +106,7 @@ any Docker commands. Example:</p>
 
 <p>Let's run the server:</p>
 
-<pre><code>SOJA_SERVER=$(docker run -v /soja:/soja -name soja-server -p 8888:8888 -d soja grunt server)
+<pre><code>SOJA_SERVER=$(docker run -v /soja:/soja -name soja-server -p 8888:8888 -d soja npm start)
 </code></pre>
 
 <p>Open your browser and go to the URL <code>http://localhost:8888</code>.</p>
@@ -125,7 +124,7 @@ docker rm $SOJA_SERVER
 
 <p>Run the server:</p>
 
-<pre><code>grunt server
+<pre><code>npm start
 </code></pre>
 
 <p>Launch your favorite browser and go to <code>http://localhost:8888</code>:</p>
@@ -151,12 +150,12 @@ the <a href="https://github.com/MattiSG/Watai/wiki/Code-conventions">Watai's cod
 
 <p>To execute the test suite, run the following command:</p>
 
-<pre><code>grunt test
+<pre><code>npm test
 </code></pre>
 
-<p>In your favorite browser, go to <code>http://localhost:9999</code>:</p>
+<p>In your favorite browser, go to <code>http://localhost:8888</code>:</p>
 
-<pre><code>open http://localhost:9999
+<pre><code>open http://localhost:8888
 </code></pre>
 
 <h3>
@@ -164,15 +163,9 @@ the <a href="https://github.com/MattiSG/Watai/wiki/Code-conventions">Watai's cod
 
 <p>The documentation is powered by <a href="http://usejsdoc.org/">JSDoc3</a>.</p>
 
-<p>If your OS is OS X, you can use <a href="http://brew.sh/">Homebrew</a> to install
-the latest version of JSDoc in a single one command:</p>
+<p>To generate it, first install JSDoc3, then execute this command:</p>
 
-<pre><code>brew install jsdoc3
-</code></pre>
-
-<p>Then you can easily generate and browse it:</p>
-
-<pre><code>grunt doc
+<pre><code>make docs
 </code></pre>
 
 <h3>
