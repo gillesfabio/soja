@@ -10,9 +10,9 @@ var wss      = new WSServer({server: server});
 
 // Paths
 // ----------------------------------------------------------------------------
-var APP_STATIC_PATH = path.resolve('./app/static');
+var APP_FRONTEND_PATH       = path.resolve('./app/frontend');
 var APP_FRONTEND_TESTS_PATH = path.resolve('./tests/frontend');
-var BOWER_COMPONENTS_PATH = path.resolve('./bower_components');
+var BOWER_COMPONENTS_PATH   = path.resolve('./bower_components');
 
 // Global configuration
 // ----------------------------------------------------------------------------
@@ -22,14 +22,14 @@ app.use(express.urlencoded());
 // Production
 // ----------------------------------------------------------------------------
 app.configure('production', function() {
-	app.use(express.static(APP_STATIC_PATH));
+	app.use(express.static(APP_FRONTEND_PATH));
 	app.use('/vendor', express.static(BOWER_COMPONENTS_PATH));
 });
 
 // Development
 // ----------------------------------------------------------------------------
 app.configure('development', function() {
-	app.use(express.static(APP_STATIC_PATH));
+	app.use(express.static(APP_FRONTEND_PATH));
 	app.use('/vendor', express.static(BOWER_COMPONENTS_PATH));
 });
 
@@ -37,7 +37,7 @@ app.configure('development', function() {
 // ----------------------------------------------------------------------------
 app.configure('test', function() {
 	app.use(express.static(APP_FRONTEND_TESTS_PATH));
-	app.use(express.static(APP_STATIC_PATH));
+	app.use(express.static(APP_FRONTEND_PATH));
 	app.use('/vendor', express.static(BOWER_COMPONENTS_PATH));
 	wss.on('connection', function(ws) {
 		var runDate = new Date();
