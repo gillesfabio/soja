@@ -22,7 +22,7 @@
     "backbone": "1.0.x",
     "backbone.localStorage": "1.1.x",
     "momentjs": "2.2.x",
-    "font-awesome": "3.2.x",
+    "font-awesome": "git://github.com/FortAwesome/Font-Awesome.git#v4.0.3",
     "loglevel": "0.4.x",
     "handlebars": "1.x",
     "handlebars-helpers": "1.x",

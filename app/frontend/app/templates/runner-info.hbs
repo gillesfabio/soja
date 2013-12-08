@@ -10,15 +10,15 @@
 						<h2>{{#if runner.runDate}}{{dateFromNow runner.runDate}}{{else}}Never{{/if}}</h2>
 						<p>Last run</p>
 					</div>
-					<div class="col-xs-6 col-sm-6 col-md-6 runner-info-server-status runner-info">
+					<div class="col-xs-6 col-sm-6 col-md-6 runner-info-client-status runner-info">
 						<h2>
 							{{#if connected}}
-							<i class="icon-thumbs-up-alt"></i>
+							<i class="fa fa-check-circle-o"></i>
 							{{else}}
-							<i class="icon-thumbs-down-alt"></i>
+							<i class="fa fa-times"></i>
 							{{/if}}
 						</h2>
-						<p>Server Status</p>
+						<p>Client Connection</p>
 					</div>
 				</div>
 			</div>

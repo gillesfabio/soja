@@ -188,7 +188,7 @@ body {
 	color       : #444;
 }
 
-#runner-info .runner-info-server-status h2 {
+#runner-info .runner-info-client-status h2 {
 	font-size: 30px;
 }
 
