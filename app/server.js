@@ -10,8 +10,8 @@ var wss      = new WSServer({server: server});
 
 // Paths
 // ----------------------------------------------------------------------------
-var APP_STATIC_PATH       = path.resolve('./app/static');
-var APP_TESTS_STATIC_PATH = path.resolve('./test');
+var APP_STATIC_PATH = path.resolve('./app/static');
+var APP_FRONTEND_TESTS_PATH = path.resolve('./test/frontend');
 var BOWER_COMPONENTS_PATH = path.resolve('./bower_components');
 
 // Global configuration
@@ -36,7 +36,7 @@ app.configure('development', function() {
 // Test
 // ----------------------------------------------------------------------------
 app.configure('test', function() {
-	app.use(express.static(APP_TESTS_STATIC_PATH));
+	app.use(express.static(APP_FRONTEND_TESTS_PATH));
 	app.use(express.static(APP_STATIC_PATH));
 	app.use('/vendor', express.static(BOWER_COMPONENTS_PATH));
 	wss.on('connection', function(ws) {
