@@ -14,7 +14,7 @@ clean:
 	rm -rf node_modules bower_components docs
 
 docs:
-	./node_modules/jsdoc/jsdoc -c jsdoc.json
+	@$(NODE_LOCAL_BIN)/jsdoc -c jsdoc.json
 
 server:
 	@env NODE_ENV=${NODE_ENV} PORT=8888 node app.js

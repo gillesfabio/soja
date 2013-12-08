@@ -1,12 +1,15 @@
 {
 	"opts": {
-		"destination": "./doc",
+		"destination": "./docs",
 		"recurse": true,
 		"private": true,
 		"verbose": true
 	},
 	"source": {
-		"include": ["README.md", "src"]
+		"include": [
+			"README.md",
+			"app"
+		]
 	},
 	"plugins": ["plugins/markdown"],
 	"markdown": {
