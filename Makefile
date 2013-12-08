@@ -1,4 +1,4 @@
-.PHONY: install install_docker clean docs server test
+.PHONY: install install_docker clean docs server test jshint lint
 NODE_LOCAL_BIN=./node_modules/.bin
 NODE_ENV?=development
 
@@ -21,3 +21,8 @@ server:
 
 test:
 	@env NODE_ENV=test PORT=8888 node app.js
+
+jshint:
+	@$(NODE_LOCAL_BIN)/jshint --verbose *.js app tests
+
+lint: jshint

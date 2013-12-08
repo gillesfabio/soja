@@ -1,19 +1,20 @@
 {
-	"name": "soja",
-	"version": "0.1.0",
-	"description": "Web User Interface for Watai framework.",
-	"author": "Gilles Fabio <gilles@gillesfabio.com>",
-	"license": "AGPL",
-	"private": true,
-	"scripts": {
-		"start": "make server",
-		"test": "make test"
-	},
-	"dependencies": {
-		"express": "3.x",
-		"ws": "0.4.x"
-	},
-	"devDependencies": {
-		"jsdoc": "git://github.com/jsdoc3/jsdoc.git"
-	}
+  "name": "soja",
+  "version": "0.1.0",
+  "description": "Web User Interface for Watai framework.",
+  "author": "Gilles Fabio <gilles@gillesfabio.com>",
+  "license": "AGPL",
+  "private": true,
+  "scripts": {
+    "start": "make server",
+    "test": "make test"
+  },
+  "dependencies": {
+    "express": "3.x",
+    "ws": "0.4.x"
+  },
+  "devDependencies": {
+    "jsdoc": "git://github.com/jsdoc3/jsdoc.git",
+    "jshint": "2.x"
+  }
 }
