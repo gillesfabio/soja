@@ -62,41 +62,37 @@ define(
 		* @private
 		*/
 		initEvents: function initEvents() {
-			_.bindAll(this, 'onSocketOpen', 'onSocketClose', 'onSocketMessage', 'render');
+			_.bindAll(this, 'onSocketMessage', 'render');
 			this.listenTo(this.runners, 'change', this.render);
 			this.listenTo(this.features, 'change', this.render);
-			if (this.ws) {
-				this.ws.addEventListener('open', this.onSocketOpen);
-				this.ws.addEventListener('close', this.onSocketClose);
-				this.ws.addEventListener('message', this.onSocketMessage);
-			}
-			return this;
-		},
-
-		/**
-		* Calls on WebSocketServer connection.
-		*/
-		onSocketOpen: function onSocketOpen() {
-			this.connected = true;
-			this.render();
-			return this;
-		},
-
-		/**
-		* Calls on WebSocketServer close.
-		*/
-		onSocketClose: function onSocketClose() {
-			this.connected = false;
-			this.render();
+			if (this.ws) this.ws.addEventListener('message', this.onSocketMessage);
 			return this;
 		},
 
 		/**
 		* Calls on WebSocketServer message.
 		*/
-		onSocketMessage: function onSocketMessage() {
-			this.connected = true;
-			this.render();
+		onSocketMessage: function onSocketMessage(event) {
+			if (!_.has(event, data) && !event.data) {
+				logger.warn("RunnerInfoView: something went wrong with " + JSON.stringify(event));
+				return this;
+			}
+			var data = JSON.parse(event.data);
+			data = _.extend({type: null}, data);
+			if (!data.type) {
+				logger.warn("RunnerInfoView: the websocket message does not contain a 'type' property");
+				return this;
+			}
+			switch (data.type) {
+				case 'watai:websocket:runner:start':
+					this.connected = true;
+					this.render();
+					break;
+				case 'watai:websocket:runner:stop':
+					this.connected = false;
+					this.render();
+					break;
+			}
 			return this;
 		},
 
