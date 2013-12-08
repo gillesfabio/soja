@@ -1,17 +1,17 @@
-.PHONY: init init-docker clean docs server test
+.PHONY: install install_docker clean docs server test
 NODE_LOCAL_BIN=./node_modules/.bin
 NODE_ENV?=development
 
-init:
+install:
 	npm install
 	bower install
 
-init-docker:
+install_docker:
 	npm install
 	bower install --allow-root
 
 clean:
-	rm -rf node_modules vendor docs
+	rm -rf node_modules components docs
 
 docs:
 	./node_modules/jsdoc/jsdoc -c jsdoc.json

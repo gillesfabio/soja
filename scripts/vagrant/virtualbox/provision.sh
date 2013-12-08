@@ -48,4 +48,4 @@ chown root:docker /var/run/docker.sock || true
 (cd /soja; docker build -t soja .)
 
 # Initialize project (install dependencies)
-(cd /soja; docker run -v /soja:/soja -name soja-init soja make init-docker)
+(cd /soja; docker run -v /soja:/soja -name soja-install soja make install_docker)
