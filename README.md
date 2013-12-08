@@ -102,9 +102,9 @@ To execute the test suite, run the following command:
 
 	npm test
 
-In your favorite browser, go to `http://localhost:8888/test`:
+In your favorite browser, go to `http://localhost:8888`:
 
-	open http://localhost:8888/test
+	open http://localhost:8888
 
 ### Developer Documentation
 
