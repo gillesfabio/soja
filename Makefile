@@ -11,7 +11,7 @@ install_docker:
 	bower install --allow-root
 
 clean:
-	rm -rf node_modules components docs
+	rm -rf node_modules bower_components docs
 
 docs:
 	./node_modules/jsdoc/jsdoc -c jsdoc.json

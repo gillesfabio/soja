@@ -12,12 +12,6 @@
   "license": "AGPL",
   "homepage": "http://github.com/gillesfabio/soja",
   "private": true,
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "test",
-    "vendor"
-  ],
   "dependencies": {
     "requirejs": "2.1.x",
     "requirejs-text": "2.x",

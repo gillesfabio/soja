@@ -12,7 +12,7 @@ var wss      = new WSServer({server: server});
 // ----------------------------------------------------------------------------
 var APP_STATIC_PATH       = path.resolve('./src');
 var APP_TESTS_STATIC_PATH = path.resolve('./test');
-var BOWER_COMPONENTS_PATH = path.resolve('./components');
+var BOWER_COMPONENTS_PATH = path.resolve('./bower_components');
 
 // Global configuration
 // ----------------------------------------------------------------------------
